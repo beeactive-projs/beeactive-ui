@@ -1,0 +1,35 @@
+/* Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* PrimeIcons - Keep this */
+@import 'primeicons/primeicons.css';
+
+/* Remove these lines - NOT needed with Lara preset:
+@import "primeng/resources/primeng.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+*/
+
+/* Apply custom font to body */
+@layer base {
+  body {
+    @apply font-sans;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+  }
+}
