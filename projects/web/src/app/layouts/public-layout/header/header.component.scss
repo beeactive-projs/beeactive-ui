@@ -1,0 +1,25 @@
+// Custom styles for public header
+:host {
+  display: block;
+}
+
+// Mobile menu animation
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Sticky header shadow on scroll
+header {
+  transition: box-shadow 0.3s ease;
+}

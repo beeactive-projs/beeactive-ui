@@ -1,0 +1,48 @@
+// Custom styles for terms of service component
+:host {
+  display: block;
+  width: 100%;
+}
+
+// Prose styling for legal content
+.prose {
+  h2 {
+    scroll-margin-top: 2rem;
+  }
+
+  section {
+    scroll-margin-top: 2rem;
+  }
+
+  ul {
+    margin-top: 1rem;
+  }
+
+  a {
+    text-decoration: underline;
+    text-decoration-color: theme('colors.primary.300');
+    text-underline-offset: 2px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      text-decoration-color: theme('colors.primary.600');
+    }
+  }
+}
+
+// Print styles
+@media print {
+  :host {
+    background: white !important;
+  }
+
+  .prose {
+    max-width: 100% !important;
+    font-size: 12pt;
+  }
+
+  button,
+  .no-print {
+    display: none !important;
+  }
+}

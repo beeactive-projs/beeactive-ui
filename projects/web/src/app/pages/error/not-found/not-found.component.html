@@ -1,0 +1,118 @@
+<div
+  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-info-50 via-white to-primary-50 px-4 py-8 sm:px-6 lg:px-8">
+  <div class="w-full max-w-2xl">
+    <!-- 404 Illustration -->
+    <div class="text-center mb-8 animate-fade-in">
+      <!-- Large 404 Number -->
+      <div class="mb-6">
+        <h1
+          class="font-heading text-9xl sm:text-[12rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 via-accent-500 to-info-500 leading-none">
+          404
+        </h1>
+      </div>
+
+      <!-- Bee Icon -->
+      <div class="mb-6 animate-bounce-slow">
+        <i class="pi pi-search text-6xl sm:text-7xl text-secondary-400"></i>
+      </div>
+
+      <!-- Error Title -->
+      <h2 class="font-heading text-3xl sm:text-4xl font-bold text-secondary-900 mb-4">
+        Page Not Found
+      </h2>
+
+      <!-- Error Message -->
+      <p class="text-secondary-600 text-base sm:text-lg max-w-lg mx-auto leading-relaxed">
+        Oops! The page you're looking for seems to have buzzed off. It might have been moved, deleted, or
+        never existed in the first place.
+      </p>
+    </div>
+
+    <!-- Suggestions Card -->
+    <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 mb-8 animate-slide-up">
+      <!-- Suggestions -->
+      <div class="mb-6">
+        <h3 class="text-xl font-heading font-semibold text-secondary-900 mb-4 flex items-center gap-2">
+          <i class="pi pi-compass text-primary-500"></i>
+          Where would you like to go?
+        </h3>
+        <ul class="space-y-3 text-secondary-700">
+          <li class="flex items-start gap-3">
+            <i class="pi pi-angle-right text-primary-500 mt-1 flex-shrink-0"></i>
+            <span>Check the URL for typos or errors</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="pi pi-angle-right text-primary-500 mt-1 flex-shrink-0"></i>
+            <span>Return to the homepage and navigate from there</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="pi pi-angle-right text-primary-500 mt-1 flex-shrink-0"></i>
+            <span>Use the navigation menu to find what you need</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="pi pi-angle-right text-primary-500 mt-1 flex-shrink-0"></i>
+            <span>Search our help center for assistance</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <p-button
+          label="Go to Homepage"
+          icon="pi pi-home"
+          (onClick)="goHome()"
+          class="w-full bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600"
+          styleClass="w-full"
+        />
+
+        <p-button
+          label="Go Back"
+          icon="pi pi-arrow-left"
+          (onClick)="goBack()"
+          severity="secondary"
+          [outlined]="true"
+          styleClass="w-full"
+        />
+      </div>
+    </div>
+
+    <!-- Popular Links -->
+    <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+      <h3 class="text-lg font-heading font-semibold text-secondary-900 mb-4">Popular Pages</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <a
+          routerLink="/auth/login"
+          class="flex items-center gap-3 p-3 rounded-lg hover:bg-primary-50 transition-colors group">
+          <i class="pi pi-sign-in text-primary-500 text-xl group-hover:scale-110 transition-transform"></i>
+          <span class="text-secondary-700 group-hover:text-primary-600 font-medium">Sign In</span>
+        </a>
+        <a
+          routerLink="/auth/signup"
+          class="flex items-center gap-3 p-3 rounded-lg hover:bg-primary-50 transition-colors group">
+          <i class="pi pi-user-plus text-primary-500 text-xl group-hover:scale-110 transition-transform"></i>
+          <span class="text-secondary-700 group-hover:text-primary-600 font-medium">Sign Up</span>
+        </a>
+        <a
+          href="#"
+          class="flex items-center gap-3 p-3 rounded-lg hover:bg-primary-50 transition-colors group">
+          <i class="pi pi-question-circle text-primary-500 text-xl group-hover:scale-110 transition-transform"></i>
+          <span class="text-secondary-700 group-hover:text-primary-600 font-medium">Help Center</span>
+        </a>
+        <a
+          href="#"
+          class="flex items-center gap-3 p-3 rounded-lg hover:bg-primary-50 transition-colors group">
+          <i class="pi pi-phone text-primary-500 text-xl group-hover:scale-110 transition-transform"></i>
+          <span class="text-secondary-700 group-hover:text-primary-600 font-medium">Contact Us</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Fun Message -->
+    <div class="text-center">
+      <p class="text-sm text-secondary-500 italic">
+        🐝 Even bees get lost sometimes. Let's help you find your way back!
+      </p>
+    </div>
+  </div>
+</div>

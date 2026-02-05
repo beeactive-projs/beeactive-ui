@@ -27,5 +27,8 @@ export * from './lib/constants/storage-keys.const';
 export * from './lib/services/auth/auth.service';
 export * from './lib/services/auth/token.service';
 
+// Stores
+export * from './lib/stores/auth.store';
+
 // Environment
 export * from './environments/environment';

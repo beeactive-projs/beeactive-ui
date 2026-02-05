@@ -1,0 +1,76 @@
+// Custom styles for login component
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+// Enhance PrimeNG password component styling
+::ng-deep {
+  .p-password {
+    width: 100%;
+
+    .p-inputtext {
+      width: 100%;
+    }
+  }
+
+  // Custom error state styling
+  .ng-invalid.ng-dirty {
+    .p-inputtext {
+      border-color: #ef4444;
+
+      &:focus {
+        box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.25);
+      }
+    }
+  }
+
+  // Button styling enhancements
+  .p-button {
+    transition: all 0.2s ease-in-out;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  // Message component customization
+  .p-message {
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+// Animation enhancements
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

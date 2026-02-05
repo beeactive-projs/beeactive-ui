@@ -41,7 +41,7 @@
       },
       "root": "projects/web",
       "sourceRoot": "projects/web/src",
-      "prefix": "app",
+      "prefix": "bee",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
