@@ -1,12 +1,278 @@
-// Custom styles for login component
+// ===== BeeActive Login — Split Screen Layout =====
+
 :host {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-// Enhance PrimeNG password component styling
+// ===== Page Layout =====
+.login-page {
+  display: flex;
+  min-height: 100vh;
+}
+
+// ===== Left: Brand Panel =====
+.brand-panel {
+  position: relative;
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+  background: theme('colors.secondary.950');
+  overflow: hidden;
+
+  @media (min-width: 1024px) {
+    display: flex;
+  }
+}
+
+// Honeycomb pattern background
+.honeycomb-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+  animation: honeycombDrift 30s linear infinite;
+}
+
+@keyframes honeycombDrift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(56px, 100px);
+  }
+}
+
+// Gradient orbs
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: orbFloat 8s ease-in-out infinite alternate;
+}
+
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  top: -100px;
+  right: -150px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, transparent 70%);
+}
+
+.orb-2 {
+  width: 350px;
+  height: 350px;
+  bottom: -50px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%);
+  animation-delay: -3s;
+}
+
+.orb-3 {
+  width: 250px;
+  height: 250px;
+  top: 40%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.12) 0%, transparent 70%);
+  animation-delay: -6s;
+}
+
+@keyframes orbFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(30px, -40px) scale(1.1);
+  }
+}
+
+// Brand logo icon
+.brand-logo-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, theme('colors.primary.500'), theme('colors.accent.500'));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
+  flex-shrink: 0;
+}
+
+.brand-logo {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-hero {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+}
+
+.brand-stats {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 40px;
+}
+
+.brand-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+// ===== Right: Form Panel =====
+.form-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  background: white;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at top right, theme('colors.primary.50') 0%, transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(249, 115, 22, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  @media (max-width: 1023px) {
+    min-height: 100vh;
+  }
+}
+
+// Decorative honeycomb on form side
+.form-hex-decoration {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  right: -80px;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='2'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='2'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+  pointer-events: none;
+}
+
+.form-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  z-index: 1;
+}
+
+// Mobile-only logo
+.mobile-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+
+  .brand-logo-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+// ===== Form Input with Icon =====
+.form-input-icon-wrap {
+  position: relative;
+  display: block;
+}
+
+.form-field-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: theme('colors.secondary.400');
+  font-size: 14px;
+  z-index: 1;
+  pointer-events: none;
+  transition: color 0.25s ease;
+}
+
+.form-input-with-icon {
+  padding-left: 42px !important;
+}
+
+.form-input-icon-wrap:focus-within .form-field-icon {
+  color: theme('colors.primary.600');
+}
+
+// ===== Divider =====
+.form-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 4px 0;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: theme('colors.secondary.200');
+  }
+
+  span {
+    font-size: 11px;
+    font-weight: 600;
+    color: theme('colors.secondary.400');
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+}
+
+// ===== Social Buttons =====
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 2px solid theme('colors.secondary.200');
+  border-radius: 12px;
+  background: white;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: theme('colors.secondary.700');
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    border-color: theme('colors.secondary.300');
+    background: theme('colors.secondary.50');
+    transform: translateY(-1px);
+  }
+}
+
+// ===== PrimeNG Overrides =====
 ::ng-deep {
+  // Password component
   .p-password {
     width: 100%;
 
@@ -15,23 +281,40 @@
     }
   }
 
-  // Custom error state styling
+  // Error state styling
   .ng-invalid.ng-dirty {
     .p-inputtext {
-      border-color: #ef4444;
+      border-color: theme('colors.danger.500');
 
       &:focus {
-        box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.25);
+        box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.15);
       }
     }
   }
 
-  // Button styling enhancements
-  .p-button {
-    transition: all 0.2s ease-in-out;
+  // Submit button styling
+  .login-submit-btn {
+    background: linear-gradient(
+      135deg,
+      theme('colors.primary.500'),
+      theme('colors.accent.500')
+    ) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 14px 24px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+    transition: all 0.25s ease !important;
 
     &:hover:not(:disabled) {
-      transform: translateY(-1px);
+      background: linear-gradient(
+        135deg,
+        theme('colors.primary.600'),
+        theme('colors.accent.600')
+      ) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(245, 158, 11, 0.35);
     }
 
     &:active:not(:disabled) {
@@ -39,14 +322,20 @@
     }
   }
 
-  // Message component customization
+  // Checkbox
+  .p-checkbox .p-checkbox-box.p-highlight {
+    background: linear-gradient(135deg, theme('colors.primary.500'), theme('colors.accent.500'));
+    border-color: theme('colors.primary.500');
+  }
+
+  // Message
   .p-message {
-    border-radius: 0.5rem;
+    border-radius: 12px;
     font-size: 0.875rem;
   }
 }
 
-// Animation enhancements
+// ===== Animations =====
 .animate-fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -72,5 +361,18 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+// ===== Responsive =====
+@media (max-width: 480px) {
+  .form-panel {
+    padding: 24px 20px;
+  }
+
+  .social-btn {
+    flex-direction: column;
+    padding: 10px;
+    font-size: 13px;
   }
 }

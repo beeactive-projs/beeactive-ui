@@ -13,7 +13,6 @@ import { MessageModule } from 'primeng/message';
 // Core imports
 import { AuthService, AuthStore, LoginRequest } from 'core';
 
-
 @Component({
   selector: 'bee-login',
   imports: [
@@ -54,10 +53,13 @@ export class LoginComponent {
   };
 
   onSubmit(): void {
+    debugger;
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
+
+    debugger;
 
     this.isLoading.set(true);
     this.errorMessage.set(null);
@@ -70,6 +72,7 @@ export class LoginComponent {
 
     this.authService.login(credentials).subscribe({
       next: (response) => {
+        debugger;
         this.isLoading.set(false);
         // Navigate based on user role
         if (this.authStore.isTrainer()) {
@@ -83,7 +86,7 @@ export class LoginComponent {
       error: (error) => {
         this.isLoading.set(false);
         this.errorMessage.set(
-          error.error?.message || 'Invalid email or password. Please try again.'
+          error.error?.message || 'Invalid email or password. Please try again.',
         );
       },
     });

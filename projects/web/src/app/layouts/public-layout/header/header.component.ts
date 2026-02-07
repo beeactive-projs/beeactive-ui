@@ -1,20 +1,25 @@
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-
-// PrimeNG imports
 import { ButtonModule } from 'primeng/button';
-import { MenubarModule } from 'primeng/menubar';
+
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'bee-public-header',
-  imports: [CommonModule, RouterLink, RouterLinkActive, ButtonModule, MenubarModule],
+  imports: [RouterLink, RouterLinkActive, ButtonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PublicHeaderComponent {
+  private readonly themeService = inject(ThemeService);
+
   mobileMenuOpen = signal(false);
+  isDark = this.themeService.isDark;
+
+  toggleTheme(): void {
+    this.themeService.toggle();
+  }
 
   toggleMobileMenu(): void {
     this.mobileMenuOpen.update((open) => !open);

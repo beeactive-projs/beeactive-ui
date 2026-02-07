@@ -1,5 +1,159 @@
+// /** @type {import('tailwindcss').Config} */
+// module.exports = {
+//   darkMode: 'class',
+//   content: ['./projects/web/src/**/*.{html,ts}'],
+//   theme: {
+//     extend: {
+//       colors: {
+//         // Primary - Deep Steel Blue
+//         primary: {
+//           50: '#f3f6fb',
+//           100: '#e3eaf4',
+//           200: '#c1d0e6',
+//           300: '#9bb2d4',
+//           400: '#6f8dbf',
+//           500: '#4a6eaa',
+//           600: '#335892',
+//           700: '#274878',
+//           800: '#203d66',
+//           900: '#1e3a5f', // Main primary
+//           950: '#0f1e33',
+//         },
+
+//         // Highlight - Honey Gold
+//         highlight: {
+//           50: '#fffbeb',
+//           100: '#fef3c7',
+//           200: '#fde68a',
+//           300: '#fcd34d',
+//           400: '#fbbf24',
+//           500: '#f59e0b', // Main highlight
+//           600: '#d97706',
+//           700: '#b45309',
+//           800: '#92400e',
+//           900: '#78350f',
+//           950: '#451a03',
+//         },
+
+//         // Accent - Warm Brown
+//         accent: {
+//           50: '#fff7ed',
+//           100: '#ffedd5',
+//           200: '#fed7aa',
+//           300: '#fdba74',
+//           400: '#fb923c',
+//           500: '#f97316',
+//           600: '#ea580c',
+//           700: '#c2410c',
+//           800: '#b45309', // Main accent
+//           900: '#7c2d12',
+//           950: '#431407',
+//         },
+
+//         // Secondary - Dark Navy/Charcoal
+//         secondary: {
+//           50: '#f3f4f6',
+//           100: '#e5e7eb',
+//           200: '#cbd5e1',
+//           300: '#94a3b8',
+//           400: '#64748b',
+//           500: '#475569',
+//           600: '#334155',
+//           700: '#1e293b',
+//           800: '#172033',
+//           900: '#0f1720', // Main secondary
+//           950: '#070b10',
+//         },
+
+//         // Success - Emerald Green
+//         success: {
+//           50: '#ecfdf5',
+//           100: '#d1fae5',
+//           200: '#a7f3d0',
+//           300: '#6ee7b7',
+//           400: '#34d399',
+//           500: '#10b981',
+//           600: '#059669', // Main success
+//           700: '#047857',
+//           800: '#065f46',
+//           900: '#064e3b',
+//           950: '#022c22',
+//         },
+
+//         // Danger - Red
+//         danger: {
+//           50: '#fef2f2',
+//           100: '#fee2e2',
+//           200: '#fecaca',
+//           300: '#fca5a5',
+//           400: '#f87171',
+//           500: '#ef4444',
+//           600: '#dc2626', // Main danger
+//           700: '#b91c1c',
+//           800: '#991b1b',
+//           900: '#7f1d1d',
+//           950: '#450a0a',
+//         },
+
+//         // Surface colors for light/dark themes
+//         surface: {
+//           0: 'rgb(var(--surface-0) / <alpha-value>)',
+//           50: 'rgb(var(--surface-50) / <alpha-value>)',
+//           100: 'rgb(var(--surface-100) / <alpha-value>)',
+//           200: 'rgb(var(--surface-200) / <alpha-value>)',
+//           300: 'rgb(var(--surface-300) / <alpha-value>)',
+//           400: 'rgb(var(--surface-400) / <alpha-value>)',
+//           500: 'rgb(var(--surface-500) / <alpha-value>)',
+//           600: 'rgb(var(--surface-600) / <alpha-value>)',
+//           700: 'rgb(var(--surface-700) / <alpha-value>)',
+//           800: 'rgb(var(--surface-800) / <alpha-value>)',
+//           900: 'rgb(var(--surface-900) / <alpha-value>)',
+//         },
+//       },
+
+//       fontFamily: {
+//         sans: [
+//           'Inter',
+//           'ui-sans-serif',
+//           'system-ui',
+//           '-apple-system',
+//           'BlinkMacSystemFont',
+//           'Segoe UI',
+//           'Roboto',
+//           'sans-serif',
+//         ],
+//         heading: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+//       },
+
+//       animation: {
+//         'fade-in': 'fadeIn 0.5s ease-in-out',
+//         'slide-up': 'slideUp 0.5s ease-out',
+//         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+//       },
+
+//       keyframes: {
+//         fadeIn: {
+//           '0%': { opacity: '0' },
+//           '100%': { opacity: '1' },
+//         },
+//         slideUp: {
+//           '0%': { transform: 'translateY(10px)', opacity: '0' },
+//           '100%': { transform: 'translateY(0)', opacity: '1' },
+//         },
+//       },
+//     },
+//   },
+
+//   plugins: [require('tailwindcss-primeui')],
+
+//   corePlugins: {
+//     preflight: false,
+//   },
+// };
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: ['./projects/web/src/**/*.{html,ts}'],
   theme: {
     extend: {
@@ -102,7 +256,23 @@ module.exports = {
           900: '#7f1d1d',
           950: '#450a0a',
         },
+
+        // Surface colors for light/dark themes
+        surface: {
+          0: 'rgb(var(--surface-0) / <alpha-value>)',
+          50: 'rgb(var(--surface-50) / <alpha-value>)',
+          100: 'rgb(var(--surface-100) / <alpha-value>)',
+          200: 'rgb(var(--surface-200) / <alpha-value>)',
+          300: 'rgb(var(--surface-300) / <alpha-value>)',
+          400: 'rgb(var(--surface-400) / <alpha-value>)',
+          500: 'rgb(var(--surface-500) / <alpha-value>)',
+          600: 'rgb(var(--surface-600) / <alpha-value>)',
+          700: 'rgb(var(--surface-700) / <alpha-value>)',
+          800: 'rgb(var(--surface-800) / <alpha-value>)',
+          900: 'rgb(var(--surface-900) / <alpha-value>)',
+        },
       },
+
       fontFamily: {
         sans: [
           'Inter',

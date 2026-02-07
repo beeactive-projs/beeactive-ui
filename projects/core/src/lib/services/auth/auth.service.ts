@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { LoginRequest } from '../../models/auth/login.model';
 import { RegisterRequest } from '../../models/auth/register.model';
@@ -14,6 +15,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
   private http = inject(HttpClient);
+  private router = inject(Router);
   private tokenService = inject(TokenService);
 
   private currentUserSubject = new BehaviorSubject<User | null>(null);
@@ -52,6 +54,18 @@ export class AuthService {
     return this.http
       .post<void>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.LOGOUT}`, {})
       .pipe(tap(() => this.clearAuthData()));
+  }
+
+  refreshToken(): Observable<AuthResponse> {
+    const refreshToken = this.tokenService.getRefreshToken();
+    return this.http
+      .post<AuthResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.REFRESH}`, { refreshToken })
+      .pipe(tap((response) => this.handleAuthResponse(response)));
+  }
+
+  clearAuthDataAndRedirect(): void {
+    this.clearAuthData();
+    this.router.navigate(['/auth/login']);
   }
 
   getCurrentUser(): User | null {

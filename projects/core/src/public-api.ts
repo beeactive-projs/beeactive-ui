@@ -30,5 +30,11 @@ export * from './lib/services/auth/token.service';
 // Stores
 export * from './lib/stores/auth.store';
 
+// Interceptors
+export * from './lib/interceptors/auth.interceptor';
+
+// Guards
+export * from './lib/guards/auth.guard';
+
 // Environment
 export * from './environments/environment';
