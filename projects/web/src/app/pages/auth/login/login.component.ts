@@ -53,13 +53,10 @@ export class LoginComponent {
   };
 
   onSubmit(): void {
-    debugger;
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
-
-    debugger;
 
     this.isLoading.set(true);
     this.errorMessage.set(null);
@@ -72,7 +69,6 @@ export class LoginComponent {
 
     this.authService.login(credentials).subscribe({
       next: (response) => {
-        debugger;
         this.isLoading.set(false);
         // Navigate based on user role
         if (this.authStore.isTrainer()) {

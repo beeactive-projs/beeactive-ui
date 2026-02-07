@@ -1,58 +1,351 @@
-// Custom styles for home page
 :host {
   display: block;
 }
 
-// Animations
+// ===== Honeycomb SVG (shared) =====
+$honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
+
+// ===== Hero Section =====
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  background: theme('colors.secondary.50');
+
+  :host-context(.dark) & {
+    background: #0f172a;
+  }
+}
+
+.honeycomb-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image: $honeycomb-svg-light;
+  background-size: 56px 100px;
+  animation: honeycombDrift 30s linear infinite;
+
+  :host-context(.dark) & {
+    opacity: 0.04;
+  }
+}
+
+@keyframes honeycombDrift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(56px, 100px); }
+}
+
+// ===== Ambient Orbs =====
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  animation: orbFloat 8s ease-in-out infinite alternate;
+}
+
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  top: -120px;
+  right: -100px;
+  background: rgba(245, 158, 11, 0.1);
+
+  :host-context(.dark) & {
+    background: rgba(245, 158, 11, 0.06);
+  }
+}
+
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  bottom: -80px;
+  left: -120px;
+  background: rgba(20, 184, 166, 0.08);
+  animation-delay: -3s;
+
+  :host-context(.dark) & {
+    background: rgba(20, 184, 166, 0.05);
+  }
+}
+
+.orb-3 {
+  width: 300px;
+  height: 300px;
+  top: 35%;
+  left: 25%;
+  background: rgba(251, 191, 36, 0.06);
+  animation-delay: -6s;
+}
+
+@keyframes orbFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -40px) scale(1.1); }
+}
+
+// ===== Hero Visual — Hexagon Grid =====
+.hero-visual {
+  position: relative;
+  width: 100%;
+  height: 420px;
+}
+
+.hero-hex {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease;
+
+  :host-context(.dark) & {
+    background: #1e293b;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.hero-hex-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-hex-1 {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero-hex-2 {
+  top: 110px;
+  left: calc(50% - 85px);
+}
+
+.hero-hex-3 {
+  top: 110px;
+  left: calc(50% + 85px);
+  transform: translateX(-100%);
+}
+
+.hero-hex-4 {
+  top: 220px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 160px;
+  background: rgba(245, 158, 11, 0.08);
+
+  :host-context(.dark) & {
+    background: rgba(245, 158, 11, 0.1);
+  }
+}
+
+// ===== Floating Cards =====
+.floating-card {
+  position: absolute;
+  background: white;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  z-index: 2;
+
+  :host-context(.dark) & {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.floating-card-1 {
+  bottom: 20px;
+  left: -20px;
+  animation: cardFloat 4s ease-in-out infinite;
+}
+
+.floating-card-2 {
+  top: 10px;
+  right: -10px;
+  animation: cardFloat 4s ease-in-out 2s infinite;
+}
+
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+// ===== Features Section =====
+.features-section,
+.testimonials-section {
+  position: relative;
+  overflow: hidden;
+  background: theme('colors.secondary.50');
+
+  :host-context(.dark) & {
+    background: #0f172a;
+  }
+}
+
+.honeycomb-bg-subtle {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: $honeycomb-svg-light;
+  background-size: 56px 100px;
+  pointer-events: none;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.35s ease;
+
+  :host-context(.dark) & {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+
+    :host-context(.dark) & {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-icon-wrap {
+      transform: scale(1.08);
+    }
+  }
+}
+
+.feature-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: theme('colors.primary.500');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+  transition: transform 0.35s ease;
+}
+
+// ===== How It Works — Step Number =====
+.step-number {
+  position: absolute;
+  top: -10px;
+  right: calc(50% - 56px);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: theme('colors.primary.500');
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+// ===== Testimonials =====
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.35s ease;
+
+  :host-context(.dark) & {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+
+    :host-context(.dark) & {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+// ===== CTA Section =====
+.cta-section {
+  position: relative;
+  overflow: hidden;
+  background: theme('colors.secondary.900');
+}
+
+.honeycomb-bg-cta {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: $honeycomb-svg-light;
+  background-size: 56px 100px;
+  animation: honeycombDrift 30s linear infinite;
+  pointer-events: none;
+}
+
+.orb-cta-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -80px;
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.orb-cta-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -60px;
+  left: -80px;
+  background: rgba(20, 184, 166, 0.08);
+  animation-delay: -4s;
+}
+
+// ===== PrimeNG Overrides =====
+::ng-deep {
+  .cta-outline-btn {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border-color: rgba(255, 255, 255, 0.5) !important;
+    }
+  }
+}
+
+// ===== Animations =====
 .animate-fade-in {
   animation: fadeIn 0.8s ease-out;
 }
 
 .animate-slide-up {
-  animation: slideUp 0.8s ease-out;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-float-delayed {
-  animation: float 3s ease-in-out 1.5s infinite;
+  animation: slideUp 0.8s ease-out 0.2s both;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-// Smooth transitions for feature cards
-.grid > div {
-  transition: all 0.3s ease;
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }

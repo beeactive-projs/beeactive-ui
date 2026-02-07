@@ -95,7 +95,6 @@
   width: 48px;
   height: 48px;
   border-radius: 14px;
-  background: linear-gradient(135deg, theme('colors.primary.500'), theme('colors.accent.500'));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -294,11 +293,6 @@
 
   // Submit button styling
   .login-submit-btn {
-    background: linear-gradient(
-      135deg,
-      theme('colors.primary.500'),
-      theme('colors.accent.500')
-    ) !important;
     border: none !important;
     border-radius: 12px !important;
     padding: 14px 24px !important;
@@ -308,11 +302,6 @@
     transition: all 0.25s ease !important;
 
     &:hover:not(:disabled) {
-      background: linear-gradient(
-        135deg,
-        theme('colors.primary.600'),
-        theme('colors.accent.600')
-      ) !important;
       transform: translateY(-2px);
       box-shadow: 0 8px 28px rgba(245, 158, 11, 0.35);
     }
@@ -324,7 +313,6 @@
 
   // Checkbox
   .p-checkbox .p-checkbox-box.p-highlight {
-    background: linear-gradient(135deg, theme('colors.primary.500'), theme('colors.accent.500'));
     border-color: theme('colors.primary.500');
   }
 

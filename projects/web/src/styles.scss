@@ -59,7 +59,7 @@
 
 /* Custom utility classes */
 @layer utilities {
-  .text-gradient-primary {
-    @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+  .text-brand {
+    @apply text-primary-600 dark:text-primary-400;
   }
 }

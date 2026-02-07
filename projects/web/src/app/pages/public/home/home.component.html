@@ -1,77 +1,111 @@
-<!-- Hero Section -->
-<section class="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50 py-16 sm:py-24 lg:py-32">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
+<!-- ===== Hero Section ===== -->
+<section class="hero-section">
+  <div class="honeycomb-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       <!-- Hero Content -->
       <div class="text-center lg:text-left animate-fade-in">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-secondary-900 mb-6 leading-tight">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-400/15 mb-6">
+          <i class="pi pi-bolt text-primary-500 dark:text-primary-400 text-sm"></i>
+          <span class="text-sm font-semibold text-primary-700 dark:text-primary-300">The #1 Fitness Platform</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-secondary-900 dark:text-white leading-[1.1] tracking-tight mb-6">
           Transform Your
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">
-            Fitness Journey
-          </span>
+          <span class="text-brand">Fitness Journey</span>
+          Today
         </h1>
-        <p class="text-lg sm:text-xl text-secondary-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-          Connect with certified trainers, track your progress, and achieve your fitness goals with BeeActive's
-          all-in-one platform.
+
+        <p class="text-lg sm:text-xl text-secondary-500 dark:text-secondary-400 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
+          Connect with certified trainers, track your progress, and crush your fitness goals — all in one powerful platform.
         </p>
+
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <p-button
             label="Get Started Free"
             icon="pi pi-arrow-right"
             iconPos="right"
             routerLink="/auth/signup"
-            class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600"
             styleClass="p-button-lg"
           />
           <p-button
-            label="Learn More"
+            label="Watch Demo"
             icon="pi pi-play-circle"
             [outlined]="true"
-            routerLink="/about"
+            severity="secondary"
             styleClass="p-button-lg"
           />
         </div>
-        <!-- Trust Badges -->
-        <div class="flex items-center gap-6 mt-8 justify-center lg:justify-start text-sm text-secondary-600">
-          <div class="flex items-center gap-2">
-            <i class="pi pi-check-circle text-success-600"></i>
-            <span>No credit card required</span>
+
+        <div class="flex items-center gap-6 mt-10 justify-center lg:justify-start">
+          <div class="flex items-center gap-2 text-sm text-secondary-500 dark:text-secondary-400">
+            <i class="pi pi-check-circle text-accent-500"></i>
+            <span>No credit card</span>
           </div>
-          <div class="flex items-center gap-2">
-            <i class="pi pi-check-circle text-success-600"></i>
+          <div class="flex items-center gap-2 text-sm text-secondary-500 dark:text-secondary-400">
+            <i class="pi pi-check-circle text-accent-500"></i>
             <span>14-day free trial</span>
+          </div>
+          <div class="hidden sm:flex items-center gap-2 text-sm text-secondary-500 dark:text-secondary-400">
+            <i class="pi pi-check-circle text-accent-500"></i>
+            <span>Cancel anytime</span>
           </div>
         </div>
       </div>
 
-      <!-- Hero Image -->
-      <div class="relative animate-slide-up">
-        <div
-          class="aspect-square rounded-2xl bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
-          <i class="pi pi-bolt text-9xl text-primary-500 opacity-20"></i>
-        </div>
-        <!-- Floating Stats Cards -->
-        <div
-          class="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-4 animate-float hidden sm:block">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-full bg-success-100 flex items-center justify-center">
-              <i class="pi pi-chart-line text-success-600 text-xl"></i>
+      <!-- Hero Visual -->
+      <div class="relative animate-slide-up hidden lg:block">
+        <div class="hero-visual">
+          <div class="hero-hex hero-hex-1">
+            <div class="hero-hex-inner">
+              <i class="pi pi-heart-fill text-4xl text-primary-500"></i>
+              <span class="text-xs font-semibold text-secondary-600 dark:text-secondary-400 mt-2">Health</span>
             </div>
-            <div>
-              <p class="text-2xl font-bold text-secondary-900">85%</p>
-              <p class="text-xs text-secondary-600">Goal Achievement</p>
+          </div>
+          <div class="hero-hex hero-hex-2">
+            <div class="hero-hex-inner">
+              <i class="pi pi-chart-line text-4xl text-accent-500"></i>
+              <span class="text-xs font-semibold text-secondary-600 dark:text-secondary-400 mt-2">Progress</span>
+            </div>
+          </div>
+          <div class="hero-hex hero-hex-3">
+            <div class="hero-hex-inner">
+              <i class="pi pi-users text-4xl text-primary-600 dark:text-primary-400"></i>
+              <span class="text-xs font-semibold text-secondary-600 dark:text-secondary-400 mt-2">Community</span>
+            </div>
+          </div>
+          <div class="hero-hex hero-hex-4">
+            <div class="hero-hex-inner">
+              <i class="pi pi-bolt text-5xl text-primary-500"></i>
             </div>
           </div>
         </div>
-        <div
-          class="absolute -top-4 -right-4 bg-white rounded-xl shadow-lg p-4 animate-float-delayed hidden sm:block">
+
+        <!-- Floating stat cards -->
+        <div class="floating-card floating-card-1">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-              <i class="pi pi-users text-primary-600 text-xl"></i>
+            <div class="w-10 h-10 rounded-xl bg-accent-500/15 flex items-center justify-center">
+              <i class="pi pi-chart-line text-accent-500 text-lg"></i>
             </div>
             <div>
-              <p class="text-2xl font-bold text-secondary-900">10K+</p>
-              <p class="text-xs text-secondary-600">Active Members</p>
+              <p class="text-lg font-bold text-secondary-900 dark:text-white">85%</p>
+              <p class="text-xs text-secondary-500 dark:text-secondary-400">Goal Achievement</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="floating-card floating-card-2">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-primary-500/15 flex items-center justify-center">
+              <i class="pi pi-users text-primary-500 text-lg"></i>
+            </div>
+            <div>
+              <p class="text-lg font-bold text-secondary-900 dark:text-white">10K+</p>
+              <p class="text-xs text-secondary-500 dark:text-secondary-400">Active Members</p>
             </div>
           </div>
         </div>
@@ -80,51 +114,50 @@
   </div>
 </section>
 
-<!-- Stats Section -->
-<section class="py-12 bg-white">
+<!-- ===== Stats Section ===== -->
+<section class="py-16 bg-white dark:bg-secondary-900 border-y border-secondary-200/60 dark:border-secondary-700/40">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
       @for (stat of stats; track stat.label) {
         <div class="text-center">
-          <p class="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500 mb-2">
+          <p class="text-4xl sm:text-5xl font-heading font-extrabold text-brand mb-2">
             {{ stat.value }}
           </p>
-          <p class="text-sm sm:text-base text-secondary-600 font-medium">{{ stat.label }}</p>
+          <p class="text-sm sm:text-base text-secondary-500 dark:text-secondary-400 font-medium">{{ stat.label }}</p>
         </div>
       }
     </div>
   </div>
 </section>
 
-<!-- Features Section -->
-<section class="py-16 sm:py-24 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Section Header -->
+<!-- ===== Features Section ===== -->
+<section class="features-section py-20 sm:py-28">
+  <div class="honeycomb-bg-subtle"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-secondary-900 mb-4">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-500/10 dark:bg-accent-400/15 mb-4">
+        <span class="text-sm font-semibold text-accent-700 dark:text-accent-300">Features</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-secondary-900 dark:text-white mb-4">
         Everything You Need to
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">
-          Succeed
-        </span>
+        <span class="text-brand">Succeed</span>
       </h2>
-      <p class="text-lg text-secondary-600 max-w-2xl mx-auto">
+      <p class="text-lg text-secondary-500 dark:text-secondary-400 max-w-2xl mx-auto">
         Powerful features designed to help you reach your fitness goals faster and more effectively.
       </p>
     </div>
 
-    <!-- Features Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       @for (feature of features; track feature.title) {
-        <div
-          class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-          <div
-            class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center mb-4">
-            <i [class]="'pi ' + feature.icon + ' text-white text-2xl'"></i>
+        <div class="feature-card group">
+          <div class="feature-icon-wrap">
+            <i [class]="'pi ' + feature.icon + ' text-white text-xl'"></i>
           </div>
-          <h3 class="text-xl font-heading font-semibold text-secondary-900 mb-2">
+          <h3 class="text-xl font-heading font-bold text-secondary-900 dark:text-white mb-2">
             {{ feature.title }}
           </h3>
-          <p class="text-secondary-600 leading-relaxed">
+          <p class="text-secondary-500 dark:text-secondary-400 leading-relaxed">
             {{ feature.description }}
           </p>
         </div>
@@ -133,43 +166,76 @@
   </div>
 </section>
 
-<!-- Testimonials Section -->
-<section class="py-16 sm:py-24 bg-white">
+<!-- ===== How It Works Section ===== -->
+<section class="py-20 sm:py-28 bg-white dark:bg-secondary-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Section Header -->
     <div class="text-center mb-16">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-secondary-900 mb-4">
-        What Our Users Say
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-400/15 mb-4">
+        <span class="text-sm font-semibold text-primary-700 dark:text-primary-300">How It Works</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-secondary-900 dark:text-white mb-4">
+        Get Started in
+        <span class="text-brand">3 Steps</span>
       </h2>
-      <p class="text-lg text-secondary-600 max-w-2xl mx-auto">
-        Join thousands of satisfied users who have transformed their fitness journey with BeeActive.
+      <p class="text-lg text-secondary-500 dark:text-secondary-400 max-w-2xl mx-auto">
+        From sign-up to your first workout — it takes less than 5 minutes.
       </p>
     </div>
 
-    <!-- Testimonials Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+      @for (step of steps; track step.title; let i = $index) {
+        <div class="relative text-center">
+          <div class="step-number">{{ i + 1 }}</div>
+          <div class="w-16 h-16 mx-auto rounded-2xl bg-primary-500 flex items-center justify-center mb-6 shadow-lg shadow-primary-500/20">
+            <i [class]="'pi ' + step.icon + ' text-white text-2xl'"></i>
+          </div>
+          <h3 class="text-xl font-heading font-bold text-secondary-900 dark:text-white mb-3">
+            {{ step.title }}
+          </h3>
+          <p class="text-secondary-500 dark:text-secondary-400 leading-relaxed">
+            {{ step.description }}
+          </p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===== Testimonials Section ===== -->
+<section class="testimonials-section py-20 sm:py-28">
+  <div class="honeycomb-bg-subtle"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-400/15 mb-4">
+        <span class="text-sm font-semibold text-primary-700 dark:text-primary-300">Testimonials</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-secondary-900 dark:text-white mb-4">
+        Loved by Thousands
+      </h2>
+      <p class="text-lg text-secondary-500 dark:text-secondary-400 max-w-2xl mx-auto">
+        Join users who have transformed their fitness journey with BeeActive.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       @for (testimonial of testimonials; track testimonial.name) {
-        <div class="bg-gray-50 rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow">
-          <!-- Stars -->
+        <div class="testimonial-card">
           <div class="flex gap-1 mb-4">
             @for (star of [1,2,3,4,5]; track star) {
-              <i class="pi pi-star-fill text-primary-500"></i>
+              <i class="pi pi-star-fill text-primary-500 text-sm"></i>
             }
           </div>
-          <!-- Quote -->
-          <p class="text-secondary-700 mb-6 leading-relaxed italic">
+          <p class="text-secondary-600 dark:text-secondary-300 mb-6 leading-relaxed">
             "{{ testimonial.quote }}"
           </p>
-          <!-- Author -->
-          <div class="flex items-center gap-3">
-            <img
-              [src]="testimonial.image"
-              [alt]="testimonial.name"
-              class="w-12 h-12 rounded-full"
-            />
+          <div class="flex items-center gap-3 mt-auto">
+            <div class="w-11 h-11 rounded-full bg-primary-500 flex items-center justify-center text-white font-bold text-sm">
+              {{ testimonial.initials }}
+            </div>
             <div>
-              <p class="font-semibold text-secondary-900">{{ testimonial.name }}</p>
-              <p class="text-sm text-secondary-600">{{ testimonial.role }}</p>
+              <p class="font-semibold text-secondary-900 dark:text-white text-sm">{{ testimonial.name }}</p>
+              <p class="text-xs text-secondary-500 dark:text-secondary-400">{{ testimonial.role }}</p>
             </div>
           </div>
         </div>
@@ -178,13 +244,18 @@
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-16 sm:py-24 bg-gradient-to-br from-primary-500 via-accent-500 to-primary-600 text-white">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-6">
-      Ready to Start Your Fitness Journey?
+<!-- ===== CTA Section ===== -->
+<section class="cta-section">
+  <div class="honeycomb-bg-cta"></div>
+  <div class="orb orb-cta-1"></div>
+  <div class="orb orb-cta-2"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white leading-tight mb-6">
+      Ready to Start Your
+      <span class="text-primary-300">Fitness Journey?</span>
     </h2>
-    <p class="text-lg sm:text-xl mb-8 opacity-90">
+    <p class="text-lg sm:text-xl text-secondary-300 mb-10 max-w-2xl mx-auto">
       Join BeeActive today and get matched with the perfect trainer to help you achieve your goals.
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -193,16 +264,16 @@
         icon="pi pi-arrow-right"
         iconPos="right"
         routerLink="/auth/signup"
-        class="bg-white text-primary-600 hover:bg-gray-100"
+        severity="warn"
         styleClass="p-button-lg"
       />
       <p-button
         label="Contact Sales"
         icon="pi pi-phone"
         [outlined]="true"
+        severity="secondary"
         routerLink="/contact"
-        class="text-white border-white hover:bg-white hover:text-primary-600"
-        styleClass="p-button-lg"
+        styleClass="p-button-lg cta-outline-btn"
       />
     </div>
   </div>
