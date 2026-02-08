@@ -1,4 +1,4 @@
 ﻿export const environment = {
   production: true,
-  apiUrl: 'https://api.beeactive.com/api',
+  apiUrl: 'https://beeactive-api-production.up.railway.app/api',
 };
