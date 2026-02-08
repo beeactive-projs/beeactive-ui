@@ -46,7 +46,7 @@ export class LoginComponent {
   loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    rememberMe: [false],
+    // rememberMe: [false],
   });
 
   // Host bindings
@@ -66,7 +66,7 @@ export class LoginComponent {
     const credentials: LoginRequest = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,
-      rememberMe: this.loginForm.value.rememberMe,
+      // rememberMe: this.loginForm.value.rememberMe,
     };
 
     this.authService.login(credentials).subscribe({
