@@ -74,9 +74,9 @@ export class LoginComponent {
         this.isLoading.set(false);
         // Navigate based on user role
         if (this.authStore.isTrainer()) {
-          this.router.navigate(['/dashboard/trainer']);
+          this.router.navigate(['/app/dashboard']);
         } else if (this.authStore.isClient()) {
-          this.router.navigate(['/dashboard/client']);
+          this.router.navigate(['/app/client/dashboard/']);
         } else {
           this.router.navigate(['/dashboard']);
         }
@@ -110,7 +110,9 @@ export class LoginComponent {
           },
           error: (error: { error?: { message?: string } }) => {
             this.isLoading.set(false);
-            this.errorMessage.set(error.error?.message || 'Google sign-in failed. Please try again.');
+            this.errorMessage.set(
+              error.error?.message || 'Google sign-in failed. Please try again.',
+            );
           },
         });
       })
@@ -139,7 +141,9 @@ export class LoginComponent {
           },
           error: (error: { error?: { message?: string } }) => {
             this.isLoading.set(false);
-            this.errorMessage.set(error.error?.message || 'Facebook sign-in failed. Please try again.');
+            this.errorMessage.set(
+              error.error?.message || 'Facebook sign-in failed. Please try again.',
+            );
           },
         });
       })
