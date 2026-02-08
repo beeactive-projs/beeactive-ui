@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { LoginRequest } from '../../models/auth/login.model';
 import { RegisterRequest } from '../../models/auth/register.model';
+import { GoogleLoginRequest, FacebookLoginRequest } from '../../models/auth/social-login.model';
 import { AuthResponse } from '../../models/auth/auth-response.model';
 import { User } from '../../models/user/user.model';
 import { TokenService } from './token.service';
@@ -54,6 +55,18 @@ export class AuthService {
     return this.http
       .post<void>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.LOGOUT}`, {})
       .pipe(tap(() => this.clearAuthData()));
+  }
+
+  googleLogin(request: GoogleLoginRequest): Observable<AuthResponse> {
+    return this.http
+      .post<AuthResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.GOOGLE}`, request)
+      .pipe(tap((response) => this.handleAuthResponse(response)));
+  }
+
+  facebookLogin(request: FacebookLoginRequest): Observable<AuthResponse> {
+    return this.http
+      .post<AuthResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.FACEBOOK}`, request)
+      .pipe(tap((response) => this.handleAuthResponse(response)));
   }
 
   refreshToken(): Observable<AuthResponse> {

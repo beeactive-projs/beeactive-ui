@@ -17,7 +17,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { MessageModule } from 'primeng/message';
 
 // Core imports
-import { AuthService, RegisterRequest } from 'core';
+import { AuthService, AuthStore, FacebookAuthService, GoogleAuthService, RegisterRequest } from 'core';
 
 @Component({
   selector: 'bee-sign-up',
@@ -38,6 +38,9 @@ import { AuthService, RegisterRequest } from 'core';
 export class SignUpComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
+  private readonly authStore = inject(AuthStore);
+  private readonly googleAuthService = inject(GoogleAuthService);
+  private readonly facebookAuthService = inject(FacebookAuthService);
   private readonly router = inject(Router);
 
   // Signals for component state
@@ -110,6 +113,64 @@ export class SignUpComponent {
         this.errorMessage.set(error.error?.message || 'Registration failed. Please try again.');
       },
     });
+  }
+
+  onGoogleLogin(): void {
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+
+    this.googleAuthService
+      .signIn()
+      .then((accessToken: string) => {
+        this.authService.googleLogin({ accessToken }).subscribe({
+          next: () => {
+            this.isLoading.set(false);
+            if (this.authStore.isTrainer()) {
+              this.router.navigate(['/dashboard/trainer']);
+            } else if (this.authStore.isClient()) {
+              this.router.navigate(['/dashboard/client']);
+            } else {
+              this.router.navigate(['/dashboard']);
+            }
+          },
+          error: (error: { error?: { message?: string } }) => {
+            this.isLoading.set(false);
+            this.errorMessage.set(error.error?.message || 'Google sign-up failed. Please try again.');
+          },
+        });
+      })
+      .catch(() => {
+        this.isLoading.set(false);
+      });
+  }
+
+  onFacebookLogin(): void {
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+
+    this.facebookAuthService
+      .signIn()
+      .then((accessToken: string) => {
+        this.authService.facebookLogin({ accessToken }).subscribe({
+          next: () => {
+            this.isLoading.set(false);
+            if (this.authStore.isTrainer()) {
+              this.router.navigate(['/dashboard/trainer']);
+            } else if (this.authStore.isClient()) {
+              this.router.navigate(['/dashboard/client']);
+            } else {
+              this.router.navigate(['/dashboard']);
+            }
+          },
+          error: (error: { error?: { message?: string } }) => {
+            this.isLoading.set(false);
+            this.errorMessage.set(error.error?.message || 'Facebook sign-up failed. Please try again.');
+          },
+        });
+      })
+      .catch(() => {
+        this.isLoading.set(false);
+      });
   }
 
   // Helper methods for validation

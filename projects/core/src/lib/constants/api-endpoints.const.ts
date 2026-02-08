@@ -4,6 +4,8 @@
     REGISTER: '/auth/register',
     LOGOUT: '/auth/logout',
     REFRESH: '/auth/refresh',
+    GOOGLE: '/auth/google',
+    FACEBOOK: '/auth/facebook',
   },
   USERS: {
     BASE: '/users',

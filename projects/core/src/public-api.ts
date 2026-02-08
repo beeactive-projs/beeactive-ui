@@ -23,9 +23,14 @@ export * from './lib/enums/session-status.enum';
 export * from './lib/constants/api-endpoints.const';
 export * from './lib/constants/storage-keys.const';
 
+// Models - Social Auth
+export * from './lib/models/auth/social-login.model';
+
 // Services
 export * from './lib/services/auth/auth.service';
 export * from './lib/services/auth/token.service';
+export * from './lib/services/auth/google-auth.service';
+export * from './lib/services/auth/facebook-auth.service';
 
 // Stores
 export * from './lib/stores/auth.store';
