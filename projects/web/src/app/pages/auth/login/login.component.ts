@@ -78,7 +78,7 @@ export class LoginComponent {
         } else if (this.authStore.isClient()) {
           this.router.navigate(['/app/client/dashboard/']);
         } else {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/app/dashboard']);
         }
       },
       error: (error) => {
