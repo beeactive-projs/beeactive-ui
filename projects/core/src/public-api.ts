@@ -32,6 +32,7 @@ export * from './lib/services/auth/auth.service';
 export * from './lib/services/auth/token.service';
 export * from './lib/services/auth/google-auth.service';
 export * from './lib/services/auth/facebook-auth.service';
+export * from './lib/services/user/user.service';
 
 // Stores
 export * from './lib/stores/auth.store';

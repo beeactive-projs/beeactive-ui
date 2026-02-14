@@ -1,7 +1,7 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, BehaviorSubject, tap, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject, tap, Subscription, switchMap } from 'rxjs';
 import { LoginRequest } from '../../models/auth/login.model';
 import { RegisterRequest } from '../../models/auth/register.model';
 import { GoogleLoginRequest, FacebookLoginRequest } from '../../models/auth/social-login.model';
@@ -52,19 +52,27 @@ export class AuthService implements OnDestroy {
       this.isAuthenticatedSubject.next(true);
       this.authStore.setUser(user);
       this.scheduleTokenRefresh(token);
+
+      this.fetchAndStoreProfile().subscribe();
     }
   }
 
-  login(credentials: LoginRequest): Observable<AuthResponse> {
+  login(credentials: LoginRequest): Observable<User> {
     return this.http
       .post<AuthResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.LOGIN}`, credentials)
-      .pipe(tap((response) => this.handleAuthResponse(response)));
+      .pipe(
+        tap((response) => this.handleAuthResponse(response)),
+        switchMap(() => this.fetchAndStoreProfile()),
+      );
   }
 
-  register(data: RegisterRequest): Observable<AuthResponse> {
+  register(data: RegisterRequest): Observable<User> {
     return this.http
       .post<AuthResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.REGISTER}`, data)
-      .pipe(tap((response) => this.handleAuthResponse(response)));
+      .pipe(
+        tap((response) => this.handleAuthResponse(response)),
+        switchMap(() => this.fetchAndStoreProfile()),
+      );
   }
 
   logout(): Observable<void> {
@@ -73,16 +81,22 @@ export class AuthService implements OnDestroy {
       .pipe(tap(() => this.clearAuthData()));
   }
 
-  googleLogin(request: GoogleLoginRequest): Observable<AuthResponse> {
+  googleLogin(request: GoogleLoginRequest): Observable<User> {
     return this.http
       .post<AuthResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.GOOGLE}`, request)
-      .pipe(tap((response) => this.handleAuthResponse(response)));
+      .pipe(
+        tap((response) => this.handleAuthResponse(response)),
+        switchMap(() => this.fetchAndStoreProfile()),
+      );
   }
 
-  facebookLogin(request: FacebookLoginRequest): Observable<AuthResponse> {
+  facebookLogin(request: FacebookLoginRequest): Observable<User> {
     return this.http
       .post<AuthResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.FACEBOOK}`, request)
-      .pipe(tap((response) => this.handleAuthResponse(response)));
+      .pipe(
+        tap((response) => this.handleAuthResponse(response)),
+        switchMap(() => this.fetchAndStoreProfile()),
+      );
   }
 
   refreshToken(): Observable<{ accessToken: string }> {
@@ -134,6 +148,18 @@ export class AuthService implements OnDestroy {
   hasPermission(permission: string): boolean {
     const permissions = this.tokenService.getPermissions();
     return permissions.includes(permission);
+  }
+
+  private fetchAndStoreProfile(): Observable<User> {
+    return this.http
+      .get<User>(`${environment.apiUrl}${API_ENDPOINTS.USERS.ME}`)
+      .pipe(
+        tap((user) => {
+          this.tokenService.setUser(user);
+          this.currentUserSubject.next(user);
+          this.authStore.setUser(user);
+        }),
+      );
   }
 
   private handleAuthResponse(response: AuthResponse): void {

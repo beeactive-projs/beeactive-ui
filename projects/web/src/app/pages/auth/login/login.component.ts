@@ -14,7 +14,7 @@ import { InputIconModule } from 'primeng/inputicon';
 
 // Core imports
 import { AuthService, AuthStore, FacebookAuthService, GoogleAuthService, LoginRequest } from 'core';
-import { Divider } from "primeng/divider";
+import { Divider } from 'primeng/divider';
 
 @Component({
   selector: 'bee-login',
@@ -29,8 +29,8 @@ import { Divider } from "primeng/divider";
     MessageModule,
     IconFieldModule,
     InputIconModule,
-    Divider
-],
+    Divider,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

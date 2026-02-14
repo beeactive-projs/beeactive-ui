@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { inject, Injector } from '@angular/core';
 import { BehaviorSubject, catchError, filter, switchMap, take, throwError } from 'rxjs';
 import { TokenService } from '../services/auth/token.service';
 import { AuthService } from '../services/auth/auth.service';
@@ -26,7 +26,7 @@ function addAuthHeader(req: HttpRequest<unknown>, token: string): HttpRequest<un
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const tokenService = inject(TokenService);
-  const authService = inject(AuthService);
+  const injector = inject(Injector);
 
   if (shouldSkipAuth(req.url)) {
     return next(req);
@@ -38,6 +38,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401 && !shouldSkipAuth(req.url)) {
+        const authService = injector.get(AuthService);
         return handleTokenRefresh(req, next, authService, tokenService);
       }
       return throwError(() => error);
