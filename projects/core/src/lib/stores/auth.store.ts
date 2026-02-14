@@ -17,8 +17,9 @@ export class AuthStore {
   // Computed values (automatically update)
   readonly isAuthenticated = computed(() => this.user() !== null);
   readonly userRoles = computed(() => this.user()?.roles ?? []);
-  readonly isTrainer = computed(() => this.userRoles().includes('TRAINER'));
-  readonly isClient = computed(() => this.userRoles().includes('CLIENT'));
+  readonly isOrganizer = computed(() => this.userRoles().includes('ORGANIZER'));
+  readonly isParticipant = computed(() => this.userRoles().includes('PARTICIPANT'));
+  readonly isSuperAdmin = computed(() => this.userRoles().includes('SUPER_ADMIN'));
   readonly userName = computed(() => {
     const user = this.user();
     return user ? `${user.firstName} ${user.lastName}` : '';

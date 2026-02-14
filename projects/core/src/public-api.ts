@@ -6,6 +6,7 @@
 export * from './lib/models/auth/login.model';
 export * from './lib/models/auth/register.model';
 export * from './lib/models/auth/auth-response.model';
+export * from './lib/models/auth/password-reset.model';
 
 // Models - User
 export * from './lib/models/user/user.model';

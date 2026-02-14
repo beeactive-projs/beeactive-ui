@@ -1,219 +1,215 @@
-<div
-  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-accent-50 px-4 py-8 sm:px-6 lg:px-8">
-  <!-- Register Card -->
-  <div class="w-full max-w-2xl">
-    <!-- Logo & Branding -->
-    <div class="text-center mb-8 animate-fade-in">
-      <div
-        class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl shadow-lg mb-4">
-        <i class="pi pi-bolt text-white text-3xl sm:text-4xl"></i>
+<div class="min-h-screen flex">
+  <div class="brand-panel hidden lg:flex w-1/2">
+    <div class="honeycomb-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="brand-logo">
+      <div class="brand-logo-icon bg-primary-500">
+        <i class="pi pi-bolt text-white text-xl"></i>
       </div>
-      <h1 class="font-heading text-3xl sm:text-4xl font-bold text-secondary-900 mb-2">
-        Create Your Account
-      </h1>
-      <p class="text-secondary-600 text-sm sm:text-base">
-        Join BeeActive and start your fitness journey
+      <span class="font-heading text-2xl font-extrabold text-white tracking-tight">Logo</span>
+    </div>
+
+    <div class="brand-hero">
+      <h2 class="font-heading text-5xl font-extrabold text-white leading-none tracking-tight mb-5">
+        Join the<br>
+        <span class="text-brand">movement.</span>
+      </h2>
+      <p class="text-secondary-400 text-base leading-relaxed max-w-100">
+        Create your account and start tracking workouts, connecting with trainers, and crushing your goals.
       </p>
     </div>
 
-    <!-- Register Form Card -->
-    <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 animate-slide-up">
+    <div class="brand-stats"></div>
+
+  </div>
+  <div class="form-panel bg-surface-100 w-1/2">
+    <div class="hex-decoration"></div>
+
+    <div class="mobile-logo flex lg:hidden w-full">
+      <div class="brand-logo-icon bg-primary-500">
+        <i class="pi pi-bolt text-primary-contrast text-xl"></i>
+      </div>
+      <span class="font-heading text-2xl font-extrabold">Bee Active</span>
+    </div>
+
+    <div class="header w-full">
+      <div class="mb-8 animate-slide-down">
+        <h1 class="font-heading text-3xl font-bold mb-2">
+          Create your account
+        </h1>
+        <p class="text-secondary-500 text-sm">
+          Already have an account?
+          <a routerLink="/auth/login" class="text-primary-600 hover:text-primary-700 font-semibold transition-colors">
+            Sign in
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="form animate-fade-in w-full">
+
       <!-- Success Message -->
       @if (successMessage()) {
       <div class="mb-6">
-        <p-message severity="success" [text]="successMessage()!" styleClass="w-full" />
+        <p-message severity="success" styleClass="w-full">
+          {{successMessage()}}
+        </p-message>
       </div>
       }
 
       <!-- Error Message -->
       @if (errorMessage()) {
       <div class="mb-6">
-        <p-message severity="error" [text]="errorMessage()!" styleClass="w-full" />
+        <p-message severity="error" styleClass="w-full">
+          {{errorMessage()}}
+        </p-message>
       </div>
       }
 
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-5">
-        <!-- Name Fields (Side by Side on Desktop) -->
+        <!-- Name Fields -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <!-- First Name -->
           <div class="flex flex-col gap-2">
-            <label for="firstName" class="text-sm font-semibold text-secondary-700">
-              First Name
+            <label for="firstName" class="text-xs font-semibold text-secondary-500">
+              First name
             </label>
-            <input pInputText id="firstName" type="text" formControlName="firstName" placeholder="John"
-              [class]="'w-full ' + (isFieldInvalid('firstName') ? 'ng-invalid ng-dirty' : '')"
-              autocomplete="given-name" aria-required="true" [attr.aria-invalid]="isFieldInvalid('firstName')"
+            <input pInputText id="firstName" type="text" formControlName="firstName" placeholder="John" fluid
+              pSize="large" [class.ng-dirty]="isFieldInvalid('firstName')" autocomplete="given-name"
+              [attr.aria-invalid]="isFieldInvalid('firstName')"
               [attr.aria-describedby]="isFieldInvalid('firstName') ? 'firstName-error' : null" />
             @if (isFieldInvalid('firstName')) {
-            <small id="firstName-error" class="text-danger-600 text-xs font-medium" role="alert">
+            <p-message variant="simple" severity="error" size="small">
               {{ getFieldError('firstName') }}
-            </small>
+            </p-message>
             }
           </div>
 
-          <!-- Last Name -->
           <div class="flex flex-col gap-2">
-            <label for="lastName" class="text-sm font-semibold text-secondary-700">
-              Last Name
+            <label for="lastName" class="text-xs font-semibold text-secondary-500">
+              Last name
             </label>
-            <input pInputText id="lastName" type="text" formControlName="lastName" placeholder="Doe"
-              [class]="'w-full ' + (isFieldInvalid('lastName') ? 'ng-invalid ng-dirty' : '')"
-              autocomplete="family-name" aria-required="true" [attr.aria-invalid]="isFieldInvalid('lastName')"
+            <input pInputText id="lastName" type="text" formControlName="lastName" placeholder="Doe" fluid pSize="large"
+              [class.ng-dirty]="isFieldInvalid('lastName')" autocomplete="family-name"
+              [attr.aria-invalid]="isFieldInvalid('lastName')"
               [attr.aria-describedby]="isFieldInvalid('lastName') ? 'lastName-error' : null" />
             @if (isFieldInvalid('lastName')) {
-            <small id="lastName-error" class="text-danger-600 text-xs font-medium" role="alert">
+            <p-message variant="simple" severity="error" size="small">
               {{ getFieldError('lastName') }}
-            </small>
+            </p-message>
             }
           </div>
         </div>
 
         <!-- Email Field -->
         <div class="flex flex-col gap-2">
-          <label for="email" class="text-sm font-semibold text-secondary-700">
-            Email Address
+          <label for="email" class="text-xs font-semibold text-secondary-500">
+            Email address
           </label>
-          <input pInputText id="email" type="email" formControlName="email" placeholder="you@example.com"
-            [class]="'w-full ' + (isFieldInvalid('email') ? 'ng-invalid ng-dirty' : '')" autocomplete="email"
-            aria-required="true" [attr.aria-invalid]="isFieldInvalid('email')"
+          <input pInputText id="email" type="email" formControlName="email" placeholder="you@example.com" fluid
+            pSize="large" [class.ng-dirty]="isFieldInvalid('email')" autocomplete="email"
+            [attr.aria-invalid]="isFieldInvalid('email')"
             [attr.aria-describedby]="isFieldInvalid('email') ? 'email-error' : null" />
           @if (isFieldInvalid('email')) {
-          <small id="email-error" class="text-danger-600 text-xs font-medium" role="alert">
+          <p-message variant="simple" severity="error" size="small">
             {{ getFieldError('email') }}
-          </small>
+          </p-message>
           }
         </div>
 
-        <!-- Phone Field (Optional) -->
+        <!-- Phone Field -->
         <div class="flex flex-col gap-2">
-          <label for="phone" class="text-sm font-semibold text-secondary-700">
-            Phone Number
-            <span class="text-secondary-500 font-normal text-xs ml-1">(Optional)</span>
+          <label for="phone" class="text-xs font-semibold text-secondary-500">
+            Phone number
+            <span class="text-secondary-400 font-normal ml-1">(Optional)</span>
           </label>
-          <input pInputText id="phone" type="tel" formControlName="phone" placeholder="+1 (555) 123-4567"
-            [class]="'w-full ' + (isFieldInvalid('phone') ? 'ng-invalid ng-dirty' : '')" autocomplete="tel"
+          <input pInputText id="phone" type="tel" formControlName="phone" placeholder="+1 (555) 123-4567" fluid
+            pSize="large" [class.ng-dirty]="isFieldInvalid('phone')" autocomplete="tel"
             [attr.aria-invalid]="isFieldInvalid('phone')"
             [attr.aria-describedby]="isFieldInvalid('phone') ? 'phone-error' : null" />
           @if (isFieldInvalid('phone')) {
-          <small id="phone-error" class="text-danger-600 text-xs font-medium" role="alert">
+          <p-message variant="simple" severity="error" size="small">
             {{ getFieldError('phone') }}
-          </small>
+          </p-message>
           }
         </div>
 
-        <!-- Password Fields (Side by Side on Desktop) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <!-- Password -->
-          <div class="flex flex-col gap-2">
-            <label for="password" class="text-sm font-semibold text-secondary-700">
-              Password
-            </label>
-            <p-password formControlName="password" inputId="password" placeholder="Min. 8 characters"
-              [toggleMask]="true" [feedback]="true" styleClass="w-full" inputStyleClass="w-full"
-              [class]="isFieldInvalid('password') ? 'ng-invalid ng-dirty' : ''" autocomplete="new-password"
-              [attr.aria-required]="true" [attr.aria-invalid]="isFieldInvalid('password')"
-              [attr.aria-describedby]="isFieldInvalid('password') ? 'password-error' : null" />
-            @if (isFieldInvalid('password')) {
-            <small id="password-error" class="text-danger-600 text-xs font-medium" role="alert">
-              {{ getFieldError('password') }}
-            </small>
-            }
-          </div>
+        <!-- Password Fields -->
+        <!-- <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"> -->
+        <div class="flex flex-col gap-2">
+          <label for="password" class="text-xs font-semibold text-secondary-500">
+            Password
+          </label>
+          <p-password formControlName="password" inputId="password" placeholder="Min. 8 characters" fluid size="large"
+            [toggleMask]="true" [feedback]="true" [class]="isFieldInvalid('password') ? 'ng-invalid ng-dirty' : ''"
+            autocomplete="new-password" [attr.aria-required]="true" [attr.aria-invalid]="isFieldInvalid('password')"
+            [attr.aria-describedby]="isFieldInvalid('password') ? 'password-error' : null" />
+          @if (isFieldInvalid('password')) {
+          <p-message variant="simple" severity="error" size="small">
+            {{ getFieldError('password') }}
+          </p-message>
+          }
+        </div>
 
-          <!-- Confirm Password -->
-          <div class="flex flex-col gap-2">
-            <label for="confirmPassword" class="text-sm font-semibold text-secondary-700">
-              Confirm Password
+        <!-- <div class="flex flex-col gap-2">
+            <label for="confirmPassword" class="text-xs font-semibold text-secondary-500">
+              Confirm password
             </label>
-            <p-password formControlName="confirmPassword" inputId="confirmPassword" placeholder="Repeat password"
-              [toggleMask]="true" [feedback]="false" styleClass="w-full" inputStyleClass="w-full"
+            <p-password formControlName="confirmPassword" inputId="confirmPassword" placeholder="Repeat password" fluid
+              size="large" [toggleMask]="true" [feedback]="false"
               [class]="isFieldInvalid('confirmPassword') || hasPasswordMismatch() ? 'ng-invalid ng-dirty' : ''"
               autocomplete="new-password" [attr.aria-required]="true"
               [attr.aria-invalid]="isFieldInvalid('confirmPassword') || hasPasswordMismatch()"
               [attr.aria-describedby]="isFieldInvalid('confirmPassword') || hasPasswordMismatch() ? 'confirmPassword-error' : null" />
             @if (isFieldInvalid('confirmPassword')) {
-            <small id="confirmPassword-error" class="text-danger-600 text-xs font-medium" role="alert">
+            <p-message variant="simple" severity="error" size="small">
               {{ getFieldError('confirmPassword') }}
-            </small>
+            </p-message>
             } @else if (hasPasswordMismatch()) {
-            <small id="confirmPassword-error" class="text-danger-600 text-xs font-medium" role="alert">
+            <p-message variant="simple" severity="error" size="small">
               Passwords do not match
-            </small>
+            </p-message>
             }
           </div>
-        </div>
+        </div>-->
 
         <!-- Terms and Conditions -->
-        <div class="flex items-start gap-3">
+        <!-- <div class="flex items-center gap-3">
           <p-checkbox formControlName="agreeToTerms" inputId="agreeToTerms" [binary]="true"
-            styleClass="mt-0.5 flex-shrink-0" [attr.aria-invalid]="isFieldInvalid('agreeToTerms')" />
-          <label for="agreeToTerms" class="text-sm text-secondary-700 cursor-pointer select-none leading-relaxed">
+            [attr.aria-invalid]="isFieldInvalid('agreeToTerms')" />
+          <label for="agreeToTerms" class="text-xs text-secondary-500 cursor-pointer select-none leading-relaxed">
             I agree to the
-            <a
-              routerLink="/legal/terms-of-service"
-              target="_blank"
+            <a routerLink="/legal/terms-of-service"
               class="text-primary-600 hover:text-primary-700 font-medium transition-colors">
               Terms of Service
             </a>
             and
-            <a
-              routerLink="/legal/privacy-policy"
-              target="_blank"
+            <a routerLink="/legal/privacy-policy"
               class="text-primary-600 hover:text-primary-700 font-medium transition-colors">
               Privacy Policy
             </a>
           </label>
-        </div>
-        @if (isFieldInvalid('agreeToTerms')) {
-        <small class="text-danger-600 text-xs font-medium block -mt-3" role="alert">
+        </div> -->
+        <!-- @if (isFieldInvalid('agreeToTerms')) {
+        <p-message variant="simple" severity="error" size="small">
           You must agree to the terms and conditions
-        </small>
-        }
+        </p-message>
+        } -->
 
         <!-- Submit Button -->
-        <p-button type="submit" label="Create Account" icon="pi pi-user-plus" [loading]="isLoading()"
-          [disabled]="isLoading()"
-          class="w-full bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 border-0 py-3 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-          styleClass="w-full" />
-
-        <!-- Divider -->
-        <div class="relative my-6">
-          <div class="absolute inset-0 flex items-center">
-            <div class="w-full border-t border-secondary-200"></div>
-          </div>
-          <div class="relative flex justify-center text-sm">
-            <span class="px-4 bg-white text-secondary-500 font-medium">
-              or sign up with
-            </span>
-          </div>
+        <div class="flex flex-col">
+          <p-button type="submit" [loading]="isLoading()" [disabled]="isLoading()" label="Create account"
+            icon="pi pi-user-plus" iconPos="right" fluid size="large"></p-button>
         </div>
-
-        <!-- Social Login -->
+        <p-divider align="center" type="solid">
+          or sign up with
+        </p-divider>
         <div class="flex gap-3">
-          <button type="button" class="flex-1 flex items-center justify-center gap-3 px-4 py-3 border-2 border-secondary-200 rounded-xl bg-white text-secondary-700 text-sm font-medium hover:border-secondary-300 hover:bg-secondary-50 transition-all cursor-pointer" (click)="onGoogleLogin()" [disabled]="isLoading()">
-            <svg class="w-5 h-5" viewBox="0 0 24 24">
-              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
-              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
-              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
-            </svg>
-            <span>Google</span>
-          </button>
-          <button type="button" class="flex-1 flex items-center justify-center gap-3 px-4 py-3 border-2 border-secondary-200 rounded-xl bg-white text-secondary-700 text-sm font-medium hover:border-secondary-300 hover:bg-secondary-50 transition-all cursor-pointer" (click)="onFacebookLogin()" [disabled]="isLoading()">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#1877F2">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-            </svg>
-            <span>Facebook</span>
-          </button>
-        </div>
-
-        <!-- Sign In Link -->
-        <div class="text-center pt-2">
-          <span class="text-sm text-secondary-500">Already have an account?</span>
-          <a routerLink="/auth/login"
-            class="inline-flex items-center gap-1 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors ml-1">
-            Sign in
-          </a>
+          <p-button type="button" class="flex-1" styleClass="social-btn" label="Google" icon="pi pi-google" fluid
+            size="large" (onClick)="onGoogleLogin()"></p-button>
+          <p-button type="button" class="flex-1" styleClass="social-btn" label="Facebook" icon="pi pi-facebook" fluid
+            size="large" (onClick)="onFacebookLogin()"></p-button>
         </div>
       </form>
     </div>

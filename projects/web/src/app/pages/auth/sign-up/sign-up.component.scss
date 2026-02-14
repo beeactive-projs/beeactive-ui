@@ -1,81 +1,162 @@
-// Custom styles for register component
-:host {
-  display: block;
-  width: 100%;
-  height: 100%;
+.brand-panel,
+.form-panel {
+  flex-grow: 1;
+  height: 100vh;
 }
+.brand-panel {
+  position: relative;
+  background: var(--color-secondary-950);
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem;
 
-// Enhance PrimeNG password component styling
-::ng-deep {
-  .p-password {
-    width: 100%;
+  .honeycomb-bg {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    inset: 0;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 56px 100px;
+    animation: honeycombDrift 30s linear infinite;
+  }
 
-    .p-inputtext {
-      width: 100%;
+  @keyframes honeycombDrift {
+    0% {
+      transform: translate(-100px, -100px);
+    }
+    100% {
+      transform: translate(0, 0);
     }
   }
 
-  // Custom error state styling
-  .ng-invalid.ng-dirty {
-    .p-inputtext {
-      border-color: #ef4444;
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    animation: orbFloat 8s ease-in-out infinite alternate;
+  }
 
-      &:focus {
-        box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.25);
-      }
+  .orb-1 {
+    width: 500px;
+    height: 500px;
+    top: -500px;
+    right: -150px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.35) 0%, transparent 70%);
+  }
+
+  .orb-2 {
+    width: 350px;
+    height: 350px;
+    bottom: -50px;
+    left: -100px;
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.3) 0%, transparent 70%);
+    animation-delay: -3s;
+  }
+
+  .orb-3 {
+    width: 250px;
+    height: 250px;
+    top: 40%;
+    left: 30%;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.22) 0%, transparent 70%);
+    animation-delay: -6s;
+  }
+
+  @keyframes orbFloat {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      transform: translate(30px, -40px) scale(1.1);
     }
   }
 
-  // Button styling enhancements
-  .p-button {
-    transition: all 0.2s ease-in-out;
+  .brand-logo {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 
-    &:hover:not(:disabled) {
-      transform: translateY(-1px);
+    .brand-logo-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
+      flex-shrink: 0;
     }
+  }
 
-    &:active:not(:disabled) {
-      transform: translateY(0);
+  .brand-hero {
+    max-width: 40rem;
+  }
+}
+
+.form-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow-y: auto;
+
+  .mobile-logo,
+  .header,
+  .form {
+    max-width: 27rem;
+  }
+
+  .mobile-logo {
+    position: relative;
+    z-index: 2;
+    align-items: center;
+    gap: 1rem;
+
+    .brand-logo-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
+      flex-shrink: 0;
     }
   }
 
-  // Message component customization
-  .p-message {
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-  }
-
-  // Password strength meter customization
-  .p-password-meter {
-    margin-top: 0.5rem;
-  }
-}
-
-// Animation enhancements
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+  .hex-decoration {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-top-left-radius: 70%;
+    bottom: 0;
+    right: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='2'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='2'/%3E%3C/svg%3E");
+    background-size: 56px 100px;
+    pointer-events: none;
   }
 }
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+:host::ng-deep {
+  .p-divider-content {
+    --p-divider-content-background: var(--surface-100);
+    --p-divider-content-color: var(--surface-900);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .social-btn {
+    border-color: var(--color-secondary-200);
+    background-color: white;
+    color: var(--color-secondary-800);
+    transition: all 0.25s ease;
+
+    &:hover {
+      border-color: var(--color-secondary-300);
+      background: var(--color-secondary-50);
+    }
   }
 }

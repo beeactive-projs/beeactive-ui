@@ -199,7 +199,7 @@ const BeeActiveLara = definePreset(Lara, {
   // },
   semantic: {
     primary: {
-      50:  '#fffbeb',
+      50: '#fffbeb',
       100: '#fef3c7',
       200: '#fde68a',
       300: '#fcd34d',
@@ -270,7 +270,6 @@ const BeeActiveLara = definePreset(Lara, {
       },
     },
   },
-
 });
 
 export const appConfig: ApplicationConfig = {
@@ -285,7 +284,7 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: '.dark',
           cssLayer: {
             name: 'primeng',
-            order: 'tailwind-base, primeng, tailwind-utilities',
+            order: 'theme, base, primeng',
           },
         },
       },

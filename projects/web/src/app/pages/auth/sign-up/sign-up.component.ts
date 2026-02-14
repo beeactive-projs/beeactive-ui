@@ -7,22 +7,26 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
-
 // PrimeNG imports
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MessageModule } from 'primeng/message';
+import { Divider } from 'primeng/divider';
 
 // Core imports
-import { AuthService, AuthStore, FacebookAuthService, GoogleAuthService, RegisterRequest } from 'core';
+import {
+  AuthService,
+  AuthStore,
+  FacebookAuthService,
+  GoogleAuthService,
+  RegisterRequest,
+} from 'core';
 
 @Component({
   selector: 'bee-sign-up',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     RouterLink,
     ButtonModule,
@@ -30,6 +34,7 @@ import { AuthService, AuthStore, FacebookAuthService, GoogleAuthService, Registe
     PasswordModule,
     CheckboxModule,
     MessageModule,
+    Divider,
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
@@ -56,18 +61,13 @@ export class SignUpComponent {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.pattern(/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required]],
-      agreeToTerms: [false, [Validators.requiredTrue]],
+      // confirmPassword: ['', [Validators.required]],
+      // agreeToTerms: [false, [Validators.requiredTrue]],
     },
     {
       validators: this.passwordMatchValidator,
     },
   );
-
-  // Host bindings
-  host = {
-    class: 'block w-full h-full',
-  };
 
   // Custom validator for password match
   private passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
@@ -103,10 +103,7 @@ export class SignUpComponent {
     this.authService.register(data).subscribe({
       next: () => {
         this.isLoading.set(false);
-        this.successMessage.set('Account created successfully! Redirecting to login...');
-        setTimeout(() => {
-          this.router.navigate(['/auth/login']);
-        }, 2000);
+        this.navigateToDashboard();
       },
       error: (error) => {
         this.isLoading.set(false);
@@ -125,17 +122,13 @@ export class SignUpComponent {
         this.authService.googleLogin({ accessToken }).subscribe({
           next: () => {
             this.isLoading.set(false);
-            if (this.authStore.isTrainer()) {
-              this.router.navigate(['/dashboard/trainer']);
-            } else if (this.authStore.isClient()) {
-              this.router.navigate(['/dashboard/client']);
-            } else {
-              this.router.navigate(['/dashboard']);
-            }
+            this.navigateToDashboard();
           },
           error: (error: { error?: { message?: string } }) => {
             this.isLoading.set(false);
-            this.errorMessage.set(error.error?.message || 'Google sign-up failed. Please try again.');
+            this.errorMessage.set(
+              error.error?.message || 'Google sign-up failed. Please try again.',
+            );
           },
         });
       })
@@ -154,17 +147,13 @@ export class SignUpComponent {
         this.authService.facebookLogin({ accessToken }).subscribe({
           next: () => {
             this.isLoading.set(false);
-            if (this.authStore.isTrainer()) {
-              this.router.navigate(['/dashboard/trainer']);
-            } else if (this.authStore.isClient()) {
-              this.router.navigate(['/dashboard/client']);
-            } else {
-              this.router.navigate(['/dashboard']);
-            }
+            this.navigateToDashboard();
           },
           error: (error: { error?: { message?: string } }) => {
             this.isLoading.set(false);
-            this.errorMessage.set(error.error?.message || 'Facebook sign-up failed. Please try again.');
+            this.errorMessage.set(
+              error.error?.message || 'Facebook sign-up failed. Please try again.',
+            );
           },
         });
       })
@@ -201,6 +190,16 @@ export class SignUpComponent {
     }
 
     return '';
+  }
+
+  private navigateToDashboard(): void {
+    if (this.authStore.isOrganizer()) {
+      this.router.navigate(['/app/dashboard']);
+    } else if (this.authStore.isParticipant()) {
+      this.router.navigate(['/app/client/dashboard/']);
+    } else {
+      this.router.navigate(['/app/dashboard']);
+    }
   }
 
   private capitalize(str: string): string {

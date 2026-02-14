@@ -1,17 +1,18 @@
 import { Component, signal, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 // PrimeNG imports
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 
+// Core imports
+import { AuthService } from 'core';
+
 @Component({
   selector: 'bee-reset-password',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     RouterLink,
     ButtonModule,
@@ -24,6 +25,7 @@ import { MessageModule } from 'primeng/message';
 })
 export class ResetPasswordComponent {
   private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
 
   // Signals for component state
   isLoading = signal(false);
@@ -34,11 +36,6 @@ export class ResetPasswordComponent {
   forgotPasswordForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
   });
-
-  // Host bindings
-  host = {
-    class: 'block w-full h-full',
-  };
 
   onSubmit(): void {
     if (this.forgotPasswordForm.invalid) {
@@ -52,31 +49,21 @@ export class ResetPasswordComponent {
 
     const email = this.forgotPasswordForm.value.email;
 
-    // Simulate API call (replace with actual API call when backend is ready)
-    setTimeout(() => {
-      this.isLoading.set(false);
-      this.successMessage.set(
-        'If an account exists with this email, you will receive password reset instructions shortly.',
-      );
-      this.forgotPasswordForm.reset();
-    }, 1500);
-
-    // TODO: Replace with actual API call when backend is ready
-    // this.authService.forgotPassword(email).subscribe({
-    //   next: () => {
-    //     this.isLoading.set(false);
-    //     this.successMessage.set(
-    //       'If an account exists with this email, you will receive password reset instructions shortly.'
-    //     );
-    //     this.forgotPasswordForm.reset();
-    //   },
-    //   error: (error) => {
-    //     this.isLoading.set(false);
-    //     this.errorMessage.set(
-    //       error.error?.message || 'Failed to send reset instructions. Please try again.'
-    //     );
-    //   },
-    // });
+    this.authService.forgotPassword({ email }).subscribe({
+      next: () => {
+        this.isLoading.set(false);
+        this.successMessage.set(
+          'If an account exists with this email, you will receive password reset instructions shortly.',
+        );
+        this.forgotPasswordForm.reset();
+      },
+      error: (error) => {
+        this.isLoading.set(false);
+        this.errorMessage.set(
+          error.error?.message || 'Failed to send reset instructions. Please try again.',
+        );
+      },
+    });
   }
 
   // Helper methods for validation

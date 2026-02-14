@@ -18,6 +18,12 @@ export const authRoutes: Routes = [
     title: 'Reset Password - BeeActive',
   },
   {
+    path: 'new-password',
+    loadComponent: () =>
+      import('./new-password/new-password.component').then((m) => m.NewPasswordComponent),
+    title: 'New Password - BeeActive',
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',

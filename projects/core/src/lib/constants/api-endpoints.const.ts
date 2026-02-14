@@ -6,6 +6,8 @@
     REFRESH: '/auth/refresh',
     GOOGLE: '/auth/google',
     FACEBOOK: '/auth/facebook',
+    FORGOT_PASSWORD: '/auth/forgot-password',
+    RESET_PASSWORD: '/auth/reset-password',
   },
   USERS: {
     BASE: '/users',

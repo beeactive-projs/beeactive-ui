@@ -2,7 +2,7 @@ import { Component, signal, inject, ChangeDetectionStrategy } from '@angular/cor
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 
-import { ThemeService } from '../../../services/theme.service';
+import { ThemeService } from '../../../_core/services/theme.service';
 
 @Component({
   selector: 'bee-public-header',

@@ -9,9 +9,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MessageModule } from 'primeng/message';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 // Core imports
 import { AuthService, AuthStore, FacebookAuthService, GoogleAuthService, LoginRequest } from 'core';
+import { Divider } from "primeng/divider";
 
 @Component({
   selector: 'bee-login',
@@ -24,7 +27,10 @@ import { AuthService, AuthStore, FacebookAuthService, GoogleAuthService, LoginRe
     PasswordModule,
     CheckboxModule,
     MessageModule,
-  ],
+    IconFieldModule,
+    InputIconModule,
+    Divider
+],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,11 +55,6 @@ export class LoginComponent {
     // rememberMe: [false],
   });
 
-  // Host bindings
-  host = {
-    class: 'block w-full h-full',
-  };
-
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -70,16 +71,9 @@ export class LoginComponent {
     };
 
     this.authService.login(credentials).subscribe({
-      next: (response) => {
+      next: () => {
         this.isLoading.set(false);
-        // Navigate based on user role
-        if (this.authStore.isTrainer()) {
-          this.router.navigate(['/app/dashboard']);
-        } else if (this.authStore.isClient()) {
-          this.router.navigate(['/app/client/dashboard/']);
-        } else {
-          this.router.navigate(['/app/dashboard']);
-        }
+        this.navigateToDashboard();
       },
       error: (error) => {
         this.isLoading.set(false);
@@ -100,13 +94,7 @@ export class LoginComponent {
         this.authService.googleLogin({ accessToken }).subscribe({
           next: () => {
             this.isLoading.set(false);
-            if (this.authStore.isTrainer()) {
-              this.router.navigate(['/dashboard/trainer']);
-            } else if (this.authStore.isClient()) {
-              this.router.navigate(['/dashboard/client']);
-            } else {
-              this.router.navigate(['/dashboard']);
-            }
+            this.navigateToDashboard();
           },
           error: (error: { error?: { message?: string } }) => {
             this.isLoading.set(false);
@@ -131,13 +119,7 @@ export class LoginComponent {
         this.authService.facebookLogin({ accessToken }).subscribe({
           next: () => {
             this.isLoading.set(false);
-            if (this.authStore.isTrainer()) {
-              this.router.navigate(['/dashboard/trainer']);
-            } else if (this.authStore.isClient()) {
-              this.router.navigate(['/dashboard/client']);
-            } else {
-              this.router.navigate(['/dashboard']);
-            }
+            this.navigateToDashboard();
           },
           error: (error: { error?: { message?: string } }) => {
             this.isLoading.set(false);
@@ -169,6 +151,16 @@ export class LoginComponent {
     }
 
     return '';
+  }
+
+  private navigateToDashboard(): void {
+    if (this.authStore.isOrganizer()) {
+      this.router.navigate(['/app/dashboard']);
+    } else if (this.authStore.isParticipant()) {
+      this.router.navigate(['/app/client/dashboard/']);
+    } else {
+      this.router.navigate(['/app/dashboard']);
+    }
   }
 
   private capitalize(str: string): string {

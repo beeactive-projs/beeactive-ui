@@ -3,8 +3,8 @@
  */
 export interface Role {
   id: string;
-  name: string; // e.g., "TRAINER", "CLIENT", "ADMIN"
-  displayName: string; // e.g., "Trainer", "Client"
+  name: string; // e.g., "ORGANIZER", "PARTICIPANT", "SUPER_ADMIN"
+  displayName: string; // e.g., "Organizer", "Participant"
   description?: string;
   permissions: string[]; // Array of permission names
   createdAt: Date;
@@ -15,9 +15,9 @@ export interface Role {
  * System Roles Enum
  */
 export enum SystemRole {
-  ADMIN = 'ADMIN',
-  TRAINER = 'TRAINER',
-  CLIENT = 'CLIENT',
+  SUPER_ADMIN = 'SUPER_ADMIN',
+  ORGANIZER = 'ORGANIZER',
+  PARTICIPANT = 'PARTICIPANT',
 }
 
 /**

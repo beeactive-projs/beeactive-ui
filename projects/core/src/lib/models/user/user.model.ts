@@ -10,7 +10,7 @@ export interface User {
   avatarUrl?: string;
   isActive: boolean;
   isEmailVerified: boolean;
-  roles: string[]; // Array of role names: ["TRAINER", "CLIENT"]
+  roles: string[]; // Array of role names: ["ORGANIZER", "PARTICIPANT"]
   permissions: string[]; // Array of permission names: ["clients.create", "sessions.read"]
   createdAt: string;
   updatedAt: string;

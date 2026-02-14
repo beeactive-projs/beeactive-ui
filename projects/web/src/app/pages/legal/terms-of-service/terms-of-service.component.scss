@@ -20,12 +20,12 @@
 
   a {
     text-decoration: underline;
-    text-decoration-color: theme('colors.primary.300');
+    text-decoration-color: var(--color-primary-300);
     text-underline-offset: 2px;
     transition: all 0.2s ease;
 
     &:hover {
-      text-decoration-color: theme('colors.primary.600');
+      text-decoration-color: var(--color-primary-600);
     }
   }
 }

@@ -1,23 +1,30 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, BehaviorSubject, tap } from 'rxjs';
+import { Observable, BehaviorSubject, tap, Subscription } from 'rxjs';
 import { LoginRequest } from '../../models/auth/login.model';
 import { RegisterRequest } from '../../models/auth/register.model';
 import { GoogleLoginRequest, FacebookLoginRequest } from '../../models/auth/social-login.model';
 import { AuthResponse } from '../../models/auth/auth-response.model';
+import {
+  ForgotPasswordRequest,
+  ResetPasswordRequest,
+  PasswordResetResponse,
+} from '../../models/auth/password-reset.model';
 import { User } from '../../models/user/user.model';
 import { TokenService } from './token.service';
+import { AuthStore } from '../../stores/auth.store';
 import { API_ENDPOINTS } from '../../constants/api-endpoints.const';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
   private http = inject(HttpClient);
   private router = inject(Router);
   private tokenService = inject(TokenService);
+  private authStore = inject(AuthStore);
 
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
@@ -25,8 +32,15 @@ export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
+  private refreshTimerId: ReturnType<typeof setTimeout> | null = null;
+  private refreshSubscription: Subscription | null = null;
+
   constructor() {
     this.checkAuthStatus();
+  }
+
+  ngOnDestroy(): void {
+    this.clearRefreshTimer();
   }
 
   private checkAuthStatus(): void {
@@ -36,6 +50,8 @@ export class AuthService {
     if (token && user) {
       this.currentUserSubject.next(user);
       this.isAuthenticatedSubject.next(true);
+      this.authStore.setUser(user);
+      this.scheduleTokenRefresh(token);
     }
   }
 
@@ -69,11 +85,32 @@ export class AuthService {
       .pipe(tap((response) => this.handleAuthResponse(response)));
   }
 
-  refreshToken(): Observable<AuthResponse> {
+  refreshToken(): Observable<{ accessToken: string }> {
     const refreshToken = this.tokenService.getRefreshToken();
     return this.http
-      .post<AuthResponse>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.REFRESH}`, { refreshToken })
-      .pipe(tap((response) => this.handleAuthResponse(response)));
+      .post<{ accessToken: string }>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.REFRESH}`, {
+        refreshToken,
+      })
+      .pipe(
+        tap((response) => {
+          this.tokenService.setAccessToken(response.accessToken);
+          this.scheduleTokenRefresh(response.accessToken);
+        }),
+      );
+  }
+
+  forgotPassword(data: ForgotPasswordRequest): Observable<PasswordResetResponse> {
+    return this.http.post<PasswordResetResponse>(
+      `${environment.apiUrl}${API_ENDPOINTS.AUTH.FORGOT_PASSWORD}`,
+      data,
+    );
+  }
+
+  resetPassword(data: ResetPasswordRequest): Observable<PasswordResetResponse> {
+    return this.http.post<PasswordResetResponse>(
+      `${environment.apiUrl}${API_ENDPOINTS.AUTH.RESET_PASSWORD}`,
+      data,
+    );
   }
 
   clearAuthDataAndRedirect(): void {
@@ -108,11 +145,53 @@ export class AuthService {
 
     this.currentUserSubject.next(response.user);
     this.isAuthenticatedSubject.next(true);
+    this.authStore.setUser(response.user);
+
+    this.scheduleTokenRefresh(response.accessToken);
   }
 
   private clearAuthData(): void {
+    this.clearRefreshTimer();
     this.tokenService.clearTokens();
     this.currentUserSubject.next(null);
     this.isAuthenticatedSubject.next(false);
+    this.authStore.clearUser();
+  }
+
+  private scheduleTokenRefresh(accessToken: string): void {
+    this.clearRefreshTimer();
+
+    const expiresInMs = this.getTokenExpiresInMs(accessToken);
+    if (expiresInMs <= 0) return;
+
+    // Refresh 60 seconds before expiry (or at half-life if token lives < 2 min)
+    const refreshInMs = expiresInMs > 120_000 ? expiresInMs - 60_000 : expiresInMs / 2;
+
+    this.refreshTimerId = setTimeout(() => {
+      this.refreshSubscription = this.refreshToken().subscribe({
+        error: () => this.clearAuthDataAndRedirect(),
+      });
+    }, refreshInMs);
+  }
+
+  private getTokenExpiresInMs(token: string): number {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiresAt = payload.exp * 1000;
+      return expiresAt - Date.now();
+    } catch {
+      return 0;
+    }
+  }
+
+  private clearRefreshTimer(): void {
+    if (this.refreshTimerId) {
+      clearTimeout(this.refreshTimerId);
+      this.refreshTimerId = null;
+    }
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+      this.refreshSubscription = null;
+    }
   }
 }
