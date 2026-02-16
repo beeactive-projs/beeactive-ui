@@ -24,6 +24,14 @@ export const authRoutes: Routes = [
     title: 'New Password - BeeActive',
   },
   {
+    path: 'facebook-callback',
+    loadComponent: () =>
+      import('./facebook-callback/facebook-callback.component').then(
+        (m) => m.FacebookCallbackComponent,
+      ),
+    title: 'Facebook Sign In - BeeActive',
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',

@@ -13,8 +13,12 @@ export * from './lib/models/user/user.model';
 export * from './lib/models/user/role.model';
 export * from './lib/models/user/permission.model';
 
+// Models - Client
+export * from './lib/models/client/client.model';
+
 // Models - Common
 export * from './lib/models/common/api-response.model';
+export * from './lib/models/common/pagination.model';
 
 // Enums
 export * from './lib/enums/user-role.enum';
@@ -33,6 +37,7 @@ export * from './lib/services/auth/token.service';
 export * from './lib/services/auth/google-auth.service';
 export * from './lib/services/auth/facebook-auth.service';
 export * from './lib/services/user/user.service';
+export * from './lib/services/client/client.service';
 
 // Stores
 export * from './lib/stores/auth.store';
