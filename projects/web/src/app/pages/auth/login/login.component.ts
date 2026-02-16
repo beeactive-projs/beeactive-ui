@@ -1,6 +1,6 @@
 import { Component, signal, inject, ChangeDetectionStrategy, afterNextRender, viewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 // PrimeNG imports
@@ -42,6 +42,7 @@ export class LoginComponent {
   private readonly googleAuthService = inject(GoogleAuthService);
   private readonly facebookAuthService = inject(FacebookAuthService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   // Signals for component state
   isLoading = signal(false);
@@ -162,6 +163,12 @@ export class LoginComponent {
   }
 
   private navigateToDashboard(): void {
+    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+    if (returnUrl) {
+      this.router.navigateByUrl(returnUrl);
+      return;
+    }
+
     if (this.authStore.isOrganizer()) {
       this.router.navigate(['/app/dashboard']);
     } else if (this.authStore.isParticipant()) {
