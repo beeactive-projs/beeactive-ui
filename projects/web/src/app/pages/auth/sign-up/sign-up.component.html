@@ -206,8 +206,11 @@
           or sign up with
         </p-divider>
         <div class="flex gap-3">
-          <p-button type="button" class="flex-1" styleClass="social-btn" label="Google" icon="pi pi-google" fluid
-            size="large" (onClick)="onGoogleLogin()"></p-button>
+          <div class="social-btn-wrapper flex-1">
+            <p-button type="button" styleClass="social-btn" label="Google" icon="pi pi-google" fluid
+              size="large"></p-button>
+            <div #googleBtn class="google-btn-overlay"></div>
+          </div>
           <p-button type="button" class="flex-1" styleClass="social-btn" label="Facebook" icon="pi pi-facebook" fluid
             size="large" (onClick)="onFacebookLogin()"></p-button>
         </div>

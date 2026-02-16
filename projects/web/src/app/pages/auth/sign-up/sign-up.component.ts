@@ -1,4 +1,12 @@
-import { Component, signal, inject, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  signal,
+  inject,
+  ChangeDetectionStrategy,
+  afterNextRender,
+  ElementRef,
+  viewChild,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -81,6 +89,21 @@ export class SignUpComponent {
     return password.value === confirmPassword.value ? null : { passwordMismatch: true };
   }
 
+  private readonly googleBtnContainer = viewChild<ElementRef>('googleBtn');
+
+  constructor() {
+    afterNextRender(() => {
+      const el = this.googleBtnContainer()?.nativeElement;
+      if (el) {
+        this.googleAuthService.renderButton(
+          el,
+          (idToken) => this.onGoogleCredential(idToken),
+          (error) => this.errorMessage.set(error.message),
+        );
+      }
+    });
+  }
+
   onSubmit(): void {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
@@ -112,29 +135,20 @@ export class SignUpComponent {
     });
   }
 
-  onGoogleLogin(): void {
+  private onGoogleCredential(idToken: string): void {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    this.googleAuthService
-      .signIn()
-      .then((accessToken: string) => {
-        this.authService.googleLogin({ accessToken }).subscribe({
-          next: () => {
-            this.isLoading.set(false);
-            this.navigateToDashboard();
-          },
-          error: (error: { error?: { message?: string } }) => {
-            this.isLoading.set(false);
-            this.errorMessage.set(
-              error.error?.message || 'Google sign-up failed. Please try again.',
-            );
-          },
-        });
-      })
-      .catch(() => {
+    this.authService.googleLogin({ idToken }).subscribe({
+      next: () => {
         this.isLoading.set(false);
-      });
+        this.navigateToDashboard();
+      },
+      error: (error: { error?: { message?: string } }) => {
+        this.isLoading.set(false);
+        this.errorMessage.set(error.error?.message || 'Google sign-in failed. Please try again.');
+      },
+    });
   }
 
   onFacebookLogin(): void {

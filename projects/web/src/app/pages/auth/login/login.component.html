@@ -17,7 +17,7 @@
         Your fitness journey<br>
         starts <span class="text-brand">here.</span>
       </h2>
-      <p class="text-secondary-400 text-base leading-relaxed max-w-[400px]">
+      <p class="text-secondary-400 text-base leading-relaxed max-w-100">
         Track workouts, connect with trainers, and crush your goals — all in one place built for
         people who move.
       </p>
@@ -103,10 +103,13 @@
           or continue with
         </p-divider>
         <div class="flex gap-3">
-          <p-button type="button" class="flex-1" styleClass="social-btn" label="Google" icon="pi pi-google" fluid
-            size="large"></p-button>
+          <div class="social-btn-wrapper flex-1">
+            <p-button type="button" styleClass="social-btn" label="Google" icon="pi pi-google" fluid
+              size="large"></p-button>
+            <div #googleBtn class="google-btn-overlay"></div>
+          </div>
           <p-button type="button" class="flex-1" styleClass="social-btn" label="Facebook" icon="pi pi-facebook" fluid
-            size="large"></p-button>
+            size="large" (onClick)="onFacebookLogin()"></p-button>
         </div>
         <div class="flex flex-col gap-3 text-center">
           <p class="text-xs text-secondary-400 leading-relaxed">

@@ -1,5 +1,5 @@
 export interface GoogleLoginRequest {
-  accessToken: string;
+  idToken: string;
 }
 
 export interface FacebookLoginRequest {

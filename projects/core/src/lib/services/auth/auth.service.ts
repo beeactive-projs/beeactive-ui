@@ -76,9 +76,11 @@ export class AuthService implements OnDestroy {
   }
 
   logout(): Observable<void> {
-    return this.http
-      .post<void>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.LOGOUT}`, {})
-      .pipe(tap(() => this.clearAuthData()));
+    this.clearAuthData();
+    return new Observable<void>();
+    // return this.http
+    //   .post<void>(`${environment.apiUrl}${API_ENDPOINTS.AUTH.LOGOUT}`, {})
+    //   .pipe(tap(() => this.clearAuthData()));
   }
 
   googleLogin(request: GoogleLoginRequest): Observable<User> {
@@ -151,15 +153,13 @@ export class AuthService implements OnDestroy {
   }
 
   private fetchAndStoreProfile(): Observable<User> {
-    return this.http
-      .get<User>(`${environment.apiUrl}${API_ENDPOINTS.USERS.ME}`)
-      .pipe(
-        tap((user) => {
-          this.tokenService.setUser(user);
-          this.currentUserSubject.next(user);
-          this.authStore.setUser(user);
-        }),
-      );
+    return this.http.get<User>(`${environment.apiUrl}${API_ENDPOINTS.USERS.ME}`).pipe(
+      tap((user) => {
+        this.tokenService.setUser(user);
+        this.currentUserSubject.next(user);
+        this.authStore.setUser(user);
+      }),
+    );
   }
 
   private handleAuthResponse(response: AuthResponse): void {

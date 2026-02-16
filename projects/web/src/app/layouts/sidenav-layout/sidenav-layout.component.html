@@ -1,0 +1,46 @@
+<div class="layout">
+  <div class="sidebar-backdrop" [class.sidebar-backdrop-visible]="showBackdrop()" (click)="closeSidebar()"></div>
+
+  <aside class="sidebar sidebar-open" [class.sidebar-open]="sidebarOpen()"
+    [class.sidebar-animating]="sidebarAnimating()" (transitionend)="onSidebarTransitionEnd($event)">
+    <div class="brand-logo">
+      <div class="brand-logo-icon bg-primary-500">
+        <i class="pi pi-bolt text-primary-contrast text-xl"></i>
+      </div>
+      <span class="font-heading text-2xl font-extrabold">{{ brandName() }}</span>
+    </div>
+    <nav>
+      <ul class="flex flex-col gap-2">
+        @for (item of menuItems(); track item.label) {
+        <li>
+          <a [routerLink]="item.routerLink" routerLinkActive="bg-primary-500 text-secondary-950 font-semibold" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm
+            transition-colors hover:bg-secondary-100 hover:text-secondary-600">
+            <i [class]="item.icon + ' text-base'"></i>
+            {{ item.label }}
+          </a>
+        </li>
+        }
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="content" [class.sidebar-open]="sidebarOpen()">
+    <p-toolbar>
+      <ng-template #start>
+        <p-button icon="pi pi-bars" class="mr-2" text rounded severity="secondary" (onClick)="toggleSidebar()" />
+      </ng-template>
+      <ng-template #center>
+        <ng-content select="[toolbarCenter]" />
+      </ng-template>
+      <ng-template #end>
+        <ng-content select="[toolbarEnd]" />
+        <bee-theme-toggle />
+        <p-button icon="pi pi-sign-out" text rounded severity="secondary" (onClick)="signOut()" ariaLabel="Sign out" />
+      </ng-template>
+    </p-toolbar>
+
+    <main class="flex flex-col flex-1 overflow-auto">
+      <ng-content />
+    </main>
+  </div>
+</div>

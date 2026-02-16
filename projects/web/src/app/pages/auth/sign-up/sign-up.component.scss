@@ -143,6 +143,27 @@
     pointer-events: none;
   }
 }
+
+// Custom Google button with invisible GIS overlay
+.social-btn-wrapper {
+  position: relative;
+
+  .google-btn-overlay {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0;
+    cursor: pointer;
+
+    // Make the Google iframe fill the overlay area
+    div,
+    iframe {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+}
+
 :host::ng-deep {
   .p-divider-content {
     --p-divider-content-background: var(--surface-100);

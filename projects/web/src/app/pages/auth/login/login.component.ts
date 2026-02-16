@@ -1,4 +1,4 @@
-import { Component, signal, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, inject, ChangeDetectionStrategy, afterNextRender, viewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -84,29 +84,37 @@ export class LoginComponent {
     });
   }
 
-  onGoogleLogin(): void {
+  private readonly googleBtnContainer = viewChild<ElementRef>('googleBtn');
+
+  constructor() {
+    afterNextRender(() => {
+      const el = this.googleBtnContainer()?.nativeElement;
+      if (el) {
+        this.googleAuthService.renderButton(
+          el,
+          (idToken) => this.onGoogleCredential(idToken),
+          (error) => this.errorMessage.set(error.message),
+        );
+      }
+    });
+  }
+
+  private onGoogleCredential(idToken: string): void {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    this.googleAuthService
-      .signIn()
-      .then((accessToken: string) => {
-        this.authService.googleLogin({ accessToken }).subscribe({
-          next: () => {
-            this.isLoading.set(false);
-            this.navigateToDashboard();
-          },
-          error: (error: { error?: { message?: string } }) => {
-            this.isLoading.set(false);
-            this.errorMessage.set(
-              error.error?.message || 'Google sign-in failed. Please try again.',
-            );
-          },
-        });
-      })
-      .catch(() => {
+    this.authService.googleLogin({ idToken }).subscribe({
+      next: () => {
         this.isLoading.set(false);
-      });
+        this.navigateToDashboard();
+      },
+      error: (error: { error?: { message?: string } }) => {
+        this.isLoading.set(false);
+        this.errorMessage.set(
+          error.error?.message || 'Google sign-in failed. Please try again.',
+        );
+      },
+    });
   }
 
   onFacebookLogin(): void {
