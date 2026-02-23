@@ -14,7 +14,7 @@
       </a>
 
       <!-- Desktop nav links -->
-      <div class="hidden md:flex items-center" role="navigation" aria-label="Main navigation">
+      <div class="hidden lg:flex items-center" role="navigation" aria-label="Main navigation">
         @for (link of navLinks; track link.label) {
         <a [routerLink]="link.path" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: true}"
           class="nav-link">{{ link.label }}</a>
@@ -22,7 +22,7 @@
       </div>
 
       <!-- Desktop auth area -->
-      <div class="hidden md:flex items-center gap-2">
+      <div class="hidden lg:flex items-center gap-2">
         <div class="nav-divider" aria-hidden="true"></div>
         <p-button [icon]="isDark() ? 'pi pi-sun' : 'pi pi-moon'" [rounded]="true" [text]="true"
           (onClick)="toggleTheme()" [ariaLabel]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
@@ -32,7 +32,7 @@
       </div>
 
       <!-- Mobile controls -->
-      <div class="flex md:hidden items-center gap-1">
+      <div class="flex lg:hidden items-center gap-1">
         <p-button [icon]="isDark() ? 'pi pi-sun' : 'pi pi-moon'" [rounded]="true" [text]="true"
           (onClick)="toggleTheme()" [ariaLabel]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'" />
         <p-button [icon]="mobileMenuOpen() ? 'pi pi-times' : 'pi pi-bars'" [rounded]="true" [text]="true"
@@ -42,21 +42,22 @@
 
     <!-- Mobile menu panel -->
     @if (mobileMenuOpen()) {
-    <!-- <div class="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <div class="mobile-menu" role="navigation" aria-label="Mobile navigation">
       @for (link of navLinks; track link.label) {
-      <a [routerLink]="link.path" routerLinkActive="mobile-link--active" (click)="closeMobileMenu()"
-        class="mobile-link">{{
+      <a [routerLink]="link.path" routerLinkActive="mobile-link--active" [routerLinkActiveOptions]="{exact: true}"
+        (click)="closeMobileMenu()" class="mobile-link">{{
         link.label }}</a>
       }
 
       <div class="mobile-menu-divider"></div>
 
-      <div class="flex flex-col gap-2">
-        <p-button label="Sign In" [outlined]="true" routerLink="/auth/login" (onClick)="closeMobileMenu()" />
+      <div class="flex gap-2">
+        <p-button label="Sign In" [outlined]="true" routerLink="/auth/login" (onClick)="closeMobileMenu()" class="w-1/2"
+          fluid />
         <p-button label="Get Started" icon="pi pi-arrow-right" iconPos="right" routerLink="/auth/signup"
-          (onClick)="closeMobileMenu()" />
+          (onClick)="closeMobileMenu()" class="w-1/2" fluid />
       </div>
-    </div> -->
+    </div>
     }
   </nav>
 </header>

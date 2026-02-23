@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'bee-home',
-  imports: [ButtonModule],
+  imports: [ButtonModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
