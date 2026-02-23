@@ -21,4 +21,15 @@ export const publicRoutes: Routes = [
     loadComponent: () => import('./contact/contact.component').then((m) => m.ContactComponent),
     title: 'Contact Us - BeeActive',
   },
+  {
+    path: 'blog',
+    loadComponent: () => import('./blog/blog.component').then((m) => m.BlogComponent),
+    title: 'Blog - Fitness Insights & Expert Tips | BeeActive',
+  },
+  {
+    path: 'blog/:slug',
+    loadComponent: () =>
+      import('./blog/blog-article/blog-article.component').then((m) => m.BlogArticleComponent),
+    title: 'BeeActive Blog',
+  },
 ];

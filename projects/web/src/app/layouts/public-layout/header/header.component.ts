@@ -30,6 +30,7 @@ export class PublicHeaderComponent {
     { label: 'About', path: '/about', exact: false },
     { label: 'Services', path: '/services', exact: false },
     { label: 'Contact', path: '/contact', exact: false },
+    { label: 'Blog', path: '/blog', exact: false },
   ];
 
   toggleTheme(): void {

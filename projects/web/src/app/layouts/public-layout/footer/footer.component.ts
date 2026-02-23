@@ -23,6 +23,7 @@ export class PublicFooterComponent {
     { label: 'About Us', path: '/about' },
     { label: 'Services', path: '/services' },
     { label: 'Contact', path: '/contact' },
+    { label: 'Blog', path: '/blog' },
   ];
 
   readonly supportLinks = [

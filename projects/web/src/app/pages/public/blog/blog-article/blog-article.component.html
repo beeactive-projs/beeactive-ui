@@ -1,0 +1,159 @@
+@if (post(); as article) {
+
+<!-- ===== Article Header ===== -->
+<section class="article-header-section">
+  <div class="relative z-50 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10">
+    <!-- Back link -->
+    <a routerLink="/blog" class="back-link" aria-label="Back to blog list">
+      <i class="pi pi-arrow-left text-sm"></i>
+      <span>Back to Blog</span>
+    </a>
+
+    <!-- Meta -->
+    <div class="flex items-center gap-3 flex-wrap mt-6 mb-5">
+      <span class="category-badge">{{ article.category }}</span>
+      <span class="text-sm text-secondary-400">{{ article.publishedAt }}</span>
+      <span class="text-sm text-secondary-400">
+        <i class="pi pi-clock mr-1 text-xs"></i>{{ article.readTime }} min read
+      </span>
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white leading-tight mb-6">
+      {{ article.title }}
+    </h1>
+
+    <!-- Excerpt -->
+    <p class="text-lg text-secondary-400 leading-relaxed mb-8">
+      {{ article.excerpt }}
+    </p>
+
+    <!-- Author -->
+    <div class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-full bg-primary-500 flex items-center justify-center text-white font-bold text-sm"
+        aria-hidden="true">
+        {{ article.author.initials }}
+      </div>
+      <div>
+        <p class="font-semibold text-white text-sm">{{ article.author.name }}</p>
+        <p class="text-xs text-secondary-400">{{ article.author.role }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Cover Image ===== -->
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-2 mb-12">
+  <img [src]="article.coverImage" [alt]="article.title" class="article-cover-image" loading="eager" width="1200"
+    height="675" />
+</div>
+
+<!-- ===== Article Content ===== -->
+<article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-12" aria-label="Article content">
+  <div class="article-content">
+    @for (block of article.content; track $index) {
+    @switch (block.type) {
+    @case ('h2') {
+    <h2>{{ block.text }}</h2>
+    }
+    @case ('h3') {
+    <h3>{{ block.text }}</h3>
+    }
+    @case ('p') {
+    <p>{{ block.text }}</p>
+    }
+    @case ('ul') {
+    <ul>
+      @for (item of block.items; track $index) {
+      <li>{{ item }}</li>
+      }
+    </ul>
+    }
+    }
+    }
+  </div>
+
+  <!-- Tags -->
+  <div class="flex flex-wrap gap-2 mt-10 pt-8 border-t border-secondary-200 dark:border-secondary-700/50">
+    @for (tag of article.tags; track tag) {
+    <span class="tag-pill">#{{ tag }}</span>
+    }
+  </div>
+</article>
+
+<!-- ===== Author Bio Card ===== -->
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+  <div class="author-bio-card">
+    <div
+      class="w-16 h-16 rounded-full bg-primary-500 flex items-center justify-center text-white font-extrabold text-xl flex-shrink-0"
+      aria-hidden="true">
+      {{ article.author.initials }}
+    </div>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-widest text-secondary-400 dark:text-secondary-500 mb-1">Written
+        by</p>
+      <p class="text-lg font-heading font-bold text-secondary-900 dark:text-white">{{ article.author.name }}</p>
+      <p class="text-sm text-secondary-500 dark:text-secondary-400 mt-1">{{ article.author.role }} at BeeActive —
+        helping athletes of all levels reach their potential through evidence-based coaching and training principles.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Related Articles ===== -->
+@if (relatedPosts().length > 0) {
+<section
+  class="py-16 bg-secondary-50 dark:bg-secondary-900/50 border-t border-secondary-200/60 dark:border-secondary-700/40"
+  aria-labelledby="related-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 id="related-heading"
+      class="text-2xl sm:text-3xl font-heading font-extrabold text-secondary-900 dark:text-white mb-8">
+      Related Articles
+    </h2>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (related of relatedPosts(); track related.id) {
+      <a [routerLink]="['/blog', related.slug]" class="related-card"
+        [attr.aria-label]="'Read article: ' + related.title">
+        <div class="related-card__image-wrap">
+          <img [src]="related.coverImage" [alt]="related.title" class="related-card__image" loading="lazy" width="800"
+            height="450" />
+        </div>
+        <div class="related-card__content">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="category-badge">{{ related.category }}</span>
+            <span class="text-xs text-secondary-400 dark:text-secondary-500">{{ related.readTime }} min read</span>
+          </div>
+          <h3
+            class="text-base font-heading font-bold text-secondary-900 dark:text-white leading-snug mb-2 group-hover:text-brand transition-colors line-clamp-2">
+            {{ related.title }}
+          </h3>
+          <p class="text-sm text-secondary-500 dark:text-secondary-400 line-clamp-2">{{ related.excerpt }}</p>
+        </div>
+      </a>
+      }
+    </div>
+  </div>
+</section>
+}
+
+<!-- ===== CTA Section ===== -->
+<section class="cta-section">
+  <div class="honeycomb-bg-cta"></div>
+  <div class="orb orb-cta-1"></div>
+  <div class="orb orb-cta-2"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 text-center">
+    <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-white leading-tight mb-5">
+      Put This Into Practice with
+      <span class="text-primary-300">BeeActive</span>
+    </h2>
+    <p class="text-lg text-secondary-300 mb-8 max-w-xl mx-auto">
+      Connect with a certified trainer who can help you apply these principles to your unique goals.
+    </p>
+    <p-button label="Find Your Trainer" icon="pi pi-arrow-right" iconPos="right" routerLink="/auth/signup"
+      severity="warn" size="large" />
+  </div>
+</section>
+
+}
