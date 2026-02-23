@@ -1,14 +1,11 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Location } from '@angular/common';
-
-// PrimeNG imports
+import { Router, RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'bee-not-found',
-  imports: [CommonModule, RouterLink, ButtonModule],
+  imports: [RouterLink, ButtonModule],
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,10 +20,5 @@ export class NotFoundComponent {
 
   goBack(): void {
     this.location.back();
-  }
-
-  searchHelp(): void {
-    // Navigate to help/FAQ page when implemented
-    console.log('Navigate to help page');
   }
 }

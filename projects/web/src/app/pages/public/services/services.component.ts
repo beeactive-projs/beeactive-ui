@@ -1,52 +1,57 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'bee-services',
-  imports: [CommonModule, RouterLink, ButtonModule],
+  imports: [RouterLink, ButtonModule],
   templateUrl: './services.component.html',
   styleUrl: './services.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServicesComponent {
-  services = [
+  readonly services = [
     {
       icon: 'pi-user',
       title: 'Personal Training',
-      description: 'One-on-one sessions with certified trainers tailored to your specific goals and fitness level.',
+      description:
+        'One-on-one sessions with certified trainers crafted entirely around your specific goals, fitness level, and schedule.',
       features: ['Custom workout plans', 'Progress tracking', 'Nutritional guidance', 'Weekly check-ins'],
     },
     {
       icon: 'pi-users',
       title: 'Group Classes',
-      description: 'Join energetic group sessions and work out with others who share your fitness goals.',
-      features: ['Various class types', 'Live and on-demand', 'Community support', 'Flexible scheduling'],
+      description:
+        'Join energetic group sessions and train alongside people who share your goals — motivation included at no extra charge.',
+      features: ['Multiple class formats', 'Live and on-demand', 'Community support', 'Flexible scheduling'],
     },
     {
       icon: 'pi-mobile',
       title: 'Online Coaching',
-      description: 'Get expert guidance from anywhere with our comprehensive online coaching programs.',
-      features: ['Video consultations', 'Custom meal plans', 'Form check videos', '24/7 support'],
+      description:
+        'World-class coaching delivered wherever you are, through video consultations and a fully digital training platform.',
+      features: ['Video consultations', 'Custom meal plans', 'Form check videos', '24/7 messaging support'],
     },
     {
       icon: 'pi-chart-line',
       title: 'Performance Analytics',
-      description: 'Advanced tracking and analytics to monitor your progress and optimize your training.',
-      features: ['Detailed metrics', 'Progress visualization', 'Goal tracking', 'Performance insights'],
+      description:
+        'Advanced tracking and detailed analytics to monitor every aspect of your training and unlock actionable insights.',
+      features: ['Detailed metrics dashboard', 'Progress visualisation', 'Goal tracking', 'Performance reports'],
     },
     {
       icon: 'pi-calendar',
-      title: 'Flexible Scheduling',
-      description: 'Book sessions that fit your schedule with our easy-to-use calendar system.',
+      title: 'Smart Scheduling',
+      description:
+        'Book, reschedule, and manage sessions with an intuitive calendar that fits around your life — not the other way around.',
       features: ['Real-time availability', 'Easy rescheduling', 'Automated reminders', 'Calendar sync'],
     },
     {
-      icon: 'pi-shield',
+      icon: 'pi-heart',
       title: 'Wellness Programs',
-      description: 'Holistic wellness programs that address fitness, nutrition, and mental well-being.',
-      features: ['Stress management', 'Sleep optimization', 'Mindfulness training', 'Lifestyle coaching'],
+      description:
+        'Holistic programs that go beyond the gym — addressing fitness, nutrition, recovery, and mental well-being together.',
+      features: ['Stress management', 'Sleep optimisation', 'Mindfulness training', 'Lifestyle coaching'],
     },
   ];
 }

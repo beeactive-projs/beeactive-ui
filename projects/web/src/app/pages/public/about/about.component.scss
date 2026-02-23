@@ -1,3 +1,171 @@
-:host {
-  display: block;
+$honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
+
+// ===== Values Section =====
+.values-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--p-secondary-50);
+
+  :host-context(.dark) & {
+    background: var(--p-secondary-900);
+  }
+}
+
+.honeycomb-bg-subtle {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: $honeycomb-svg;
+  background-size: 56px 100px;
+  pointer-events: none;
+}
+
+// ===== Feature Cards (mirrors home) =====
+.feature-card {
+  background: var(--p-gray-100);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.35s ease;
+
+  :host-context(.dark) & {
+    background: var(--p-gray-800);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+
+    :host-context(.dark) & {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-icon-wrap {
+      transform: scale(1.08);
+    }
+  }
+}
+
+.feature-icon-wrap {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.825rem;
+  background: var(--p-primary-500);
+  color: var(--p-primary-contrast-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+  transition: transform 0.35s ease;
+}
+
+// ===== Team Cards (mirrors testimonial-card from home) =====
+.team-card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 1rem;
+  padding: 1.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.35s ease;
+
+  :host-context(.dark) & {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+
+    :host-context(.dark) & {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+// ===== Story Visual — Milestone Cards =====
+.milestone-card {
+  position: absolute;
+  background: var(--p-gray-100);
+  border-radius: 1rem;
+  padding: 1.25rem 1.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+
+  :host-context(.dark) & {
+    background: var(--p-gray-800);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.milestone-card--1 {
+  top: 0;
+  left: 50%;
+  animation: cardFloatCentered 4s ease-in-out infinite;
+}
+
+.milestone-card--2 {
+  bottom: 0;
+  left: 4%;
+  animation: cardFloat 4s ease-in-out -1.5s infinite;
+}
+
+.milestone-card--3 {
+  bottom: 0;
+  right: 4%;
+  animation: cardFloat 4s ease-in-out -3s infinite;
+}
+
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes cardFloatCentered {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-8px); }
+}
+
+// ===== CTA Section (mirrors home/blog) =====
+.cta-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-secondary-900, #0f172a);
+}
+
+.honeycomb-bg-cta {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: $honeycomb-svg;
+  background-size: 56px 100px;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+.orb-cta-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -80px;
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.orb-cta-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -60px;
+  left: -80px;
+  background: rgba(20, 184, 166, 0.08);
 }

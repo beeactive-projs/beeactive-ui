@@ -1,122 +1,72 @@
-<div
-  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-danger-50 via-white to-warning-50 px-4 py-8 sm:px-6 lg:px-8">
-  <div class="w-full max-w-2xl">
-    <!-- Error Icon & Code -->
-    <div class="text-center mb-8 animate-fade-in">
-      <div
-        class="inline-flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-danger-500 to-warning-500 rounded-full shadow-2xl mb-6 animate-pulse-slow">
-        <i class="pi pi-exclamation-triangle text-white text-5xl sm:text-6xl"></i>
-      </div>
+<div class="min-h-screen bg-secondary-50 dark:bg-secondary-950 flex items-center justify-center px-4 py-16">
+  <div class="w-full max-w-xl text-center">
 
-      <!-- Error Code -->
-      <div class="mb-4">
-        <span
-          class="inline-block px-6 py-2 bg-danger-100 text-danger-700 rounded-full text-sm font-bold tracking-wider">
-          ERROR {{ errorCode() }}
-        </span>
-      </div>
-
-      <!-- Error Title -->
-      <h1 class="font-heading text-4xl sm:text-5xl font-bold text-secondary-900 mb-4">
-        {{ errorTitle() }}
-      </h1>
-
-      <!-- Error Message -->
-      <p class="text-secondary-600 text-base sm:text-lg max-w-lg mx-auto leading-relaxed">
-        {{ errorMessage() }}
-      </p>
+    <!-- Icon -->
+    <div class="feature-icon-wrap mx-auto mb-6">
+      <i class="pi pi-exclamation-triangle text-xl"></i>
     </div>
 
-    <!-- Error Details Card -->
-    <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 mb-8 animate-slide-up">
-      <!-- What to do section -->
-      <div class="mb-6">
-        <h2 class="text-xl font-heading font-semibold text-secondary-900 mb-4 flex items-center gap-2">
-          <i class="pi pi-lightbulb text-primary-500"></i>
-          What can you do?
-        </h2>
-        <ul class="space-y-3 text-secondary-700">
-          <li class="flex items-start gap-3">
-            <i class="pi pi-check-circle text-success-600 mt-1 flex-shrink-0"></i>
-            <span>Try refreshing the page or wait a moment before trying again</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <i class="pi pi-check-circle text-success-600 mt-1 flex-shrink-0"></i>
-            <span>Check your internet connection</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <i class="pi pi-check-circle text-success-600 mt-1 flex-shrink-0"></i>
-            <span>Return to the homepage and navigate back</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <i class="pi pi-check-circle text-success-600 mt-1 flex-shrink-0"></i>
-            <span>If the problem persists, contact our support team</span>
-          </li>
-        </ul>
+    <!-- Badge with error code -->
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-500/10 dark:bg-accent-400/15 mb-6">
+      <span class="text-sm font-semibold text-accent-700 dark:text-accent-300">ERROR {{ errorCode() }}</span>
+    </div>
+
+    <h1 class="text-3xl sm:text-4xl font-heading font-extrabold text-secondary-900 dark:text-white mb-4">
+      {{ errorTitle() }}
+    </h1>
+
+    <p class="text-secondary-600 dark:text-secondary-400 text-base sm:text-lg max-w-md mx-auto leading-relaxed mb-10">
+      {{ errorMessage() }}
+    </p>
+
+    <!-- Tips Card -->
+    <div class="error-card mb-10 text-left">
+      <h2 class="text-lg font-heading font-semibold text-secondary-900 dark:text-white mb-4 flex items-center gap-2">
+        <i class="pi pi-lightbulb text-primary-500 dark:text-primary-400"></i>
+        What can you do?
+      </h2>
+      <ul class="flex flex-col gap-3">
+        <li class="flex items-start gap-3 text-sm text-secondary-600 dark:text-secondary-400">
+          <i class="pi pi-check-circle text-accent-500 dark:text-accent-400 shrink-0 mt-0.5"></i>
+          <span>Try refreshing the page or wait a moment before trying again</span>
+        </li>
+        <li class="flex items-start gap-3 text-sm text-secondary-600 dark:text-secondary-400">
+          <i class="pi pi-check-circle text-accent-500 dark:text-accent-400 shrink-0 mt-0.5"></i>
+          <span>Check your internet connection</span>
+        </li>
+        <li class="flex items-start gap-3 text-sm text-secondary-600 dark:text-secondary-400">
+          <i class="pi pi-check-circle text-accent-500 dark:text-accent-400 shrink-0 mt-0.5"></i>
+          <span>Return to the homepage and navigate back</span>
+        </li>
+        <li class="flex items-start gap-3 text-sm text-secondary-600 dark:text-secondary-400">
+          <i class="pi pi-check-circle text-accent-500 dark:text-accent-400 shrink-0 mt-0.5"></i>
+          <span>If the problem persists, contact our support team</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+      <p-button label="Go Home" icon="pi pi-home" (onClick)="goHome()" severity="warn" size="large" />
+      <p-button label="Try Again" icon="pi pi-refresh" (onClick)="retry()" [outlined]="true" size="large"
+        styleClass="error-outline-btn" />
+      <p-button label="Go Back" icon="pi pi-arrow-left" (onClick)="goBack()" [outlined]="true" size="large"
+        styleClass="error-outline-btn" />
+    </div>
+
+    <!-- Support Info -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-secondary-500 dark:text-secondary-500">
+      <div class="flex items-center gap-2">
+        <i class="pi pi-clock"></i>
+        <span>24/7 Support Available</span>
       </div>
-
-      <!-- Action Buttons -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <p-button
-          label="Go Home"
-          icon="pi pi-home"
-          (onClick)="goHome()"
-          class="w-full bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600"
-          styleClass="w-full"
-        />
-
-        <p-button
-          label="Try Again"
-          icon="pi pi-refresh"
-          (onClick)="retry()"
-          severity="secondary"
-          [outlined]="true"
-          styleClass="w-full"
-        />
-
-        <p-button
-          label="Go Back"
-          icon="pi pi-arrow-left"
-          (onClick)="goBack()"
-          severity="secondary"
-          [outlined]="true"
-          styleClass="w-full"
-        />
+      <span class="hidden sm:inline">·</span>
+      <div class="flex items-center gap-2">
+        <i class="pi pi-envelope"></i>
+        <a href="mailto:support@beeactive.com"
+          class="text-primary-600 dark:text-primary-400 hover:underline transition-colors">support&#64;beeactive.com</a>
       </div>
     </div>
 
-    <!-- Support Section -->
-    <div class="text-center">
-      <div class="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-sm text-secondary-600">
-        <div class="flex items-center gap-2">
-          <i class="pi pi-clock text-secondary-400"></i>
-          <span>24/7 Support Available</span>
-        </div>
-        <span class="hidden sm:inline text-secondary-300">•</span>
-        <div class="flex items-center gap-2">
-          <i class="pi pi-envelope text-secondary-400"></i>
-          <a
-            href="mailto:support@beeactive.com"
-            class="text-primary-600 hover:text-primary-700 font-medium transition-colors">
-            support@beeactive.com
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Status Badge -->
-    <div class="mt-8 text-center">
-      <a
-        href="https://status.beeactive.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm text-xs text-secondary-500 hover:text-secondary-700 hover:shadow-md transition-all">
-        <span
-          class="w-2 h-2 bg-success-500 rounded-full animate-pulse-slow"
-          aria-label="System status"></span>
-        <span>Check System Status</span>
-        <i class="pi pi-external-link text-xs"></i>
-      </a>
-    </div>
   </div>
 </div>

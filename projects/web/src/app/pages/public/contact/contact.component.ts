@@ -1,6 +1,5 @@
-import { Component, signal, inject, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
@@ -8,14 +7,7 @@ import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'bee-contact',
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    ButtonModule,
-    InputTextModule,
-    TextareaModule,
-    MessageModule,
-  ],
+  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, TextareaModule, MessageModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,11 +15,35 @@ import { MessageModule } from 'primeng/message';
 export class ContactComponent {
   private readonly fb = inject(FormBuilder);
 
-  isLoading = signal(false);
-  successMessage = signal<string | null>(null);
-  errorMessage = signal<string | null>(null);
+  readonly isLoading = signal(false);
+  readonly successMessage = signal<string | null>(null);
 
-  contactForm: FormGroup = this.fb.group({
+  readonly contactInfo: { icon: string; label: string; value: string; href?: string }[] = [
+    {
+      icon: 'pi-map-marker',
+      label: 'Address',
+      value: '123 BeeActive Street, Tech City, TC 12345',
+    },
+    {
+      icon: 'pi-envelope',
+      label: 'Email',
+      value: 'info@beeactive.com',
+      href: 'mailto:info@beeactive.com',
+    },
+    {
+      icon: 'pi-phone',
+      label: 'Phone',
+      value: '+1 (234) 567-890',
+      href: 'tel:+12345678900',
+    },
+    {
+      icon: 'pi-clock',
+      label: 'Business Hours',
+      value: 'Mon–Fri: 9:00 AM – 6:00 PM\nWeekends: Closed',
+    },
+  ];
+
+  readonly contactForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
     subject: ['', [Validators.required]],
@@ -41,19 +57,17 @@ export class ContactComponent {
     }
 
     this.isLoading.set(true);
-    this.errorMessage.set(null);
     this.successMessage.set(null);
 
-    // Simulate API call
     setTimeout(() => {
       this.isLoading.set(false);
-      this.successMessage.set('Thank you for contacting us! We will get back to you soon.');
+      this.successMessage.set("Thank you! We'll get back to you within one business day.");
       this.contactForm.reset();
     }, 1500);
   }
 
-  isFieldInvalid(fieldName: string): boolean {
-    const field = this.contactForm.get(fieldName);
-    return !!(field && field.invalid && (field.dirty || field.touched));
+  isFieldInvalid(field: string): boolean {
+    const control = this.contactForm.get(field);
+    return !!(control?.invalid && (control.dirty || control.touched));
   }
 }

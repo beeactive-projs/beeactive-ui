@@ -1,83 +1,199 @@
-<!-- Hero Section -->
-<section class="bg-gradient-to-br from-primary-50 via-white to-accent-50 py-16 sm:py-24">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-secondary-900 mb-6">
-      About <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">BeeActive</span>
+<!-- ===== Hero Section ===== -->
+<section class="relative overflow-hidden py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in">
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-400/15 mb-4">
+      <i class="pi pi-heart text-accent-300 text-sm"></i>
+      <span class="text-sm font-semibold text-accent-300">About Us</span>
+    </div>
+
+    <h1
+      class="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-white leading-[1.1] tracking-tight mb-6">
+      Building the Future of
+      <span class="text-brand">Fitness</span>
     </h1>
-    <p class="text-lg sm:text-xl text-secondary-600 max-w-3xl mx-auto leading-relaxed">
-      We're on a mission to make fitness accessible, enjoyable, and effective for everyone through innovative technology and personalized training.
+
+    <p class="text-lg sm:text-xl text-secondary-400 max-w-2xl mx-auto leading-relaxed">
+      We're on a mission to make quality fitness training accessible, enjoyable, and effective for
+      everyone — everywhere.
     </p>
   </div>
 </section>
 
-<!-- Story Section -->
-<section class="py-16 sm:py-24 bg-white">
+<!-- ===== Stats Bar ===== -->
+<section
+  class="py-16 bg-white dark:bg-secondary-900 border-y border-secondary-200/60 dark:border-secondary-700/40">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      @for (stat of stats; track stat.label) {
+      <div class="text-center">
+        <p class="text-4xl sm:text-5xl font-heading font-extrabold text-brand mb-2">
+          {{ stat.value }}
+        </p>
+        <p class="text-sm sm:text-base text-secondary-500 dark:text-secondary-400 font-medium">
+          {{ stat.label }}
+        </p>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===== Story Section ===== -->
+<section class="py-20 sm:py-28 bg-white dark:bg-secondary-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+      <!-- Text -->
       <div>
-        <h2 class="text-3xl sm:text-4xl font-heading font-bold text-secondary-900 mb-6">Our Story</h2>
-        <p class="text-secondary-600 leading-relaxed mb-4">
-          BeeActive was born from a simple idea: everyone deserves access to quality fitness training, regardless of location or schedule.
-        </p>
-        <p class="text-secondary-600 leading-relaxed mb-4">
-          Founded in 2020, we've grown from a small startup to a thriving community of over 10,000 active users and 500+ certified trainers.
-        </p>
-        <p class="text-secondary-600 leading-relaxed">
-          Our platform combines cutting-edge technology with the human touch of professional trainers to create a fitness experience that's both effective and enjoyable.
-        </p>
-      </div>
-      <div class="aspect-square rounded-2xl bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
-        <i class="pi pi-heart text-9xl text-primary-500 opacity-20"></i>
-      </div>
-    </div>
-  </div>
-</section>
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-400/15 mb-4">
+          <span class="text-sm font-semibold text-primary-700 dark:text-primary-300">Our Story</span>
+        </div>
 
-<!-- Values Section -->
-<section class="py-16 sm:py-24 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl sm:text-4xl font-heading font-bold text-secondary-900 mb-4">Our Values</h2>
-      <p class="text-lg text-secondary-600 max-w-2xl mx-auto">The principles that guide everything we do</p>
-    </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-      @for (value of values; track value.title) {
-        <div class="text-center">
-          <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <i [class]="'pi ' + value.icon + ' text-white text-2xl'"></i>
+        <h2
+          class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-secondary-900 dark:text-white mb-6">
+          From Startup to
+          <span class="text-brand">Community</span>
+        </h2>
+
+        <p class="text-secondary-500 dark:text-secondary-400 leading-relaxed mb-4">
+          BeeActive was born from a simple frustration: quality personal training was only accessible to
+          those in the right city, with the right budget, and the right connections.
+        </p>
+        <p class="text-secondary-500 dark:text-secondary-400 leading-relaxed mb-4">
+          Founded in 2020, we set out to change that. Today we connect over 10,000 active members with
+          500+ certified trainers worldwide — through a platform built entirely around results.
+        </p>
+        <p class="text-secondary-500 dark:text-secondary-400 leading-relaxed">
+          Our platform combines cutting-edge technology with the human touch of professional coaching to
+          create a fitness experience that's both effective and deeply personal.
+        </p>
+      </div>
+
+      <!-- Visual -->
+      <div class="relative hidden lg:block h-80" aria-hidden="true">
+        @for (milestone of milestones; track milestone.label; let i = $index) {
+        <div class="milestone-card" [class]="'milestone-card--' + (i + 1)">
+          <div
+            [class]="'w-12 h-12 rounded-xl flex items-center justify-center mb-3 mx-auto ' + (milestone.color === 'accent' ? 'bg-accent-500/10' : 'bg-primary-500/10')">
+            <i
+              [class]="'pi ' + milestone.icon + ' text-xl ' + (milestone.color === 'accent' ? 'text-accent-500' : 'text-primary-500')"></i>
           </div>
-          <h3 class="text-xl font-heading font-semibold text-secondary-900 mb-2">{{ value.title }}</h3>
-          <p class="text-secondary-600">{{ value.description }}</p>
+          <p class="text-2xl font-extrabold font-heading text-secondary-900 dark:text-white">
+            {{ milestone.value }}
+          </p>
+          <p class="text-xs text-secondary-500 dark:text-secondary-400 mt-1">{{ milestone.label }}</p>
         </div>
+        }
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== Values Section ===== -->
+<section class="values-section py-20 sm:py-28">
+  <div class="honeycomb-bg-subtle"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-500/10 dark:bg-accent-400/15 mb-4">
+        <span class="text-sm font-semibold text-accent-700 dark:text-accent-300">Our Values</span>
+      </div>
+      <h2
+        class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-secondary-900 dark:text-white mb-4">
+        What Drives
+        <span class="text-brand">Everything We Do</span>
+      </h2>
+      <p class="text-lg text-secondary-500 dark:text-secondary-400 max-w-2xl mx-auto">
+        The principles that guide every decision, product, and interaction at BeeActive.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      @for (value of values; track value.title) {
+      <div class="feature-card group">
+        <div class="feature-icon-wrap">
+          <i [class]="'pi ' + value.icon + ' text-xl'"></i>
+        </div>
+        <h3 class="text-xl font-heading font-bold text-secondary-900 dark:text-white mb-2">
+          {{ value.title }}
+        </h3>
+        <p class="text-secondary-500 dark:text-secondary-400 leading-relaxed">
+          {{ value.description }}
+        </p>
+      </div>
       }
     </div>
   </div>
 </section>
 
-<!-- Team Section -->
-<section class="py-16 sm:py-24 bg-white">
+<!-- ===== Team Section ===== -->
+<section class="py-20 sm:py-28 bg-white dark:bg-secondary-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-3xl sm:text-4xl font-heading font-bold text-secondary-900 mb-4">Meet Our Team</h2>
-      <p class="text-lg text-secondary-600 max-w-2xl mx-auto">Passionate professionals dedicated to your success</p>
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-400/15 mb-4">
+        <span class="text-sm font-semibold text-primary-700 dark:text-primary-300">Our Team</span>
+      </div>
+      <h2
+        class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-secondary-900 dark:text-white mb-4">
+        Meet the People
+        <span class="text-brand">Behind BeeActive</span>
+      </h2>
+      <p class="text-lg text-secondary-500 dark:text-secondary-400 max-w-2xl mx-auto">
+        Passionate professionals committed to your success every step of the way.
+      </p>
     </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
       @for (member of team; track member.name) {
-        <div class="text-center">
-          <img [src]="member.image" [alt]="member.name" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-lg" />
-          <h3 class="text-xl font-heading font-semibold text-secondary-900">{{ member.name }}</h3>
-          <p class="text-secondary-600">{{ member.role }}</p>
+      <div class="team-card">
+        <div
+          class="w-16 h-16 rounded-full bg-primary-500 flex items-center justify-center text-white font-extrabold text-xl mx-auto mb-4"
+          aria-hidden="true">
+          {{ member.initials }}
         </div>
+        <h3
+          class="text-lg font-heading font-bold text-secondary-900 dark:text-white mb-1 text-center">
+          {{ member.name }}
+        </h3>
+        <p class="text-sm font-semibold text-primary-500 dark:text-primary-400 text-center mb-3">
+          {{ member.role }}
+        </p>
+        <p class="text-sm text-secondary-500 dark:text-secondary-400 leading-relaxed text-center">
+          {{ member.bio }}
+        </p>
+      </div>
       }
     </div>
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-16 sm:py-24 bg-gradient-to-br from-primary-500 to-accent-500 text-white">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-3xl sm:text-4xl font-heading font-bold mb-6">Join Our Growing Community</h2>
-    <p class="text-lg mb-8 opacity-90">Be part of something special. Start your fitness journey with BeeActive today.</p>
-    <p-button label="Get Started Free" icon="pi pi-arrow-right" iconPos="right" routerLink="/auth/signup" class="bg-white text-primary-600" styleClass="p-button-lg" />
+<!-- ===== CTA Section ===== -->
+<section class="cta-section">
+  <div class="honeycomb-bg-cta"></div>
+  <div class="orb orb-cta-1"></div>
+  <div class="orb orb-cta-2"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
+    <h2
+      class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white leading-tight mb-6">
+      Ready to Join Our
+      <span class="text-primary-300">Community?</span>
+    </h2>
+    <p class="text-lg sm:text-xl text-secondary-300 mb-10 max-w-2xl mx-auto">
+      Join BeeActive today and become part of something bigger than just a workout.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <p-button
+        label="Get Started Free"
+        icon="pi pi-arrow-right"
+        iconPos="right"
+        routerLink="/auth/signup"
+        severity="warn"
+        size="large" />
+    </div>
   </div>
 </section>

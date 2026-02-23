@@ -1,48 +1,76 @@
-<!-- Hero Section -->
-<section class="bg-gradient-to-br from-primary-50 via-white to-accent-50 py-16 sm:py-24">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-secondary-900 mb-6">
-      Our <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">Services</span>
+<!-- ===== Hero Section ===== -->
+<section class="relative overflow-hidden py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in">
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-400/15 mb-4">
+      <i class="pi pi-bolt text-accent-300 text-sm"></i>
+      <span class="text-sm font-semibold text-accent-300">Our Services</span>
+    </div>
+
+    <h1
+      class="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-white leading-[1.1] tracking-tight mb-6">
+      Everything You Need to
+      <span class="text-brand">Reach Your Goals</span>
     </h1>
-    <p class="text-lg sm:text-xl text-secondary-600 max-w-3xl mx-auto leading-relaxed">
-      Comprehensive fitness solutions designed to help you achieve your goals, no matter where you are in your journey.
+
+    <p class="text-lg sm:text-xl text-secondary-400 max-w-2xl mx-auto leading-relaxed">
+      Comprehensive fitness solutions designed to work for you — whatever your level, location, or lifestyle.
     </p>
   </div>
 </section>
 
-<!-- Services Grid -->
-<section class="py-16 sm:py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- ===== Services Grid ===== -->
+<section class="services-section py-20 sm:py-28">
+  <!-- <div class="honeycomb-bg-subtle"></div> -->
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       @for (service of services; track service.title) {
-        <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-          <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mb-6">
-            <i [class]="'pi ' + service.icon + ' text-white text-3xl'"></i>
-          </div>
-          <h3 class="text-2xl font-heading font-bold text-secondary-900 mb-3">{{ service.title }}</h3>
-          <p class="text-secondary-600 mb-6 leading-relaxed">{{ service.description }}</p>
-          <ul class="space-y-2">
-            @for (feature of service.features; track feature) {
-              <li class="flex items-center gap-2 text-secondary-700">
-                <i class="pi pi-check text-success-600 flex-shrink-0"></i>
-                <span>{{ feature }}</span>
-              </li>
-            }
-          </ul>
+      <div class="service-card group">
+        <div class="feature-icon-wrap">
+          <i [class]="'pi ' + service.icon + ' text-xl'"></i>
         </div>
+
+        <h3 class="text-xl font-heading font-bold text-secondary-900 dark:text-white mb-2">
+          {{ service.title }}
+        </h3>
+
+        <p class="text-secondary-500 dark:text-secondary-400 leading-relaxed mb-5">
+          {{ service.description }}
+        </p>
+
+        <ul class="flex flex-col gap-2">
+          @for (feature of service.features; track feature) {
+          <li class="flex items-center gap-2 text-sm text-secondary-500 dark:text-secondary-400">
+            <i class="pi pi-check-circle text-accent-500 text-sm shrink-0" aria-hidden="true"></i>
+            <span>{{ feature }}</span>
+          </li>
+          }
+        </ul>
+      </div>
       }
     </div>
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-16 sm:py-24 bg-gradient-to-br from-primary-500 to-accent-500 text-white">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-3xl sm:text-4xl font-heading font-bold mb-6">Ready to Get Started?</h2>
-    <p class="text-lg mb-8 opacity-90">Choose the service that's right for you and begin your transformation today.</p>
+<!-- ===== CTA Section ===== -->
+<section class="cta-section">
+  <div class="honeycomb-bg-cta"></div>
+  <div class="orb orb-cta-1"></div>
+  <div class="orb orb-cta-2"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white leading-tight mb-6">
+      Ready to Get
+      <span class="text-primary-300">Started?</span>
+    </h2>
+    <p class="text-lg sm:text-xl text-secondary-300 mb-10 max-w-2xl mx-auto">
+      Choose the service that fits your goals and begin your transformation today.
+    </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <p-button label="Sign Up Now" icon="pi pi-arrow-right" iconPos="right" routerLink="/auth/signup" class="bg-white text-primary-600" styleClass="p-button-lg" />
-      <p-button label="Contact Us" icon="pi pi-phone" [outlined]="true" routerLink="/contact" class="text-white border-white" styleClass="p-button-lg" />
+      <p-button label="Get Started Free" icon="pi pi-arrow-right" iconPos="right" routerLink="/auth/signup"
+        severity="warn" size="large" />
+      <p-button label="Contact Us" icon="pi pi-phone" [outlined]="true" routerLink="/contact" size="large"
+        styleClass="cta-outline-btn" />
     </div>
   </div>
 </section>

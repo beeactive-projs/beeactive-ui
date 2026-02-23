@@ -1,48 +1,89 @@
-// Custom styles for privacy policy component
 :host {
   display: block;
   width: 100%;
 }
 
-// Prose styling for legal content
-.prose {
-  h2 {
-    scroll-margin-top: 2rem;
-  }
+.feature-icon-wrap {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.825rem;
+  background: var(--p-primary-500);
+  color: var(--p-primary-contrast-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+}
 
-  h3 {
-    scroll-margin-top: 2rem;
-  }
+.legal-section {
+  margin-bottom: 2.5rem;
+}
 
-  section {
-    scroll-margin-top: 2rem;
-  }
+.legal-heading {
+  font-size: 1.25rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--p-secondary-900);
+  margin-bottom: 0.75rem;
 
-  ul {
-    margin-top: 1rem;
-  }
-
-  a {
-    text-decoration: underline;
-    text-decoration-color: var(--color-primary-300);
-    text-underline-offset: 2px;
-    transition: all 0.2s ease;
-
-    &:hover {
-      text-decoration-color: var(--color-primary-600);
-    }
+  :host-context(.dark) & {
+    color: white;
   }
 }
 
-// Print styles
+.legal-subheading {
+  font-size: 1rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--p-secondary-800);
+  margin-top: 1.25rem;
+  margin-bottom: 0.625rem;
+
+  :host-context(.dark) & {
+    color: var(--p-secondary-200);
+  }
+}
+
+.legal-body {
+  color: var(--p-secondary-600);
+  line-height: 1.75;
+
+  :host-context(.dark) & {
+    color: var(--p-secondary-400);
+  }
+}
+
+.legal-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--p-secondary-600);
+
+  :host-context(.dark) & {
+    color: var(--p-secondary-400);
+  }
+}
+
+.legal-contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--p-secondary-50);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+
+  :host-context(.dark) & {
+    background: var(--p-secondary-800);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
 @media print {
   :host {
     background: white !important;
-  }
-
-  .prose {
-    max-width: 100% !important;
-    font-size: 12pt;
   }
 
   button,
