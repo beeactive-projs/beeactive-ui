@@ -10,12 +10,27 @@ import { ThemeService } from '../../../_core/services/theme.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(window:scroll)': 'onScroll()',
+  },
 })
 export class PublicHeaderComponent {
   private readonly themeService = inject(ThemeService);
 
-  mobileMenuOpen = signal(false);
-  isDark = this.themeService.isDark;
+  readonly mobileMenuOpen = signal(false);
+  readonly isDark = this.themeService.isDark;
+  readonly scrolled = signal(false);
+
+  onScroll(): void {
+    this.scrolled.set(window.scrollY > 5);
+  }
+
+  readonly navLinks = [
+    { label: 'Home', path: '/', exact: true },
+    { label: 'About', path: '/about', exact: false },
+    { label: 'Services', path: '/services', exact: false },
+    { label: 'Contact', path: '/contact', exact: false },
+  ];
 
   toggleTheme(): void {
     this.themeService.toggle();

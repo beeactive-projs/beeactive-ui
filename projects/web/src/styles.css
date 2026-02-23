@@ -11,21 +11,16 @@
 /*  Theme tokens                                      */
 /* -------------------------------------------------- */
 @theme {
-  /* Primary — Honey Gold */
-  --color-primary-50: #fffbeb;
-  --color-primary-100: #fef3c7;
-  --color-primary-200: #fde68a;
-  --color-primary-300: #fcd34d;
-  --color-primary-400: #fbbf24;
-  --color-primary-500: #f59e0b;
-  --color-primary-600: #d97706;
-  --color-primary-700: #b45309;
-  --color-primary-800: #92400e;
-  --color-primary-900: #78350f;
-  --color-primary-950: #451a03;
+  /*
+   * Primary, Success, Info, Warning, Danger & Surface palettes are
+   * provided by PrimeNG (styles.primeng.ts → theme-colors.ts) and
+   * bridged to Tailwind via tailwindcss-primeui. No need to duplicate.
+   *
+   * Only Tailwind-only palettes (Secondary, Accent) are defined here.
+   */
 
   /* Secondary — Midnight Navy */
-  --color-secondary-50: #f8fafc;
+  --color-secondary-50:  #f8fafc;
   --color-secondary-100: #f1f5f9;
   --color-secondary-200: #e2e8f0;
   --color-secondary-300: #cbd5e1;
@@ -49,71 +44,6 @@
   --color-accent-800: #115e59;
   --color-accent-900: #134e4a;
   --color-accent-950: #042f2e;
-
-  /* Success */
-  --color-success-50: #ecfdf5;
-  --color-success-100: #d1fae5;
-  --color-success-200: #a7f3d0;
-  --color-success-300: #6ee7b7;
-  --color-success-400: #34d399;
-  --color-success-500: #10b981;
-  --color-success-600: #059669;
-  --color-success-700: #047857;
-  --color-success-800: #065f46;
-  --color-success-900: #064e3b;
-  --color-success-950: #022c22;
-
-  /* Info */
-  --color-info-50: #f0f9ff;
-  --color-info-100: #e0f2fe;
-  --color-info-200: #bae6fd;
-  --color-info-300: #7dd3fc;
-  --color-info-400: #38bdf8;
-  --color-info-500: #0ea5e9;
-  --color-info-600: #0284c7;
-  --color-info-700: #0369a1;
-  --color-info-800: #075985;
-  --color-info-900: #0c4a6e;
-  --color-info-950: #082f49;
-
-  /* Warning */
-  --color-warning-50: #fffbeb;
-  --color-warning-100: #fef3c7;
-  --color-warning-200: #fde68a;
-  --color-warning-300: #fcd34d;
-  --color-warning-400: #fbbf24;
-  --color-warning-500: #f59e0b;
-  --color-warning-600: #d97706;
-  --color-warning-700: #b45309;
-  --color-warning-800: #92400e;
-  --color-warning-900: #78350f;
-  --color-warning-950: #451a03;
-
-  /* Danger */
-  --color-danger-50: #fef2f2;
-  --color-danger-100: #fee2e2;
-  --color-danger-200: #fecaca;
-  --color-danger-300: #fca5a5;
-  --color-danger-400: #f87171;
-  --color-danger-500: #ef4444;
-  --color-danger-600: #dc2626;
-  --color-danger-700: #b91c1c;
-  --color-danger-800: #991b1b;
-  --color-danger-900: #7f1d1d;
-  --color-danger-950: #450a0a;
-
-  /* Surface (references runtime CSS vars for light/dark) */
-  --color-surface-0: var(--surface-0);
-  --color-surface-50: var(--surface-50);
-  --color-surface-100: var(--surface-100);
-  --color-surface-200: var(--surface-200);
-  --color-surface-300: var(--surface-300);
-  --color-surface-400: var(--surface-400);
-  --color-surface-500: var(--surface-500);
-  --color-surface-600: var(--surface-600);
-  --color-surface-700: var(--surface-700);
-  --color-surface-800: var(--surface-800);
-  --color-surface-900: var(--surface-900);
 
   /* Fonts */
   --font-sans:
@@ -162,26 +92,14 @@
   }
 }
 
-/* -------------------------------------------------- */
-/*  CSS variables (always available for var() in SCSS) */
-/*  @theme above handles utility class generation,    */
-/*  but Tailwind tree-shakes unused vars. This :root  */
-/*  block ensures they're always present at runtime.  */
-/* -------------------------------------------------- */
+/*
+ * Primary, Success, Info, Warning, Danger & Surface CSS variables
+ * are generated at runtime by PrimeNG (see styles.primeng.ts).
+ * No :root / .dark overrides needed here for those palettes.
+ */
 :root {
-  --color-primary-50: #fffbeb;
-  --color-primary-100: #fef3c7;
-  --color-primary-200: #fde68a;
-  --color-primary-300: #fcd34d;
-  --color-primary-400: #fbbf24;
-  --color-primary-500: #f59e0b;
-  --color-primary-600: #d97706;
-  --color-primary-700: #b45309;
-  --color-primary-800: #92400e;
-  --color-primary-900: #78350f;
-  --color-primary-950: #451a03;
-
-  --color-secondary-50: #f8fafc;
+  /* Secondary — Midnight Navy */
+  /* --color-secondary-50: #f8fafc;
   --color-secondary-100: #f1f5f9;
   --color-secondary-200: #e2e8f0;
   --color-secondary-300: #cbd5e1;
@@ -191,9 +109,10 @@
   --color-secondary-700: #334155;
   --color-secondary-800: #1e293b;
   --color-secondary-900: #0f172a;
-  --color-secondary-950: #020617;
+  --color-secondary-950: #020617; */
 
-  --color-accent-50: #f0fdfa;
+  /* Accent — Teal */
+  /* --color-accent-50: #f0fdfa;
   --color-accent-100: #ccfbf1;
   --color-accent-200: #99f6e4;
   --color-accent-300: #5eead4;
@@ -203,106 +122,22 @@
   --color-accent-700: #0f766e;
   --color-accent-800: #115e59;
   --color-accent-900: #134e4a;
-  --color-accent-950: #042f2e;
-
-  --color-success-50: #ecfdf5;
-  --color-success-100: #d1fae5;
-  --color-success-200: #a7f3d0;
-  --color-success-300: #6ee7b7;
-  --color-success-400: #34d399;
-  --color-success-500: #10b981;
-  --color-success-600: #059669;
-  --color-success-700: #047857;
-  --color-success-800: #065f46;
-  --color-success-900: #064e3b;
-  --color-success-950: #022c22;
-
-  --color-info-50: #f0f9ff;
-  --color-info-100: #e0f2fe;
-  --color-info-200: #bae6fd;
-  --color-info-300: #7dd3fc;
-  --color-info-400: #38bdf8;
-  --color-info-500: #0ea5e9;
-  --color-info-600: #0284c7;
-  --color-info-700: #0369a1;
-  --color-info-800: #075985;
-  --color-info-900: #0c4a6e;
-  --color-info-950: #082f49;
-
-  --color-warning-50: #fffbeb;
-  --color-warning-100: #fef3c7;
-  --color-warning-200: #fde68a;
-  --color-warning-300: #fcd34d;
-  --color-warning-400: #fbbf24;
-  --color-warning-500: #f59e0b;
-  --color-warning-600: #d97706;
-  --color-warning-700: #b45309;
-  --color-warning-800: #92400e;
-  --color-warning-900: #78350f;
-  --color-warning-950: #451a03;
-
-  --color-danger-50: #fef2f2;
-  --color-danger-100: #fee2e2;
-  --color-danger-200: #fecaca;
-  --color-danger-300: #fca5a5;
-  --color-danger-400: #f87171;
-  --color-danger-500: #ef4444;
-  --color-danger-600: #dc2626;
-  --color-danger-700: #b91c1c;
-  --color-danger-800: #991b1b;
-  --color-danger-900: #7f1d1d;
-  --color-danger-950: #450a0a;
+  --color-accent-950: #042f2e; */
 }
-
-/* -------------------------------------------------- */
-/*  Surface colours — light / dark                    */
-/* -------------------------------------------------- */
-:root {
-  --surface-0: #ffffff;
-  --surface-50: #f8fafc;
-  --surface-100: #f1f5f9;
-  --surface-200: #e2e8f0;
-  --surface-300: #cbd5e1;
-  --surface-400: #94a3b8;
-  --surface-500: #64748b;
-  --surface-600: #475569;
-  --surface-700: #334155;
-  --surface-800: #1e293b;
-  --surface-900: #0f172a;
-}
-
-.dark {
-  --surface-0: #0f1720;
-  --surface-50: #1a2332;
-  --surface-100: #212b3d;
-  --surface-200: #293548;
-  --surface-300: #324054;
-  --surface-400: #3d4d62;
-  --surface-500: #4a5b71;
-  --surface-600: #5a6c83;
-  --surface-700: #6d7f96;
-  --surface-800: #8394aa;
-  --surface-900: #9caabf;
-}
-
 /* -------------------------------------------------- */
 /*  Base styles                                       */
 /* -------------------------------------------------- */
 html,
 body {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   margin: 0;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-surface-100);
-  color: var(--color-secondary-900);
-}
-
-.dark body {
-  color: var(--color-surface-900);
+  background-color: var(--p-surface-50);
+  color: var(--p-surface-900);
 }
 
 h1,

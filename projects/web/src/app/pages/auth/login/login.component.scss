@@ -5,7 +5,7 @@
 }
 .brand-panel {
   position: relative;
-  background: var(--color-secondary-950);
+  background: var(--p-secondary-950);
   overflow: hidden;
   flex-direction: column;
   justify-content: space-between;
@@ -167,7 +167,8 @@
     cursor: pointer;
 
     // Make the Google iframe fill the overlay area
-    div, iframe {
+    div,
+    iframe {
       width: 100% !important;
       height: 100% !important;
     }
@@ -180,14 +181,14 @@
     --p-divider-content-color: var(--surface-900);
   }
   .social-btn {
-    border-color: var(--color-secondary-200);
+    border-color: var(--p-secondary-200);
     background-color: white;
-    color: var(--color-secondary-800);
+    color: var(--p-secondary-800);
     transition: all 0.25s ease;
 
     &:hover {
-      border-color: var(--color-secondary-300);
-      background: var(--color-secondary-50);
+      border-color: var(--p-secondary-300);
+      background: var(--p-secondary-50);
     }
   }
 }

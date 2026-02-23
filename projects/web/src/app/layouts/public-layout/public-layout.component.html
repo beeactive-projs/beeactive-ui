@@ -1,7 +1,16 @@
-<div class="flex flex-col min-h-screen">
-  <bee-public-header />
+<div class="flex flex-col min-h-screen relative">
+  <!-- class="flex flex-col min-h-screen bg-main-gradient overflow-hidden shadow-black-card animate-duration-500 animate-slidefadein"> -->
+  <div class="background-main h-210">
+    <div class="honeycomb-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="bottom-border" aria-hidden="true"></div>
+  </div>
 
-  <main class="grow">
+  <bee-public-header class="sticky top-0 z-50" />
+
+  <main class="grow overflow-auto">
     <router-outlet />
   </main>
 

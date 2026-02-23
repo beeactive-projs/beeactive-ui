@@ -1,7 +1,3 @@
-:host {
-  display: block;
-}
-
 // ===== Honeycomb SVG (shared) =====
 $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
 
@@ -9,29 +5,28 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 .hero-section {
   position: relative;
   overflow: hidden;
-  background: var(--color-secondary-50);
-
-  :host-context(.dark) & {
-    background: #0f172a;
-  }
 }
 
-.honeycomb-bg {
-  position: absolute;
-  inset: 0;
-  opacity: 0.06;
-  background-image: $honeycomb-svg-light;
-  background-size: 56px 100px;
-  animation: honeycombDrift 30s linear infinite;
-
-  :host-context(.dark) & {
-    opacity: 0.04;
-  }
+.fitness-platform {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--p-primary-500);
+  color: var(--p-primary-500);
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
 }
 
 @keyframes honeycombDrift {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(56px, 100px); }
+  // 0% {
+  //   transform: translate(-100px, -100px);
+  // }
+  // 100% {
+  //   transform: translate(0, 0);
+  // }
 }
 
 // ===== Ambient Orbs =====
@@ -78,8 +73,12 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 }
 
 @keyframes orbFloat {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(30px, -40px) scale(1.1); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(30px, -40px) scale(1.1);
+  }
 }
 
 // ===== Hero Visual — Hexagon Grid =====
@@ -90,17 +89,15 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 }
 
 .hero-hex {
+  cursor: pointer;
   position: absolute;
   width: 140px;
   height: 140px;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  background: white;
+  background: var(--p-gray-800);
+  color: var(--p-gray-50);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   transition: transform 0.4s ease;
-
-  :host-context(.dark) & {
-    background: #1e293b;
-  }
 
   &:hover {
     transform: scale(1.05);
@@ -118,48 +115,43 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 
 .hero-hex-1 {
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: calc(50% - 70px);
+  background: rgba(245, 158, 11, 0.08);
 }
 
 .hero-hex-2 {
   top: 110px;
-  left: calc(50% - 85px);
+  left: calc(50% - 143px);
 }
 
 .hero-hex-3 {
   top: 110px;
-  left: calc(50% + 85px);
-  transform: translateX(-100%);
+  left: calc(50% + 3px);
 }
 
 .hero-hex-4 {
   top: 220px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: calc(50% - 80px);
   width: 160px;
   height: 160px;
   background: rgba(245, 158, 11, 0.08);
-
-  :host-context(.dark) & {
-    background: rgba(245, 158, 11, 0.1);
-  }
 }
 
 // ===== Floating Cards =====
 .floating-card {
+  cursor: pointer;
   position: absolute;
-  background: white;
+  background: var(--p-gray-600);
+  color: var(--p-gray-50);
   border-radius: 16px;
   padding: 16px 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.04);
   z-index: 2;
+  transition: scale 0.4s ease;
 
-  :host-context(.dark) & {
-    background: #1e293b;
-    border-color: rgba(255, 255, 255, 0.06);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  &:hover {
+    scale: 1.05;
   }
 }
 
@@ -176,8 +168,13 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 }
 
 @keyframes cardFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 // ===== Features Section =====
@@ -185,10 +182,10 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 .testimonials-section {
   position: relative;
   overflow: hidden;
-  background: var(--color-secondary-50);
+  background: var(--p-secondary-50);
 
   :host-context(.dark) & {
-    background: #0f172a;
+    background: var(--p-secondary-900);
   }
 }
 
@@ -202,14 +199,14 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 }
 
 .feature-card {
-  background: white;
-  border-radius: 16px;
-  padding: 28px;
+  background: var(--p-gray-100);
+  border-radius: 1rem;
+  padding: 1.75rem;
   border: 1px solid rgba(0, 0, 0, 0.05);
   transition: all 0.35s ease;
 
   :host-context(.dark) & {
-    background: #1e293b;
+    background: var(--p-gray-800);
     border-color: rgba(255, 255, 255, 0.06);
   }
 
@@ -228,14 +225,15 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 }
 
 .feature-icon-wrap {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  background: var(--color-primary-500);
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.825rem;
+  background: var(--p-primary-500);
+  color: var(--p-primary-contrast-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
   box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
   transition: transform 0.35s ease;
 }
@@ -243,13 +241,13 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 // ===== How It Works — Step Number =====
 .step-number {
   position: absolute;
-  top: -10px;
-  right: calc(50% - 56px);
+  top: -14px;
+  right: calc(50% - 46px);
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--color-primary-500);
-  color: white;
+  background: var(--p-teal-500);
+  color: var(--p-primary-contrast-color);
   font-size: 13px;
   font-weight: 700;
   display: flex;
@@ -341,11 +339,23 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

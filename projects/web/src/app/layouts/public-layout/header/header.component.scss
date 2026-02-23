@@ -1,17 +1,120 @@
-// Custom styles for public header
-:host {
-  display: block;
+// ===== Frosted-glass sticky bar =====
+.site-header {
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &.scrolled {
+    background: var(--color-secondary-900);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+  }
 }
 
-// Mobile menu animation
-.animate-slide-down {
-  animation: slideDown 0.3s ease-out;
+// ===== Logo =====
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--p-secondary-50);
+  &:hover .logo-icon {
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);
+    transform: scale(1.05);
+  }
 }
 
-@keyframes slideDown {
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--p-primary-500);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+// ===== Desktop nav links =====
+.nav-link {
+  position: relative;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--p-secondary-50);
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+  &:hover {
+    background: var(--p-primary-500);
+    color: var(--p-secondary-950);
+  }
+
+  // Active underline dot
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 1rem;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--p-primary-500);
+    transition: transform 0.25s ease;
+  }
+
+  &--active {
+    color: var(--p-primary-500);
+    font-weight: 600;
+
+    &:hover {
+      background: var(--p-primary-500);
+      color: var(--p-secondary-950);
+    }
+
+    &::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+  }
+}
+
+// ===== Vertical divider before auth buttons =====
+.nav-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--p-secondary-50);
+  margin: 0 4px;
+
+  // :host-context(.dark) & {
+  //   background: rgba(255, 255, 255, 0.1);
+  // }
+}
+
+// ===== Mobile menu panel =====
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 0 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  animation: menuSlideDown 0.25s ease-out;
+
+  :host-context(.dark) & {
+    border-top-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+@keyframes menuSlideDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;
@@ -19,7 +122,49 @@
   }
 }
 
-// Sticky header shadow on scroll
-header {
-  transition: box-shadow 0.3s ease;
+.mobile-link {
+  padding: 11px 12px;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--p-surface-500);
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+  :host-context(.dark) & {
+    color: #94a3b8;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--p-surface-900);
+
+    :host-context(.dark) & {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+  }
+
+  &--active {
+    background: rgba(245, 158, 11, 0.08);
+    color: var(--p-primary-700);
+    font-weight: 600;
+
+    :host-context(.dark) & {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--p-primary-300);
+    }
+  }
+}
+
+.mobile-menu-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06);
+  margin: 10px 0;
+
+  :host-context(.dark) & {
+    background: rgba(255, 255, 255, 0.06);
+  }
 }

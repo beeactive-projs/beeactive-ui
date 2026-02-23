@@ -1,153 +1,92 @@
-<footer class="bg-secondary-900 text-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-    <!-- Main Footer Content -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-      <!-- Brand Column -->
-      <div class="lg:col-span-1">
-        <div class="flex items-center gap-2 mb-4">
-          <div
-            class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center">
+<footer class="footer">
+  <!-- Gradient top border -->
+  <div class="footer-top-border" aria-hidden="true"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+
+    <!-- Main grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+      <!-- Brand column -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <div class="flex items-center gap-2.5 mb-4">
+          <div class="footer-logo-icon" aria-hidden="true">
             <i class="pi pi-bolt text-white text-xl"></i>
           </div>
-          <span class="font-heading text-2xl font-bold">BeeActive</span>
+          <span class="font-heading text-2xl font-extrabold text-white tracking-tight">BeeActive</span>
         </div>
-        <p class="text-gray-400 text-sm mb-4 leading-relaxed">
-          Empowering fitness professionals and enthusiasts to achieve their goals through innovative technology and
-          personalized training.
+        <p class="text-secondary-400 text-sm leading-relaxed mb-6 max-w-xs">
+          Connecting fitness enthusiasts with world-class certified trainers — all in one beautifully simple platform.
         </p>
-        <!-- Social Media -->
-        <div class="flex gap-3">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-10 h-10 rounded-full bg-secondary-800 hover:bg-primary-600 flex items-center justify-center transition-colors"
-            aria-label="Facebook">
-            <i class="pi pi-facebook text-lg"></i>
+        <!-- Social icons -->
+        <div class="flex gap-2">
+          @for (s of socialLinks; track s.label) {
+          <a [href]="s.href" target="_blank" rel="noopener noreferrer" [attr.aria-label]="s.label" class="social-icon">
+            <i [class]="'pi ' + s.icon" aria-hidden="true"></i>
           </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-10 h-10 rounded-full bg-secondary-800 hover:bg-primary-600 flex items-center justify-center transition-colors"
-            aria-label="Twitter">
-            <i class="pi pi-twitter text-lg"></i>
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-10 h-10 rounded-full bg-secondary-800 hover:bg-primary-600 flex items-center justify-center transition-colors"
-            aria-label="Instagram">
-            <i class="pi pi-instagram text-lg"></i>
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-10 h-10 rounded-full bg-secondary-800 hover:bg-primary-600 flex items-center justify-center transition-colors"
-            aria-label="LinkedIn">
-            <i class="pi pi-linkedin text-lg"></i>
-          </a>
+          }
         </div>
       </div>
 
-      <!-- Quick Links -->
+      <!-- Product links -->
       <div>
-        <h3 class="font-heading text-lg font-semibold mb-4">Quick Links</h3>
-        <ul class="space-y-2">
-          <li>
-            <a routerLink="/" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">
-              Home
-            </a>
-          </li>
-          <li>
-            <a routerLink="/about" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">
-              About Us
-            </a>
-          </li>
-          <li>
-            <a routerLink="/services" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">
-              Services
-            </a>
-          </li>
-          <li>
-            <a routerLink="/contact" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">
-              Contact
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Support -->
-      <div>
-        <h3 class="font-heading text-lg font-semibold mb-4">Support</h3>
-        <ul class="space-y-2">
-          <li>
-            <a href="#" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">
-              Help Center
-            </a>
-          </li>
-          <li>
-            <a href="#" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">
-              FAQ
-            </a>
-          </li>
-          <li>
-            <a routerLink="/legal/terms-of-service" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">
-              Terms of Service
-            </a>
-          </li>
-          <li>
-            <a routerLink="/legal/privacy-policy" class="text-gray-400 hover:text-primary-400 text-sm transition-colors">
-              Privacy Policy
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Contact Info -->
-      <div>
-        <h3 class="font-heading text-lg font-semibold mb-4">Contact Us</h3>
+        <h3 class="footer-heading">Product</h3>
         <ul class="space-y-3">
-          <li class="flex items-start gap-2 text-sm text-gray-400">
-            <i class="pi pi-map-marker text-primary-400 mt-1 flex-shrink-0"></i>
-            <span>123 BeeActive Street<br />Tech City, TC 12345</span>
+          @for (link of productLinks; track link.label) {
+          <li>
+            <a [routerLink]="link.path" class="footer-link">{{ link.label }}</a>
           </li>
-          <li class="flex items-center gap-2 text-sm text-gray-400">
-            <i class="pi pi-envelope text-primary-400 flex-shrink-0"></i>
-            <a href="mailto:info@beeactive.com" class="hover:text-primary-400 transition-colors">
-              info&#64;beeactive.com
+          }
+        </ul>
+      </div>
+
+      <!-- Support links -->
+      <div>
+        <h3 class="footer-heading">Support</h3>
+        <ul class="space-y-3">
+          @for (link of supportLinks; track link.label) {
+          <li>
+            <a [routerLink]="link.path" class="footer-link">{{ link.label }}</a>
+          </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Contact column -->
+      <div>
+        <h3 class="footer-heading">Get in Touch</h3>
+        <ul class="space-y-4">
+          <!-- <li class="flex items-start gap-3 text-sm text-secondary-400">
+            <i class="pi pi-map-marker text-primary-500 mt-0.5 shrink-0" aria-hidden="true"></i>
+            <span>123 BeeActive Street<br />Tech City, TC 12345</span>
+          </li> -->
+          <li class="flex items-center gap-3 text-sm">
+            <i class="pi pi-envelope text-primary-500 shrink-0" aria-hidden="true"></i>
+            <a href="mailto:info@beeactive.com" class="footer-link">
+              beeactive&#64;gmail.com
             </a>
           </li>
-          <li class="flex items-center gap-2 text-sm text-gray-400">
-            <i class="pi pi-phone text-primary-400 flex-shrink-0"></i>
-            <a href="tel:+1234567890" class="hover:text-primary-400 transition-colors">
+          <!-- <li class="flex items-center gap-3 text-sm">
+            <i class="pi pi-phone text-primary-500 shrink-0" aria-hidden="true"></i>
+            <a href="tel:+1234567890" class="footer-link">
               +1 (234) 567-890
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
 
-    <!-- Bottom Bar -->
-    <div class="border-t border-secondary-800 pt-8">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-gray-400 text-sm text-center md:text-left">
-          © {{ currentYear }} BeeActive. All rights reserved.
-        </p>
-        <div class="flex gap-6 text-sm">
-          <a routerLink="/legal/terms-of-service" class="text-gray-400 hover:text-primary-400 transition-colors">
-            Terms
-          </a>
-          <a routerLink="/legal/privacy-policy" class="text-gray-400 hover:text-primary-400 transition-colors">
-            Privacy
-          </a>
-          <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
-            Cookies
-          </a>
-        </div>
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <p class="text-secondary-500 text-sm">
+        &copy; {{ currentYear }} BeeActive. All rights reserved.
+      </p>
+      <div class="flex items-center gap-6 text-sm">
+        <a routerLink="/legal/terms-of-service" class="footer-link">Terms</a>
+        <a routerLink="/legal/privacy-policy" class="footer-link">Privacy</a>
+        <!-- <a href="#" class="footer-link">Cookies</a> -->
       </div>
     </div>
+
   </div>
 </footer>
