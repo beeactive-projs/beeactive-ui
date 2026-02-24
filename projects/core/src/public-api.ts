@@ -20,6 +20,9 @@ export * from './lib/models/client/client.model';
 export * from './lib/models/common/api-response.model';
 export * from './lib/models/common/pagination.model';
 
+// Models - Blog
+export * from './lib/models/blog/blog.model';
+
 // Enums
 export * from './lib/enums/user-role.enum';
 export * from './lib/enums/session-status.enum';
@@ -38,6 +41,7 @@ export * from './lib/services/auth/google-auth.service';
 export * from './lib/services/auth/facebook-auth.service';
 export * from './lib/services/user/user.service';
 export * from './lib/services/client/client.service';
+export * from './lib/services/blog/blog.service';
 
 // Stores
 export * from './lib/stores/auth.store';

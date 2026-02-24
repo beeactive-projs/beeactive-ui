@@ -42,7 +42,8 @@
       <div class="featured-card__content">
         <div class="flex items-center gap-3 mb-4 flex-wrap">
           <span class="category-badge">{{ featured.category }}</span>
-          <span class="text-sm text-secondary-400 dark:text-secondary-500">{{ featured.publishedAt }}</span>
+          <span class="text-sm text-secondary-400 dark:text-secondary-500">{{ featured.publishedAt | date:
+            'mediumDate'}}</span>
           <span class="text-sm text-secondary-400 dark:text-secondary-500">
             <i class="pi pi-clock mr-1"></i>{{ featured.readTime }} min read
           </span>
@@ -62,11 +63,11 @@
             <div
               class="w-9 h-9 rounded-full bg-primary-500 flex items-center justify-center text-white font-bold text-xs"
               aria-hidden="true">
-              {{ featured.author.initials }}
+              {{ featured.authorInitials }}
             </div>
             <div>
-              <p class="text-sm font-semibold text-secondary-900 dark:text-white">{{ featured.author.name }}</p>
-              <p class="text-xs text-secondary-500 dark:text-secondary-400">{{ featured.author.role }}</p>
+              <p class="text-sm font-semibold text-secondary-900 dark:text-white">{{ featured.authorName }}</p>
+              <!-- <p class="text-xs text-secondary-500 dark:text-secondary-400">{{ featured.author.role }}</p> -->
             </div>
           </div>
 
@@ -113,11 +114,12 @@
             <div
               class="w-7 h-7 rounded-full bg-primary-500 flex items-center justify-center text-white font-bold text-xs"
               aria-hidden="true">
-              {{ post.author.initials }}
+              {{ post.authorInitials }}
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-xs font-semibold text-secondary-900 dark:text-white truncate">{{ post.author.name }}</p>
-              <p class="text-xs text-secondary-400 dark:text-secondary-500">{{ post.publishedAt }}</p>
+              <p class="text-xs font-semibold text-secondary-900 dark:text-white truncate">{{ post.authorName }}</p>
+              <p class="text-xs text-secondary-400 dark:text-secondary-500">{{ post.publishedAt | date: 'mediumDate' }}
+              </p>
             </div>
           </div>
         </div>

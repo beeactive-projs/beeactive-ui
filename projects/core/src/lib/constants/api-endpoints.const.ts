@@ -19,4 +19,8 @@
   SESSIONS: {
     BASE: '/sessions',
   },
+  BLOG: {
+    BASE: '/blog',
+    UPLOAD_IMAGE: '/blog/upload-image',
+  },
 } as const;
