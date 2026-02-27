@@ -18,7 +18,7 @@ $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
   }
 }
 
-:host-context(.dark)& {
+:host-context(.dark) {
   background: #0f172a;
 
   &::before { opacity: 0.04; }

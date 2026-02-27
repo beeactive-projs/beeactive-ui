@@ -18,11 +18,11 @@ $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
   }
 }
 
-// :host-context(.dark)& {
-//   background: #0f172a;
+:host-context(.dark) {
+  background: #0f172a;
 
-//   &::before { opacity: 0.04; }
-// }
+  &::before { opacity: 0.04; }
+}
 
 // ===== Shared text classes =====
 .section-heading { color: #0f172a; }
@@ -50,7 +50,7 @@ $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
 }
 
 :host-context(.dark) .about-section:first-of-type {
-  background: linear-gradient(180deg, #0f172a 0%, #1a2332 14%);
+  background: linear-gradient(180deg, #0f172a 0%, #111827 12%);
 }
 
 // ===== Story text =====
@@ -83,8 +83,8 @@ $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
 }
 
 :host-context(.dark) .belief-card {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.06);
 
   &:hover { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); }
 }
