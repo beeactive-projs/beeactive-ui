@@ -7,144 +7,350 @@ import {
   signal,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card';
 import { AvatarModule } from 'primeng/avatar';
 import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
-import { AuthStore, User, UserService } from 'core';
-import { take } from 'rxjs';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { TextareaModule } from 'primeng/textarea';
+import { SelectModule } from 'primeng/select';
+import { ToastModule } from 'primeng/toast';
+import { TabsModule } from 'primeng/tabs';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { SkeletonModule } from 'primeng/skeleton';
+import { MessageService } from 'primeng/api';
+import {
+  ProfileService,
+  AuthStore,
+  FullProfileResponse,
+  UpdateFullProfilePayload,
+  Gender,
+  FitnessLevel,
+} from 'core';
+
+type TagSeverity = 'success' | 'warn' | 'danger' | 'secondary' | 'info' | 'contrast' | null | undefined;
+
+interface EditForm {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  dateOfBirth: string;
+  gender: Gender | null;
+  heightCm: number | null;
+  weightKg: number | null;
+  fitnessLevel: FitnessLevel | null;
+  goals: string;
+  emergencyContactName: string;
+  emergencyContactPhone: string;
+  displayName: string;
+  bio: string;
+  specializations: string;
+  yearsOfExperience: number | null;
+  isAcceptingClients: boolean;
+  locationCity: string;
+  locationCountry: string;
+}
 
 @Component({
   selector: 'bee-profile',
-  imports: [DatePipe, RouterLink, CardModule, AvatarModule, TagModule, DividerModule, ButtonModule],
+  imports: [
+    DatePipe,
+    FormsModule,
+    CardModule,
+    AvatarModule,
+    TagModule,
+    DividerModule,
+    ButtonModule,
+    DialogModule,
+    InputTextModule,
+    TextareaModule,
+    SelectModule,
+    ToastModule,
+    TabsModule,
+    ToggleSwitchModule,
+    SkeletonModule,
+  ],
+  providers: [MessageService],
+  templateUrl: './profile.html',
+  styleUrl: './profile.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <section class="min-h-screen bg-secondary-50 text-secondary-900">
-      <div class="mx-auto flex max-w-3xl flex-col gap-6 px-6 py-6 md:px-10 md:py-8">
-        <header class="flex items-center gap-2">
-          <a routerLink=".." class="flex items-center text-secondary-500 hover:text-secondary-700">
-            <i class="pi pi-arrow-left text-sm"></i>
-          </a>
-          <div class="space-y-1">
-            <p class="text-xs uppercase tracking-[0.2em] text-secondary-500">Account</p>
-            <h1 class="font-heading text-2xl font-semibold text-secondary-900 md:text-3xl">
-              My Profile
-            </h1>
-          </div>
-        </header>
-
-        @if (user(); as user) {
-          <p-card styleClass="shadow-sm">
-            <div class="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
-              @if (user.avatarUrl) {
-                <img
-                  [src]="user.avatarUrl"
-                  [alt]="fullName()"
-                  class="h-20 w-20 rounded-full object-cover"
-                />
-              } @else {
-                <p-avatar [label]="initials()" shape="circle" size="xlarge" styleClass="text-2xl" />
-              }
-              <div class="flex flex-1 flex-col gap-1 text-center sm:text-left">
-                <h2 class="text-xl font-semibold text-secondary-900">{{ fullName() }}</h2>
-                <p class="text-sm text-secondary-500">{{ user.email }}</p>
-                <div class="mt-1 flex flex-wrap justify-center gap-2 sm:justify-start">
-                  @for (role of user.roles; track role) {
-                    <p-tag [value]="role" severity="info" styleClass="!text-xs" />
-                  }
-                  @if (user.isEmailVerified) {
-                    <p-tag
-                      value="Verified"
-                      severity="success"
-                      icon="pi pi-check"
-                      styleClass="!text-xs"
-                    />
-                  } @else {
-                    <p-tag
-                      value="Unverified"
-                      severity="warn"
-                      icon="pi pi-exclamation-triangle"
-                      styleClass="!text-xs"
-                    />
-                  }
-                </div>
-              </div>
-            </div>
-          </p-card>
-
-          <p-card styleClass="shadow-sm">
-            <h3 class="text-lg font-semibold text-secondary-900">Details</h3>
-            <p-divider />
-            <dl class="grid gap-4 sm:grid-cols-2">
-              <div>
-                <dt class="text-xs uppercase tracking-wide text-secondary-500">First Name</dt>
-                <dd class="mt-1 text-sm font-medium text-secondary-900">{{ user.firstName }}</dd>
-              </div>
-              <div>
-                <dt class="text-xs uppercase tracking-wide text-secondary-500">Last Name</dt>
-                <dd class="mt-1 text-sm font-medium text-secondary-900">{{ user.lastName }}</dd>
-              </div>
-              <div>
-                <dt class="text-xs uppercase tracking-wide text-secondary-500">Email</dt>
-                <dd class="mt-1 text-sm font-medium text-secondary-900">{{ user.email }}</dd>
-              </div>
-              <div>
-                <dt class="text-xs uppercase tracking-wide text-secondary-500">Phone</dt>
-                <dd class="mt-1 text-sm font-medium text-secondary-900">
-                  {{ user.phone || 'Not provided' }}
-                </dd>
-              </div>
-              <div>
-                <dt class="text-xs uppercase tracking-wide text-secondary-500">Account Status</dt>
-                <dd class="mt-1">
-                  <p-tag
-                    [value]="user.isActive ? 'Active' : 'Inactive'"
-                    [severity]="user.isActive ? 'success' : 'danger'"
-                    styleClass="!text-xs"
-                  />
-                </dd>
-              </div>
-              <div>
-                <dt class="text-xs uppercase tracking-wide text-secondary-500">Member Since</dt>
-                <dd class="mt-1 text-sm font-medium text-secondary-900">
-                  {{ user.createdAt | date: 'mediumDate' }}
-                </dd>
-              </div>
-            </dl>
-          </p-card>
-        } @else {
-          <p-card styleClass="shadow-sm">
-            <div class="flex flex-col items-center gap-3 py-8 text-center">
-              <i class="pi pi-user text-4xl text-secondary-300"></i>
-              <p class="text-sm text-secondary-500">No profile data available.</p>
-            </div>
-          </p-card>
-        }
-      </div>
-    </section>
-  `,
 })
 export class Profile implements OnInit {
-  ngOnInit(): void {
-    this.userService
-      .getMe()
-      .pipe(take(1))
-      .subscribe((user) => this.user.set(user));
-  }
-  private readonly userService = inject(UserService);
+  private profileService = inject(ProfileService);
+  private authStore = inject(AuthStore);
+  private messageService = inject(MessageService);
 
-  user = signal<User | null>(null);
+  profile = signal<FullProfileResponse | null>(null);
+  loading = signal(true);
+  saving = signal(false);
+  showEditDialog = signal(false);
+  activeTab = signal(0);
 
+  // Edit form state
+  editForm = signal<EditForm>({
+    firstName: '',
+    lastName: '',
+    phone: '',
+    dateOfBirth: '',
+    gender: null,
+    heightCm: null,
+    weightKg: null,
+    fitnessLevel: null,
+    goals: '',
+    emergencyContactName: '',
+    emergencyContactPhone: '',
+    displayName: '',
+    bio: '',
+    specializations: '',
+    yearsOfExperience: null,
+    isAcceptingClients: false,
+    locationCity: '',
+    locationCountry: '',
+  });
+
+  // Options for select dropdowns
+  readonly genderOptions = [
+    { label: 'Male', value: 'MALE' as Gender },
+    { label: 'Female', value: 'FEMALE' as Gender },
+    { label: 'Other', value: 'OTHER' as Gender },
+    { label: 'Prefer not to say', value: 'PREFER_NOT_TO_SAY' as Gender },
+  ];
+
+  readonly fitnessOptions = [
+    { label: 'Beginner', value: 'BEGINNER' as FitnessLevel },
+    { label: 'Intermediate', value: 'INTERMEDIATE' as FitnessLevel },
+    { label: 'Advanced', value: 'ADVANCED' as FitnessLevel },
+  ];
+
+  // Computed values
   readonly fullName = computed(() => {
-    const u = this.user();
-    return u ? `${u.firstName} ${u.lastName}` : '';
+    const p = this.profile();
+    return p ? `${p.user.firstName} ${p.user.lastName}` : '';
   });
 
   readonly initials = computed(() => {
-    const u = this.user();
-    if (!u) return '';
-    return `${u.firstName.charAt(0)}${u.lastName.charAt(0)}`.toUpperCase();
+    const p = this.profile();
+    if (!p) return '';
+    return `${p.user.firstName.charAt(0)}${p.user.lastName.charAt(0)}`.toUpperCase();
   });
+
+  readonly isInstructor = computed(() => {
+    const p = this.profile();
+    if (!p) return false;
+    return p.roles.includes('INSTRUCTOR') || p.roles.includes('ORGANIZER');
+  });
+
+  readonly hasInstructorProfile = computed(() => {
+    return this.profile()?.instructorProfile != null;
+  });
+
+  readonly formattedGender = computed(() => {
+    const gender = this.profile()?.userProfile?.gender;
+    if (!gender) return null;
+    const map: Record<Gender, string> = {
+      MALE: 'Male',
+      FEMALE: 'Female',
+      OTHER: 'Other',
+      PREFER_NOT_TO_SAY: 'Prefer not to say',
+    };
+    return map[gender];
+  });
+
+  readonly formattedFitnessLevel = computed(() => {
+    const level = this.profile()?.userProfile?.fitnessLevel;
+    if (!level) return null;
+    const map: Record<FitnessLevel, string> = {
+      BEGINNER: 'Beginner',
+      INTERMEDIATE: 'Intermediate',
+      ADVANCED: 'Advanced',
+    };
+    return map[level];
+  });
+
+  ngOnInit(): void {
+    this.loadProfile();
+  }
+
+  loadProfile(): void {
+    this.loading.set(true);
+    this.profileService.getFullProfile().subscribe({
+      next: (data) => {
+        this.profile.set(data);
+        this.loading.set(false);
+      },
+      error: () => {
+        this.loading.set(false);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to load profile data',
+        });
+      },
+    });
+  }
+
+  openEditDialog(): void {
+    const p = this.profile();
+    if (!p) return;
+
+    this.editForm.set({
+      firstName: p.user.firstName,
+      lastName: p.user.lastName,
+      phone: p.user.phone || '',
+      dateOfBirth: p.userProfile?.dateOfBirth || '',
+      gender: p.userProfile?.gender || null,
+      heightCm: p.userProfile?.heightCm || null,
+      weightKg: p.userProfile?.weightKg || null,
+      fitnessLevel: p.userProfile?.fitnessLevel || null,
+      goals: p.userProfile?.goals?.join(', ') || '',
+      emergencyContactName: p.userProfile?.emergencyContactName || '',
+      emergencyContactPhone: p.userProfile?.emergencyContactPhone || '',
+      displayName: p.instructorProfile?.displayName || '',
+      bio: p.instructorProfile?.bio || '',
+      specializations: p.instructorProfile?.specializations?.join(', ') || '',
+      yearsOfExperience: p.instructorProfile?.yearsOfExperience || null,
+      isAcceptingClients: p.instructorProfile?.isAcceptingClients || false,
+      locationCity: p.instructorProfile?.locationCity || '',
+      locationCountry: p.instructorProfile?.locationCountry || '',
+    });
+
+    this.activeTab.set(0);
+    this.showEditDialog.set(true);
+  }
+
+  updateFormField(field: keyof EditForm, value: unknown): void {
+    this.editForm.update((form) => ({ ...form, [field]: value }));
+  }
+
+  saveProfile(): void {
+    const p = this.profile();
+    if (!p) return;
+
+    const form = this.editForm();
+    const payload: UpdateFullProfilePayload = {};
+
+    // Build user payload (only changed fields)
+    const userChanges: UpdateFullProfilePayload['user'] = {};
+    if (form.firstName !== p.user.firstName) userChanges.firstName = form.firstName;
+    if (form.lastName !== p.user.lastName) userChanges.lastName = form.lastName;
+    if (form.phone !== (p.user.phone || '')) userChanges.phone = form.phone;
+    if (Object.keys(userChanges).length > 0) payload.user = userChanges;
+
+    // Build userProfile payload (only changed fields)
+    const profileChanges: NonNullable<UpdateFullProfilePayload['userProfile']> = {};
+    if (form.dateOfBirth !== (p.userProfile?.dateOfBirth || '')) {
+      profileChanges.dateOfBirth = form.dateOfBirth || undefined;
+    }
+    if (form.gender !== (p.userProfile?.gender || null)) {
+      profileChanges.gender = form.gender || undefined;
+    }
+    if (form.heightCm !== (p.userProfile?.heightCm || null)) {
+      profileChanges.heightCm = form.heightCm || undefined;
+    }
+    if (form.weightKg !== (p.userProfile?.weightKg || null)) {
+      profileChanges.weightKg = form.weightKg || undefined;
+    }
+    if (form.fitnessLevel !== (p.userProfile?.fitnessLevel || null)) {
+      profileChanges.fitnessLevel = form.fitnessLevel || undefined;
+    }
+    const newGoals = form.goals
+      .split(',')
+      .map((g) => g.trim())
+      .filter(Boolean);
+    const oldGoals = p.userProfile?.goals || [];
+    if (JSON.stringify(newGoals) !== JSON.stringify(oldGoals)) {
+      profileChanges.goals = newGoals;
+    }
+    if (form.emergencyContactName !== (p.userProfile?.emergencyContactName || '')) {
+      profileChanges.emergencyContactName = form.emergencyContactName || undefined;
+    }
+    if (form.emergencyContactPhone !== (p.userProfile?.emergencyContactPhone || '')) {
+      profileChanges.emergencyContactPhone = form.emergencyContactPhone || undefined;
+    }
+    if (Object.keys(profileChanges).length > 0) payload.userProfile = profileChanges;
+
+    // Build instructor payload (only if instructor, only changed fields)
+    if (this.isInstructor() && this.hasInstructorProfile()) {
+      const instrChanges: NonNullable<UpdateFullProfilePayload['instructor']> = {};
+      if (form.displayName !== (p.instructorProfile?.displayName || '')) {
+        instrChanges.displayName = form.displayName || undefined;
+      }
+      if (form.bio !== (p.instructorProfile?.bio || '')) {
+        instrChanges.bio = form.bio || undefined;
+      }
+      const newSpecs = form.specializations
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean);
+      const oldSpecs = p.instructorProfile?.specializations || [];
+      if (JSON.stringify(newSpecs) !== JSON.stringify(oldSpecs)) {
+        instrChanges.specializations = newSpecs;
+      }
+      if (form.yearsOfExperience !== (p.instructorProfile?.yearsOfExperience || null)) {
+        instrChanges.yearsOfExperience = form.yearsOfExperience || undefined;
+      }
+      if (form.isAcceptingClients !== (p.instructorProfile?.isAcceptingClients || false)) {
+        instrChanges.isAcceptingClients = form.isAcceptingClients;
+      }
+      if (form.locationCity !== (p.instructorProfile?.locationCity || '')) {
+        instrChanges.locationCity = form.locationCity || undefined;
+      }
+      if (form.locationCountry !== (p.instructorProfile?.locationCountry || '')) {
+        instrChanges.locationCountry = form.locationCountry || undefined;
+      }
+      if (Object.keys(instrChanges).length > 0) payload.instructor = instrChanges;
+    }
+
+    // Check if anything changed
+    if (!payload.user && !payload.userProfile && !payload.instructor) {
+      this.showEditDialog.set(false);
+      this.messageService.add({
+        severity: 'info',
+        summary: 'No Changes',
+        detail: 'No changes were made to your profile',
+      });
+      return;
+    }
+
+    this.saving.set(true);
+    this.profileService.updateFullProfile(payload).subscribe({
+      next: () => {
+        this.saving.set(false);
+        this.showEditDialog.set(false);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Profile Updated',
+          detail: 'Your profile has been updated successfully',
+        });
+        this.loadProfile();
+      },
+      error: (err) => {
+        this.saving.set(false);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error?.message || 'Failed to update profile',
+        });
+      },
+    });
+  }
+
+  roleSeverity(role: string): TagSeverity {
+    switch (role) {
+      case 'SUPER_ADMIN':
+        return 'danger';
+      case 'ADMIN':
+        return 'warn';
+      case 'INSTRUCTOR':
+      case 'ORGANIZER':
+        return 'info';
+      case 'SUPPORT':
+        return 'contrast';
+      default:
+        return 'secondary';
+    }
+  }
 }

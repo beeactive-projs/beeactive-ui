@@ -1,4 +1,4 @@
-﻿export const API_ENDPOINTS = {
+export const API_ENDPOINTS = {
   AUTH: {
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
@@ -13,8 +13,19 @@
     BASE: '/users',
     ME: '/users/me',
   },
+  PROFILE: {
+    BASE: '/profile',
+  },
   CLIENTS: {
     BASE: '/clients',
+    MY_INSTRUCTORS: '/clients/my-instructors',
+    PENDING_REQUESTS: '/clients/requests/pending',
+    INVITE: '/clients/invite',
+    REQUEST: '/clients/request',
+    REQUESTS: '/clients/requests',
+  },
+  GROUPS: {
+    BASE: '/groups',
   },
   SESSIONS: {
     BASE: '/sessions',

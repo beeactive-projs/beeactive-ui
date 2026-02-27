@@ -1,10 +1,57 @@
 // ===== Honeycomb SVG (shared) =====
-$honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
+$honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
+
+// ===== Page-level honeycomb background =====
+// One continuous pattern across the entire page
+:host {
+  display: block;
+  position: relative;
+  background: #f8fafc; // light default
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: $honeycomb-svg;
+    background-size: 56px 100px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+:host-context(.dark) :host,
+:host-context(.dark)& {
+  background: #0f172a;
+
+  &::before {
+    opacity: 0.04;
+  }
+}
+
+// ===== Shared text classes =====
+.section-heading {
+  color: #0f172a;
+}
+
+:host-context(.dark) .section-heading {
+  color: #f8fafc;
+}
+
+.section-subtext {
+  color: #64748b;
+}
+
+:host-context(.dark) .section-subtext {
+  color: #94a3b8;
+}
 
 // ===== Hero Section =====
 .hero-section {
   position: relative;
   overflow: hidden;
+  // Hero is always dark (white text)
+  background: #0f172a;
 }
 
 .fitness-platform {
@@ -18,15 +65,6 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
   font-size: 0.875rem;
   font-weight: 500;
   margin-bottom: 1rem;
-}
-
-@keyframes honeycombDrift {
-  // 0% {
-  //   transform: translate(-100px, -100px);
-  // }
-  // 100% {
-  //   transform: translate(0, 0);
-  // }
 }
 
 // ===== Ambient Orbs =====
@@ -43,11 +81,7 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
   height: 500px;
   top: -120px;
   right: -100px;
-  background: rgba(245, 158, 11, 0.1);
-
-  :host-context(.dark) & {
-    background: rgba(245, 158, 11, 0.06);
-  }
+  background: rgba(245, 158, 11, 0.06);
 }
 
 .orb-2 {
@@ -55,12 +89,8 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
   height: 400px;
   bottom: -80px;
   left: -120px;
-  background: rgba(20, 184, 166, 0.08);
+  background: rgba(184, 20, 113, 0.05);
   animation-delay: -3s;
-
-  :host-context(.dark) & {
-    background: rgba(20, 184, 166, 0.05);
-  }
 }
 
 .orb-3 {
@@ -68,17 +98,13 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
   height: 300px;
   top: 35%;
   left: 25%;
-  background: rgba(251, 191, 36, 0.06);
+  background: rgba(251, 191, 36, 0.04);
   animation-delay: -6s;
 }
 
 @keyframes orbFloat {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    transform: translate(30px, -40px) scale(1.1);
-  }
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -40px) scale(1.1); }
 }
 
 // ===== Hero Visual — Hexagon Grid =====
@@ -94,14 +120,11 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
   width: 140px;
   height: 140px;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  background: var(--p-gray-800);
+  background: rgba(30, 41, 59, 0.8);
   color: var(--p-gray-50);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   transition: transform 0.4s ease;
 
-  &:hover {
-    transform: scale(1.05);
-  }
+  &:hover { transform: scale(1.05); }
 }
 
 .hero-hex-inner {
@@ -113,27 +136,12 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
   justify-content: center;
 }
 
-.hero-hex-1 {
-  top: 0;
-  left: calc(50% - 70px);
-  background: rgba(245, 158, 11, 0.08);
-}
-
-.hero-hex-2 {
-  top: 110px;
-  left: calc(50% - 143px);
-}
-
-.hero-hex-3 {
-  top: 110px;
-  left: calc(50% + 3px);
-}
-
+.hero-hex-1 { top: 0; left: calc(50% - 70px); background: rgba(245, 158, 11, 0.08); }
+.hero-hex-2 { top: 110px; left: calc(50% - 143px); }
+.hero-hex-3 { top: 110px; left: calc(50% + 3px); }
 .hero-hex-4 {
-  top: 220px;
-  left: calc(50% - 80px);
-  width: 160px;
-  height: 160px;
+  top: 220px; left: calc(50% - 80px);
+  width: 160px; height: 160px;
   background: rgba(245, 158, 11, 0.08);
 }
 
@@ -141,221 +149,244 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 .floating-card {
   cursor: pointer;
   position: absolute;
-  background: var(--p-gray-600);
+  background: rgba(30, 41, 59, 0.9);
   color: var(--p-gray-50);
   border-radius: 16px;
-  padding: 16px 20px;
+  padding: 2px 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   z-index: 2;
   transition: scale 0.4s ease;
+  height: 120px !important;
+  width: 180px !important;
 
-  &:hover {
-    scale: 1.05;
-  }
+  &:hover { scale: 1.05; }
 }
 
-.floating-card-1 {
-  bottom: 20px;
-  left: -20px;
-  animation: cardFloat 4s ease-in-out infinite;
-}
-
-.floating-card-2 {
-  top: 10px;
-  right: -10px;
-  animation: cardFloat 4s ease-in-out 2s infinite;
-}
+.floating-card-1 { bottom: 0; left: -20px; animation: cardFloat 4s ease-in-out infinite; }
+.floating-card-2 { top: 10px; right: -10px; animation: cardFloat 4s ease-in-out 2s infinite; }
 
 @keyframes cardFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+// ===== Who It's For Section =====
+.who-section {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  // Light: gradient from dark hero into light page
+  background: linear-gradient(180deg, #1e293b 0%, #f8fafc 12%);
+}
+
+:host-context(.dark) .who-section {
+  background: linear-gradient(180deg, #0f172a 0%, #1a2332 14%);
+}
+
+.who-bg {
+  display: none; // honeycomb is now on host
+}
+
+.who-grid { position: relative; }
+
+.who-column {
+  position: relative;
+  border-radius: 1.25rem;
+  padding: 2.25rem 1.75rem;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.06);
+}
+
+:host-context(.dark) .who-column {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.who-column-right {
+  @media (min-width: 768px) {
+    border-left: 1px solid rgba(148, 163, 184, 0.3);
   }
 }
 
-// ===== Features Section =====
-.features-section,
-.testimonials-section {
+:host-context(.dark) .who-column-right {
+  @media (min-width: 768px) {
+    border-left-color: rgba(148, 163, 184, 0.15);
+  }
+}
+
+.who-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.who-icon-instructors { background: linear-gradient(135deg, #f59e0b, #f97316); }
+.who-icon-movers { background: linear-gradient(135deg, #0ea5e9, #22c55e); }
+
+.who-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+:host-context(.dark) .who-list {
+  color: #cbd5e1;
+}
+
+.who-list li {
+  position: relative;
+  padding-left: 1.65rem;
+}
+
+.who-list li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: var(--color-brand, #f59e0b);
+  color: white;
+  font-size: 0.55rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+// ===== What's Coming Section =====
+.coming-section {
   position: relative;
   overflow: hidden;
-  background: var(--p-secondary-50);
-
-  :host-context(.dark) & {
-    background: var(--p-secondary-900);
-  }
+  z-index: 1;
+  background: transparent; // inherits from host
 }
 
 .honeycomb-bg-subtle {
-  position: absolute;
-  inset: 0;
-  opacity: 0.03;
-  background-image: $honeycomb-svg-light;
-  background-size: 56px 100px;
-  pointer-events: none;
+  display: none; // honeycomb is now on host
 }
 
-.feature-card {
-  background: var(--p-gray-100);
+.coming-card {
+  position: relative;
+  background: white;
   border-radius: 1rem;
   padding: 1.75rem;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   transition: all 0.35s ease;
-
-  :host-context(.dark) & {
-    background: var(--p-gray-800);
-    border-color: rgba(255, 255, 255, 0.06);
-  }
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-
-    :host-context(.dark) & {
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .feature-icon-wrap {
-      transform: scale(1.08);
-    }
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
   }
 }
 
-.feature-icon-wrap {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 0.825rem;
+:host-context(.dark) .coming-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+
+  &:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.coming-icon-wrap {
+  width: 2.75rem;
+  height: 2.75rem;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   background: var(--p-primary-500);
   color: var(--p-primary-contrast-color);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
-  transition: transform 0.35s ease;
 }
 
-// ===== How It Works — Step Number =====
-.step-number {
-  position: absolute;
-  top: -14px;
-  right: calc(50% - 46px);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--p-teal-500);
-  color: var(--p-primary-contrast-color);
-  font-size: 13px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+.coming-badge {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-// ===== Testimonials =====
-.testimonial-card {
-  display: flex;
-  flex-direction: column;
-  background: white;
-  border-radius: 16px;
-  padding: 28px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all 0.35s ease;
+.coming-badge-live {
+  background: rgba(34, 197, 94, 0.12);
+  color: #16a34a;
+}
 
-  :host-context(.dark) & {
-    background: #1e293b;
-    border-color: rgba(255, 255, 255, 0.06);
-  }
+:host-context(.dark) .coming-badge-live {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+}
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+.coming-badge-soon {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
 
-    :host-context(.dark) & {
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-    }
-  }
+:host-context(.dark) .coming-badge-soon {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
 }
 
 // ===== CTA Section =====
 .cta-section {
   position: relative;
   overflow: hidden;
-  background: var(--color-secondary-900);
+  z-index: 1;
+  // Always dark
+  background: #0c1222;
 }
 
 .honeycomb-bg-cta {
   position: absolute;
   inset: 0;
   opacity: 0.05;
-  background-image: $honeycomb-svg-light;
+  background-image: $honeycomb-svg;
   background-size: 56px 100px;
-  animation: honeycombDrift 30s linear infinite;
   pointer-events: none;
 }
 
 .orb-cta-1 {
-  width: 400px;
-  height: 400px;
-  top: -100px;
-  right: -80px;
+  width: 400px; height: 400px;
+  top: -100px; right: -80px;
   background: rgba(245, 158, 11, 0.1);
 }
 
 .orb-cta-2 {
-  width: 300px;
-  height: 300px;
-  bottom: -60px;
-  left: -80px;
+  width: 300px; height: 300px;
+  bottom: -60px; left: -80px;
   background: rgba(20, 184, 166, 0.08);
   animation-delay: -4s;
 }
 
-// ===== PrimeNG Overrides =====
-::ng-deep {
-  .cta-outline-btn {
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    color: white !important;
-
-    &:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.1) !important;
-      border-color: rgba(255, 255, 255, 0.5) !important;
-    }
-  }
-}
-
 // ===== Animations =====
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.8s ease-out 0.2s both;
-}
+.animate-fade-in { animation: fadeIn 0.8s ease-out; }
+.animate-slide-up { animation: slideUp 0.8s ease-out 0.2s both; }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }

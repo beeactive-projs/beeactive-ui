@@ -16,9 +16,6 @@ import { SidenavLayoutComponent } from '../../layouts/sidenav-layout/sidenav-lay
 export class Client {
   readonly menuItems: ReadonlyArray<MenuItem> = [
     { label: 'Dashboard', icon: 'pi pi-objects-column', routerLink: '/app/client/dashboard' },
-    { label: 'My Sessions', icon: 'pi pi-calendar', routerLink: '/app/client/sessions' },
-    { label: 'Programs', icon: 'pi pi-file', routerLink: '/app/client/programs' },
-    { label: 'Messages', icon: 'pi pi-comments', routerLink: '/app/client/messages' },
-    { label: 'Settings', icon: 'pi pi-cog', routerLink: '/app/client/settings' },
+    { label: 'My Instructors', icon: 'pi pi-users', routerLink: '/app/client/instructors' },
   ];
 }

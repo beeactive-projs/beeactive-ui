@@ -1,34 +1,25 @@
 <!-- ===== Hero Section ===== -->
 <section class="blog-hero-section">
-  <div class="relative z-50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 text-center">
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 text-center">
     <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-400/15 mb-4">
       <i class="pi pi-book text-accent-300 text-sm"></i>
       <span class="text-sm font-semibold text-accent-300">Blog</span>
     </div>
 
     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-white leading-tight mb-5">
-      Fitness Insights &amp;
-      <span class="text-brand">Expert Tips</span>
+      Stories from the <span class="text-brand">hive</span>.
     </h1>
 
     <p class="text-lg sm:text-xl text-secondary-400 max-w-2xl mx-auto leading-relaxed">
-      Research-backed advice, training strategies, and wellness wisdom to fuel every stage of your journey.
+      What we're building, why we're building it, and everything we learn along the way.
     </p>
   </div>
 </section>
 
-<!-- ===== Category Filter ===== -->
-<!-- <section
-  class="py-6 bg-white dark:bg-secondary-900 border-b border-secondary-200/60 dark:border-secondary-700/40 sticky top-0 z-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
-    <p-selectbutton [options]="categories()" [(ngModel)]="selectedCategory" aria-label="Filter articles by category" />
-  </div>
-</section> -->
-
 <!-- ===== Featured Post ===== -->
-@if (featuredPost(); as featured) {
-<section class="py-12 sm:py-16 ">
+<section class="featured-section py-12 sm:py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    @if (featuredPost(); as featured) {
     <a [routerLink]="['/blog', featured.slug]" class="featured-card"
       [attr.aria-label]="'Read featured article: ' + featured.title">
       <!-- Cover Image -->
@@ -42,19 +33,18 @@
       <div class="featured-card__content">
         <div class="flex items-center gap-3 mb-4 flex-wrap">
           <span class="category-badge">{{ featured.category }}</span>
-          <span class="text-sm text-secondary-400 dark:text-secondary-500">{{ featured.publishedAt | date:
-            'mediumDate'}}</span>
-          <span class="text-sm text-secondary-400 dark:text-secondary-500">
+          <span class="text-sm section-subtext">{{ featured.publishedAt | date: 'mediumDate'}}</span>
+          <span class="text-sm section-subtext">
             <i class="pi pi-clock mr-1"></i>{{ featured.readTime }} min read
           </span>
         </div>
 
         <h2
-          class="text-2xl sm:text-3xl font-heading font-extrabold text-secondary-900 dark:text-white mb-4 leading-tight group-hover:text-brand transition-colors">
+          class="text-2xl sm:text-3xl font-heading font-extrabold section-heading mb-4 leading-tight group-hover:text-brand transition-colors">
           {{ featured.title }}
         </h2>
 
-        <p class="text-secondary-500 dark:text-secondary-400 leading-relaxed mb-6 line-clamp-3">
+        <p class="section-subtext leading-relaxed mb-6 line-clamp-3">
           {{ featured.excerpt }}
         </p>
 
@@ -66,8 +56,7 @@
               {{ featured.authorInitials }}
             </div>
             <div>
-              <p class="text-sm font-semibold text-secondary-900 dark:text-white">{{ featured.authorName }}</p>
-              <!-- <p class="text-xs text-secondary-500 dark:text-secondary-400">{{ featured.author.role }}</p> -->
+              <p class="text-sm font-semibold section-heading">{{ featured.authorName }}</p>
             </div>
           </div>
 
@@ -77,13 +66,13 @@
         </div>
       </div>
     </a>
+    }
   </div>
 </section>
-}
 
 <!-- ===== Posts Grid ===== -->
 @if (gridPosts().length > 0) {
-<section class="py-12 sm:py-16 bg-secondary-50 dark:bg-secondary-900/50">
+<section class="posts-section py-12 sm:py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       @for (post of gridPosts(); track post.id) {
@@ -98,15 +87,15 @@
         <div class="blog-card__content">
           <div class="flex items-center gap-2 mb-3 flex-wrap">
             <span class="category-badge">{{ post.category }}</span>
-            <span class="text-xs text-secondary-400 dark:text-secondary-500">{{ post.readTime }} min read</span>
+            <span class="text-xs section-subtext">{{ post.readTime }} min read</span>
           </div>
 
           <h3
-            class="text-lg font-heading font-bold text-secondary-900 dark:text-white mb-2 leading-snug group-hover:text-brand transition-colors line-clamp-2">
+            class="text-lg font-heading font-bold section-heading mb-2 leading-snug group-hover:text-brand transition-colors line-clamp-2">
             {{ post.title }}
           </h3>
 
-          <p class="text-sm text-secondary-500 dark:text-secondary-400 leading-relaxed line-clamp-3 mb-4">
+          <p class="text-sm section-subtext leading-relaxed line-clamp-3 mb-4">
             {{ post.excerpt }}
           </p>
 
@@ -117,9 +106,8 @@
               {{ post.authorInitials }}
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-xs font-semibold text-secondary-900 dark:text-white truncate">{{ post.authorName }}</p>
-              <p class="text-xs text-secondary-400 dark:text-secondary-500">{{ post.publishedAt | date: 'mediumDate' }}
-              </p>
+              <p class="text-xs font-semibold section-heading truncate">{{ post.authorName }}</p>
+              <p class="text-xs section-subtext">{{ post.publishedAt | date: 'mediumDate' }}</p>
             </div>
           </div>
         </div>
@@ -130,34 +118,17 @@
 </section>
 }
 
-<!-- ===== Empty State ===== -->
-<!-- @if (filteredPosts().length === 0) {
-<section class="py-24 bg-white dark:bg-secondary-900 text-center">
-  <div class="max-w-md mx-auto px-4">
-    <i class="pi pi-search text-5xl text-secondary-300 dark:text-secondary-600 mb-4 block"></i>
-    <h2 class="text-xl font-heading font-bold text-secondary-900 dark:text-white mb-2">No articles found</h2>
-    <p class="text-secondary-500 dark:text-secondary-400 mb-6">Try a different category or check back soon.</p>
-    <button class="category-pill active" (click)="selectedCategory.set('All')">View all articles</button>
-  </div>
-</section>
-} -->
-
 <!-- ===== CTA Section ===== -->
-<section class="cta-section">
-  <div class="honeycomb-bg-cta"></div>
-  <div class="orb orb-cta-1"></div>
-  <div class="orb orb-cta-2"></div>
-
+<section class="blog-cta">
   <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white leading-tight mb-6">
-      Ready to Start Your
-      <span class="text-primary-300">Fitness Journey?</span>
+      Want to stay in the <span class="text-primary-300">loop</span>?
     </h2>
     <p class="text-lg sm:text-xl text-secondary-300 mb-10 max-w-2xl mx-auto">
-      Put these insights into action. Connect with a certified trainer and track your progress on BeeActive.
+      We're building BeeActive in the open. Follow along and be the first to know when the hive opens.
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <p-button label="Get Started Free" icon="pi pi-arrow-right" iconPos="right" routerLink="/auth/signup"
+      <p-button label="Back to Home" icon="pi pi-arrow-left" routerLink="/"
         severity="warn" size="large" />
     </div>
   </div>

@@ -16,6 +16,21 @@ export const organizerRoutes: Routes = [
         title: 'Clients - BeeActive',
       },
       {
+        path: 'groups',
+        loadComponent: () => import('./groups/groups').then((m) => m.Groups),
+        title: 'Groups - BeeActive',
+      },
+      {
+        path: 'groups/:id',
+        loadComponent: () => import('./groups/group-detail/group-detail').then((m) => m.GroupDetail),
+        title: 'Group Details - BeeActive',
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('../profile/profile').then((m) => m.Profile),
+        title: 'My Profile - BeeActive',
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',

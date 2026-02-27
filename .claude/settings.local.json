@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:beeactive-api-production.up.railway.app)"
+      "WebFetch(domain:beeactive-api-production.up.railway.app)",
+      "Bash(ls -la /Users/ionutbutnaru/Documents/mystuff/beeactive-ui/*.*)"
     ]
   }
 }

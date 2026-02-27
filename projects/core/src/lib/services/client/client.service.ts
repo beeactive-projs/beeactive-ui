@@ -1,183 +1,85 @@
-import { Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
-import { Client } from '../../models/client/client.model';
-import { PaginatedResponse } from '../../models/common/pagination.model';
-
-const MOCK_CLIENTS: Client[] = [
-  {
-    id: '1',
-    firstName: 'Elena',
-    lastName: 'Vasquez',
-    email: 'elena.vasquez@email.com',
-    phone: '+1 555-0101',
-    status: 'active',
-    joinedAt: '2025-09-15',
-    lastSessionAt: '2026-02-14',
-    totalSessions: 42,
-  },
-  {
-    id: '2',
-    firstName: 'Marcus',
-    lastName: 'Chen',
-    email: 'marcus.chen@email.com',
-    phone: '+1 555-0102',
-    status: 'active',
-    joinedAt: '2025-11-03',
-    lastSessionAt: '2026-02-13',
-    totalSessions: 28,
-  },
-  {
-    id: '3',
-    firstName: 'Sofia',
-    lastName: 'Andersson',
-    email: 'sofia.andersson@email.com',
-    phone: '+1 555-0103',
-    status: 'active',
-    joinedAt: '2025-08-20',
-    lastSessionAt: '2026-02-12',
-    totalSessions: 55,
-  },
-  {
-    id: '4',
-    firstName: 'James',
-    lastName: 'Okafor',
-    email: 'james.okafor@email.com',
-    status: 'inactive',
-    joinedAt: '2025-06-10',
-    lastSessionAt: '2025-12-05',
-    totalSessions: 18,
-  },
-  {
-    id: '5',
-    firstName: 'Aria',
-    lastName: 'Patel',
-    email: 'aria.patel@email.com',
-    phone: '+1 555-0105',
-    status: 'active',
-    joinedAt: '2025-10-22',
-    lastSessionAt: '2026-02-15',
-    totalSessions: 36,
-  },
-  {
-    id: '6',
-    firstName: 'Liam',
-    lastName: 'Murphy',
-    email: 'liam.murphy@email.com',
-    phone: '+1 555-0106',
-    status: 'pending',
-    joinedAt: '2026-02-10',
-    totalSessions: 0,
-  },
-  {
-    id: '7',
-    firstName: 'Yuki',
-    lastName: 'Tanaka',
-    email: 'yuki.tanaka@email.com',
-    phone: '+1 555-0107',
-    status: 'active',
-    joinedAt: '2025-07-14',
-    lastSessionAt: '2026-02-11',
-    totalSessions: 61,
-  },
-  {
-    id: '8',
-    firstName: 'Olivia',
-    lastName: 'Schmidt',
-    email: 'olivia.schmidt@email.com',
-    status: 'inactive',
-    joinedAt: '2025-05-30',
-    lastSessionAt: '2025-11-20',
-    totalSessions: 12,
-  },
-  {
-    id: '9',
-    firstName: 'Noah',
-    lastName: 'Williams',
-    email: 'noah.williams@email.com',
-    phone: '+1 555-0109',
-    status: 'active',
-    joinedAt: '2025-12-01',
-    lastSessionAt: '2026-02-14',
-    totalSessions: 22,
-  },
-  {
-    id: '10',
-    firstName: 'Isabella',
-    lastName: 'Rossi',
-    email: 'isabella.rossi@email.com',
-    phone: '+1 555-0110',
-    status: 'active',
-    joinedAt: '2025-09-08',
-    lastSessionAt: '2026-02-13',
-    totalSessions: 47,
-  },
-  {
-    id: '11',
-    firstName: 'Ethan',
-    lastName: 'Kim',
-    email: 'ethan.kim@email.com',
-    phone: '+1 555-0111',
-    status: 'active',
-    joinedAt: '2025-10-15',
-    lastSessionAt: '2026-02-10',
-    totalSessions: 33,
-  },
-  {
-    id: '12',
-    firstName: 'Mia',
-    lastName: 'Johnson',
-    email: 'mia.johnson@email.com',
-    status: 'pending',
-    joinedAt: '2026-02-14',
-    totalSessions: 0,
-  },
-  {
-    id: '13',
-    firstName: 'Daniel',
-    lastName: 'Garcia',
-    email: 'daniel.garcia@email.com',
-    phone: '+1 555-0113',
-    status: 'active',
-    joinedAt: '2025-08-05',
-    lastSessionAt: '2026-02-15',
-    totalSessions: 50,
-  },
-  {
-    id: '14',
-    firstName: 'Charlotte',
-    lastName: 'Dubois',
-    email: 'charlotte.dubois@email.com',
-    phone: '+1 555-0114',
-    status: 'inactive',
-    joinedAt: '2025-04-18',
-    lastSessionAt: '2025-10-30',
-    totalSessions: 8,
-  },
-  {
-    id: '15',
-    firstName: 'Alexander',
-    lastName: 'Petrov',
-    email: 'alexander.petrov@email.com',
-    phone: '+1 555-0115',
-    status: 'active',
-    joinedAt: '2025-11-20',
-    lastSessionAt: '2026-02-12',
-    totalSessions: 25,
-  },
-];
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import {
+  ClientListResponse,
+  ClientListParams,
+  InstructorClient,
+  ClientRequest,
+  CreateClientInvitation,
+  UpdateClientPayload,
+} from '../../models/client/client.model';
+import { environment } from '../../../environments/environment';
+import { API_ENDPOINTS } from '../../constants/api-endpoints.const';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientService {
-  getClients(first: number, rows: number): Observable<PaginatedResponse<Client>> {
-    const items = MOCK_CLIENTS.slice(first, first + rows);
+  private http = inject(HttpClient);
+  private baseUrl = `${environment.apiUrl}${API_ENDPOINTS.CLIENTS.BASE}`;
 
-    return of({
-      items,
-      total: MOCK_CLIENTS.length,
-      page: Math.floor(first / rows),
-      pageSize: rows,
-    }).pipe(delay(300));
+  getClients(params: ClientListParams = {}): Observable<ClientListResponse> {
+    let httpParams = new HttpParams();
+    if (params.status) httpParams = httpParams.set('status', params.status);
+    if (params.page) httpParams = httpParams.set('page', params.page.toString());
+    if (params.limit) httpParams = httpParams.set('limit', params.limit.toString());
+
+    return this.http.get<ClientListResponse>(this.baseUrl, { params: httpParams });
+  }
+
+  getMyInstructors(): Observable<InstructorClient[]> {
+    return this.http.get<InstructorClient[]>(
+      `${environment.apiUrl}${API_ENDPOINTS.CLIENTS.MY_INSTRUCTORS}`,
+    );
+  }
+
+  getPendingRequests(): Observable<ClientRequest[]> {
+    return this.http.get<ClientRequest[]>(
+      `${environment.apiUrl}${API_ENDPOINTS.CLIENTS.PENDING_REQUESTS}`,
+    );
+  }
+
+  sendInvitation(dto: CreateClientInvitation): Observable<{ message: string; request: ClientRequest }> {
+    return this.http.post<{ message: string; request: ClientRequest }>(
+      `${environment.apiUrl}${API_ENDPOINTS.CLIENTS.INVITE}`,
+      dto,
+    );
+  }
+
+  requestToBeClient(instructorId: string, message?: string): Observable<{ message: string; request: ClientRequest }> {
+    return this.http.post<{ message: string; request: ClientRequest }>(
+      `${environment.apiUrl}${API_ENDPOINTS.CLIENTS.REQUEST}/${instructorId}`,
+      { message },
+    );
+  }
+
+  acceptRequest(requestId: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      `${environment.apiUrl}${API_ENDPOINTS.CLIENTS.REQUESTS}/${requestId}/accept`,
+      {},
+    );
+  }
+
+  declineRequest(requestId: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      `${environment.apiUrl}${API_ENDPOINTS.CLIENTS.REQUESTS}/${requestId}/decline`,
+      {},
+    );
+  }
+
+  cancelRequest(requestId: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      `${environment.apiUrl}${API_ENDPOINTS.CLIENTS.REQUESTS}/${requestId}/cancel`,
+      {},
+    );
+  }
+
+  updateClient(clientId: string, dto: UpdateClientPayload): Observable<InstructorClient> {
+    return this.http.patch<InstructorClient>(`${this.baseUrl}/${clientId}`, dto);
+  }
+
+  archiveClient(clientId: string): Observable<InstructorClient> {
+    return this.http.delete<InstructorClient>(`${this.baseUrl}/${clientId}`);
   }
 }

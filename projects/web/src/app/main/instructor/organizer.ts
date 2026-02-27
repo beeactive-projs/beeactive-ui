@@ -14,10 +14,7 @@ export class Organizer {
   readonly menuItems: ReadonlyArray<MenuItem> = [
     { label: 'Dashboard', icon: 'pi pi-objects-column', routerLink: '/app/dashboard' },
     { label: 'Clients', icon: 'pi pi-users', routerLink: '/app/clients' },
-    { label: 'Schedule', icon: 'pi pi-calendar', routerLink: '/app/schedule' },
-    { label: 'Programs', icon: 'pi pi-file', routerLink: '/app/programs' },
-    { label: 'Analytics', icon: 'pi pi-chart-bar', routerLink: '/app/analytics' },
-    { label: 'Messages', icon: 'pi pi-comments', routerLink: '/app/messages' },
-    { label: 'Settings', icon: 'pi pi-cog', routerLink: '/app/settings' },
+    { label: 'Groups', icon: 'pi pi-sitemap', routerLink: '/app/groups' },
+    { label: 'Profile', icon: 'pi pi-user', routerLink: '/app/profile' },
   ];
 }

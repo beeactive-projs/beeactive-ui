@@ -1,38 +1,58 @@
 $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
 
-.honeycomb-bg-subtle {
-  position: absolute;
-  inset: 0;
-  opacity: 0.04;
-  background-image: $honeycomb-svg;
-  background-size: 56px 100px;
-  pointer-events: none;
+// ===== Page background with honeycomb =====
+:host {
+  display: block;
+  position: relative;
+  background: #f8fafc;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: $honeycomb-svg;
+    background-size: 56px 100px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
-// ===== Orbs =====
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  pointer-events: none;
-  animation: orbFloat 8s ease-in-out infinite alternate;
+:host-context(.dark)& {
+  background: #0f172a;
+
+  &::before { opacity: 0.04; }
 }
 
-.orb-1 {
-  width: 400px;
-  height: 400px;
-  top: -80px;
-  right: -80px;
-  background: rgba(245, 158, 11, 0.08);
+// ===== Shared text classes =====
+.section-heading { color: #0f172a; }
+:host-context(.dark) .section-heading { color: #f8fafc; }
+
+.section-subtext { color: #64748b; }
+:host-context(.dark) .section-subtext { color: #94a3b8; }
+
+// ===== Hero (always dark) =====
+.blog-hero-section {
+  position: relative;
+  z-index: 1;
+  background: #0f172a;
 }
 
-.orb-2 {
-  width: 300px;
-  height: 300px;
-  bottom: -60px;
-  left: -80px;
-  background: rgba(20, 184, 166, 0.06);
-  animation-delay: -3s;
+// ===== Featured section: gradient from dark hero into page bg =====
+.featured-section {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, #1e293b 0%, #f8fafc 12%);
+}
+
+:host-context(.dark) .featured-section {
+  background: linear-gradient(180deg, #0f172a 0%, #1a2332 14%);
+}
+
+// ===== Posts grid section =====
+.posts-section {
+  position: relative;
+  z-index: 1;
 }
 
 // ===== Category Badge (on cards) =====
@@ -45,29 +65,25 @@ $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
   background: rgba(245, 158, 11, 0.1);
   color: var(--p-primary-700);
   letter-spacing: 0.02em;
+}
 
-  :host-context(.dark) & {
-    background: rgba(245, 158, 11, 0.15);
-    color: var(--p-primary-400);
-  }
+:host-context(.dark) .category-badge {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--p-primary-400);
 }
 
 // ===== Featured Card =====
 .featured-card {
   display: grid;
+  width: 100%;
   grid-template-columns: 1fr;
   gap: 0;
   border-radius: 1.25rem;
   overflow: hidden;
-  background: var(--p-gray-100);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   text-decoration: none;
   transition: all 0.35s ease;
-
-  :host-context(.dark) & {
-    background: var(--p-gray-800);
-    border-color: rgba(255, 255, 255, 0.06);
-  }
 
   @media (min-width: 768px) {
     grid-template-columns: 1.2fr 1fr;
@@ -77,14 +93,17 @@ $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
     transform: translateY(-4px);
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
 
-    :host-context(.dark) & {
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
-    }
-
     .featured-card__image {
       transform: scale(1.04);
     }
   }
+}
+
+:host-context(.dark) .featured-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+
+  &:hover { box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35); }
 }
 
 .featured-card__image-wrap {
@@ -121,18 +140,17 @@ $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
 
 .featured-card__content {
   display: flex;
-  z-index: 49;
   flex-direction: column;
-  padding: 2rem 2rem 2rem;
-  background: var(--p-gray-200);
-
-  :host-context(.dark) & {
-    background: var(--p-gray-800);
-  }
+  padding: 2rem;
+  background: white;
 
   @media (min-width: 768px) {
-    padding: 2.5rem 2.5rem;
+    padding: 2.5rem;
   }
+}
+
+:host-context(.dark) .featured-card__content {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 // ===== Read More Link =====
@@ -156,23 +174,14 @@ $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
   flex-direction: column;
   border-radius: 1rem;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   text-decoration: none;
   transition: all 0.35s ease;
-  background: var(--p-gray-200);
-
-  :host-context(.dark) & {
-    background: var(--p-gray-800);
-    border-color: rgba(255, 255, 255, 0.06);
-  }
+  background: white;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-
-    :host-context(.dark) & {
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-    }
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 
     .blog-card__image {
       transform: scale(1.04);
@@ -183,6 +192,13 @@ $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
     outline: 2px solid var(--p-primary-500);
     outline-offset: 2px;
   }
+}
+
+:host-context(.dark) .blog-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+
+  &:hover { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); }
 }
 
 .blog-card__image-wrap {
@@ -206,35 +222,9 @@ $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
   padding: 1.5rem;
 }
 
-// ===== CTA Section =====
-.cta-section {
+// ===== CTA (always dark) =====
+.blog-cta {
   position: relative;
-  overflow: hidden;
-  background: var(--color-secondary-900, #0f172a);
-}
-
-.honeycomb-bg-cta {
-  position: absolute;
-  inset: 0;
-  opacity: 0.05;
-  background-image: $honeycomb-svg;
-  background-size: 56px 100px;
-  pointer-events: none;
-}
-
-.orb-cta-1 {
-  width: 400px;
-  height: 400px;
-  top: -100px;
-  right: -80px;
-  background: rgba(245, 158, 11, 0.1);
-}
-
-.orb-cta-2 {
-  width: 300px;
-  height: 300px;
-  bottom: -60px;
-  left: -80px;
-  background: rgba(20, 184, 166, 0.08);
-  animation-delay: -4s;
+  z-index: 1;
+  background: #0c1222;
 }

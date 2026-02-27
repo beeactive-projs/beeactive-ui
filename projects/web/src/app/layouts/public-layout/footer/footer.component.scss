@@ -3,12 +3,17 @@
 }
 
 .footer {
-  background: var(--p-surface-0); // secondary-950 — matches the CTA section
-  color: var(--p-surface-950);
+  background: #f1f5f9;
+  color: #0f172a;
   position: relative;
 }
 
-// Thin amber→teal gradient line at the very top
+:host-context(.dark) .footer {
+  background: #0c1222;
+  color: #f8fafc;
+}
+
+// Thin amber gradient line at the very top
 .footer-top-border {
   height: 1px;
   background: linear-gradient(
@@ -34,6 +39,15 @@
   flex-shrink: 0;
 }
 
+// Brand name
+.footer .font-heading {
+  color: #0f172a;
+}
+
+:host-context(.dark) .footer .font-heading {
+  color: #f8fafc;
+}
+
 // Column headings
 .footer-heading {
   font-family: var(--font-heading);
@@ -41,19 +55,23 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: #fff;
+  color: #0f172a;
   margin-bottom: 18px;
+}
+
+:host-context(.dark) .footer-heading {
+  color: #f8fafc;
 }
 
 // Text links
 .footer-link {
   font-size: 0.875rem;
-  color: #64748b; // secondary-500
+  color: #64748b;
   text-decoration: none;
   transition: color 0.2s ease;
 
   &:hover {
-    color: #fbbf24; // amber-400
+    color: #f59e0b;
   }
 }
 
@@ -62,8 +80,8 @@
   width: 36px;
   height: 36px;
   border-radius: 9px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,9 +96,14 @@
   &:hover {
     background: rgba(245, 158, 11, 0.12);
     border-color: rgba(245, 158, 11, 0.25);
-    color: #fbbf24;
+    color: #f59e0b;
     transform: translateY(-2px);
   }
+}
+
+:host-context(.dark) .social-icon {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.07);
 }
 
 // Bottom bar
@@ -90,7 +113,7 @@
   align-items: center;
   gap: 16px;
   padding-top: 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
   text-align: center;
 
   @media (min-width: 640px) {
@@ -98,4 +121,8 @@
     justify-content: space-between;
     text-align: left;
   }
+}
+
+:host-context(.dark) .footer-bottom {
+  border-top-color: rgba(255, 255, 255, 0.06);
 }

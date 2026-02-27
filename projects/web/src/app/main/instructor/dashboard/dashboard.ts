@@ -1,258 +1,98 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
-// PrimeNG imports
 import { AvatarModule } from 'primeng/avatar';
-import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
-import type { ButtonSeverity } from 'primeng/types/button';
 
-type TagSeverity =
-  | 'success'
-  | 'secondary'
-  | 'info'
-  | 'warn'
-  | 'danger'
-  | 'contrast'
-  | null
-  | undefined;
-
-type QuickAction = {
-  label: string;
-  icon: string;
-  severity: ButtonSeverity;
-};
-
-type StatCard = {
-  label: string;
-  value: number | string;
-  helper: string;
-  trendLabel: string;
-  trendSeverity: TagSeverity;
-  trendIcon: string;
-  icon: string;
-  accent: string;
-};
-
-type UpcomingSession = {
-  time: string;
-  title: string;
-  location: string;
-  coach: string;
-  attendees: number;
-  capacity: number;
-  occupancy: number;
-  status: string;
-  statusSeverity: TagSeverity;
-};
-
-type TeamHighlight = {
-  name: string;
-  role: string;
-  availability: string;
-  status: string;
-  statusSeverity: TagSeverity;
-};
-
-type AlertItem = {
-  title: string;
-  description: string;
-  time: string;
-  severity: TagSeverity;
-  tag: string;
-  icon: string;
-};
-
-type TopProgram = {
-  name: string;
-  occupancy: number;
-  revenue: string;
-};
+import { AuthStore } from 'core';
 
 @Component({
   selector: 'bee-dashboard',
   imports: [
-    CommonModule,
+    RouterLink,
     AvatarModule,
-    BadgeModule,
     ButtonModule,
     CardModule,
     DividerModule,
-    ProgressBarModule,
-    TableModule,
     TagModule,
   ],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.scss',
+  template: `
+    <!-- Welcome Header -->
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold text-surface-900">
+        Welcome back, {{ authStore.userName() }}
+      </h1>
+      <p class="text-surface-500 mt-1">Here's your instructor hub. What would you like to do?</p>
+    </div>
+
+    <!-- Quick Action Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <a routerLink="/app/clients" class="no-underline">
+        <p-card styleClass="hover:shadow-md transition-shadow cursor-pointer h-full">
+          <div class="flex flex-col items-center text-center gap-3 py-4">
+            <p-avatar icon="pi pi-users" size="large" shape="circle"
+              [style]="{ 'background-color': 'var(--p-primary-100)', 'color': 'var(--p-primary-600)' }" />
+            <div>
+              <h3 class="text-lg font-semibold text-surface-900 m-0">Manage Clients</h3>
+              <p class="text-surface-500 text-sm mt-1 mb-0">View and manage your client relationships</p>
+            </div>
+            <p-tag value="Clients" severity="info" />
+          </div>
+        </p-card>
+      </a>
+
+      <a routerLink="/app/groups" class="no-underline">
+        <p-card styleClass="hover:shadow-md transition-shadow cursor-pointer h-full">
+          <div class="flex flex-col items-center text-center gap-3 py-4">
+            <p-avatar icon="pi pi-sitemap" size="large" shape="circle"
+              [style]="{ 'background-color': 'var(--p-green-100)', 'color': 'var(--p-green-600)' }" />
+            <div>
+              <h3 class="text-lg font-semibold text-surface-900 m-0">Manage Groups</h3>
+              <p class="text-surface-500 text-sm mt-1 mb-0">Create and organize your training groups</p>
+            </div>
+            <p-tag value="Groups" severity="success" />
+          </div>
+        </p-card>
+      </a>
+
+      <a routerLink="/app/profile" class="no-underline">
+        <p-card styleClass="hover:shadow-md transition-shadow cursor-pointer h-full">
+          <div class="flex flex-col items-center text-center gap-3 py-4">
+            <p-avatar icon="pi pi-user" size="large" shape="circle"
+              [style]="{ 'background-color': 'var(--p-orange-100)', 'color': 'var(--p-orange-600)' }" />
+            <div>
+              <h3 class="text-lg font-semibold text-surface-900 m-0">My Profile</h3>
+              <p class="text-surface-500 text-sm mt-1 mb-0">Update your instructor profile and settings</p>
+            </div>
+            <p-tag value="Profile" severity="warn" />
+          </div>
+        </p-card>
+      </a>
+    </div>
+
+    <!-- Recent Activity Placeholder -->
+    <p-card>
+      <ng-template #header>
+        <div class="flex items-center gap-2 px-4 pt-4">
+          <i class="pi pi-clock text-surface-500"></i>
+          <h2 class="text-lg font-semibold text-surface-900 m-0">Recent Activity</h2>
+        </div>
+      </ng-template>
+      <p-divider />
+      <div class="flex flex-col items-center justify-center py-8 text-center">
+        <i class="pi pi-inbox text-4xl text-surface-300 mb-3"></i>
+        <p class="text-surface-500 m-0">Activity feed coming soon.</p>
+        <p class="text-surface-400 text-sm mt-1 mb-0">
+          Your recent sessions, client updates, and group activity will appear here.
+        </p>
+      </div>
+    </p-card>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dashboard {
-  readonly organizerName = 'BeeActive Studio';
-  readonly subtitle = 'A quick snapshot of your operations and upcoming sessions.';
-
-  readonly quickActions: ReadonlyArray<QuickAction> = [
-    { label: 'Create Event', icon: 'pi pi-plus', severity: 'primary' },
-    { label: 'Invite Clients', icon: 'pi pi-user-plus', severity: 'secondary' },
-    { label: 'Publish Schedule', icon: 'pi pi-calendar', severity: 'success' },
-    { label: 'View Reports', icon: 'pi pi-chart-line', severity: 'info' },
-  ];
-
-  readonly stats: ReadonlyArray<StatCard> = [
-    {
-      label: 'Active Programs',
-      value: 14,
-      helper: '3 new this month',
-      trendLabel: '+12%',
-      trendSeverity: 'success',
-      trendIcon: 'pi pi-arrow-up-right',
-      icon: 'pi pi-bolt',
-      accent: 'text-primary-600',
-    },
-    {
-      label: 'Sessions This Week',
-      value: 48,
-      helper: '6 remaining',
-      trendLabel: '+8%',
-      trendSeverity: 'success',
-      trendIcon: 'pi pi-arrow-up-right',
-      icon: 'pi pi-calendar',
-      accent: 'text-info-600',
-    },
-    {
-      label: 'Avg. Attendance',
-      value: '86%',
-      helper: 'Stable vs last week',
-      trendLabel: '0%',
-      trendSeverity: 'info',
-      trendIcon: 'pi pi-minus',
-      icon: 'pi pi-users',
-      accent: 'text-success-600',
-    },
-    {
-      label: 'Monthly Revenue',
-      value: '$24.6k',
-      helper: 'Projected',
-      trendLabel: '-3%',
-      trendSeverity: 'danger',
-      trendIcon: 'pi pi-arrow-down-right',
-      icon: 'pi pi-wallet',
-      accent: 'text-accent-600',
-    },
-  ];
-
-  upcomingSessions: Array<UpcomingSession> = [
-    {
-      time: 'Today · 9:30 AM',
-      title: 'Strength Foundations',
-      location: 'Studio A',
-      coach: 'Ava Carter',
-      attendees: 12,
-      capacity: 16,
-      occupancy: 75,
-      status: 'Confirmed',
-      statusSeverity: 'success',
-    },
-    {
-      time: 'Today · 1:00 PM',
-      title: 'HIIT Circuit',
-      location: 'Studio B',
-      coach: 'Marcus Lee',
-      attendees: 14,
-      capacity: 18,
-      occupancy: 78,
-      status: 'Waitlist',
-      statusSeverity: 'warn',
-    },
-    {
-      time: 'Tomorrow · 8:00 AM',
-      title: 'Mobility Flow',
-      location: 'Studio C',
-      coach: 'Sofia Gomez',
-      attendees: 9,
-      capacity: 12,
-      occupancy: 75,
-      status: 'Confirmed',
-      statusSeverity: 'success',
-    },
-    {
-      time: 'Tomorrow · 6:30 PM',
-      title: 'Athlete Performance',
-      location: 'Arena 1',
-      coach: 'Dylan Park',
-      attendees: 16,
-      capacity: 20,
-      occupancy: 80,
-      status: 'Pending',
-      statusSeverity: 'info',
-    },
-  ];
-
-  readonly teamHighlights: ReadonlyArray<TeamHighlight> = [
-    {
-      name: 'Ava Carter',
-      role: 'Lead Coach',
-      availability: '2 slots open',
-      status: 'Available',
-      statusSeverity: 'success',
-    },
-    {
-      name: 'Marcus Lee',
-      role: 'Performance Coach',
-      availability: 'Fully booked',
-      status: 'Full',
-      statusSeverity: 'danger',
-    },
-    {
-      name: 'Sofia Gomez',
-      role: 'Mobility Coach',
-      availability: '3 slots open',
-      status: 'Available',
-      statusSeverity: 'success',
-    },
-  ];
-
-  readonly alerts: ReadonlyArray<AlertItem> = [
-    {
-      title: 'Membership renewals due',
-      description: '8 clients renew within 7 days. Send reminders.',
-      time: '2 hours ago',
-      severity: 'warn',
-      tag: 'Action',
-      icon: 'pi pi-bell',
-    },
-    {
-      title: 'Equipment maintenance',
-      description: 'Treadmill 4 logged 3 issues this week.',
-      time: 'Yesterday',
-      severity: 'danger',
-      tag: 'Urgent',
-      icon: 'pi pi-wrench',
-    },
-    {
-      title: 'New review posted',
-      description: '“Best trainer experience so far!” — Michelle R.',
-      time: '1 day ago',
-      severity: 'success',
-      tag: 'Praise',
-      icon: 'pi pi-star',
-    },
-  ];
-
-  readonly topPrograms: ReadonlyArray<TopProgram> = [
-    { name: 'Strength Foundations', occupancy: 88, revenue: '$6.2k' },
-    { name: 'HIIT Circuit', occupancy: 82, revenue: '$5.5k' },
-    { name: 'Mobility Flow', occupancy: 74, revenue: '$4.1k' },
-  ];
-
-  trackByLabel = (_: number, item: QuickAction) => item.label;
-  trackByStat = (_: number, item: StatCard) => item.label;
-  trackBySession = (_: number, item: UpcomingSession) => item.title;
-  trackByMember = (_: number, item: TeamHighlight) => item.name;
-  trackByAlert = (_: number, item: AlertItem) => item.title;
-  trackByProgram = (_: number, item: TopProgram) => item.name;
+  readonly authStore = inject(AuthStore);
 }

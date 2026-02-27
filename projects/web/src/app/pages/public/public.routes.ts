@@ -4,27 +4,17 @@ export const publicRoutes: Routes = [
   {
     path: '',
     loadComponent: () => import('./home/home.component').then((m) => m.HomeComponent),
-    title: 'BeeActive - Transform Your Fitness Journey',
+    title: 'BeeActive — Where active communities come together',
   },
   {
     path: 'about',
     loadComponent: () => import('./about/about.component').then((m) => m.AboutComponent),
-    title: 'About Us - BeeActive',
-  },
-  {
-    path: 'services',
-    loadComponent: () => import('./services/services.component').then((m) => m.ServicesComponent),
-    title: 'Our Services - BeeActive',
-  },
-  {
-    path: 'contact',
-    loadComponent: () => import('./contact/contact.component').then((m) => m.ContactComponent),
-    title: 'Contact Us - BeeActive',
+    title: 'About - BeeActive',
   },
   {
     path: 'blog',
     loadComponent: () => import('./blog/blog.component').then((m) => m.BlogComponent),
-    title: 'Blog - Fitness Insights & Expert Tips | BeeActive',
+    title: 'Blog - BeeActive',
   },
   {
     path: 'blog/:slug',

@@ -2,11 +2,6 @@ import { Routes } from '@angular/router';
 
 export const appRoutes: Routes = [
   {
-    path: 'profile',
-    loadComponent: () => import('./profile/profile').then((m) => m.Profile),
-    title: 'My Profile - BeeActive',
-  },
-  {
     path: '',
     loadChildren: () => import('./instructor/organizer.routes').then((m) => m.organizerRoutes),
   },
@@ -16,7 +11,7 @@ export const appRoutes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
 ];

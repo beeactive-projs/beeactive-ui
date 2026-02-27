@@ -27,8 +27,8 @@
         <p-button [icon]="isDark() ? 'pi pi-sun' : 'pi pi-moon'" [rounded]="true" [text]="true"
           (onClick)="toggleTheme()" [ariaLabel]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
           size="small" />
-        <p-button label="Sign In" [text]="true" routerLink="/auth/login" size="small" />
-        <p-button label="Get Started" icon="pi pi-arrow-right" iconPos="right" routerLink="/auth/signup" size="small" />
+        <p-button label="Sign In" [text]="true" [disabled]="true" size="small" />
+        <p-button label="Coming Soon" icon="pi pi-clock" iconPos="right" [disabled]="true" size="small" />
       </div>
 
       <!-- Mobile controls -->
@@ -52,10 +52,7 @@
       <div class="mobile-menu-divider"></div>
 
       <div class="flex gap-2">
-        <p-button label="Sign In" [outlined]="true" routerLink="/auth/login" (onClick)="closeMobileMenu()" class="w-1/2"
-          fluid />
-        <p-button label="Get Started" icon="pi pi-arrow-right" iconPos="right" routerLink="/auth/signup"
-          (onClick)="closeMobileMenu()" class="w-1/2" fluid />
+        <p-button label="Coming Soon" icon="pi pi-clock" iconPos="right" [disabled]="true" fluid />
       </div>
     </div>
     }

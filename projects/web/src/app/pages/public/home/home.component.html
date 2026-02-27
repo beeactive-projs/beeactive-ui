@@ -4,42 +4,25 @@
       <!-- Hero Content -->
       <div class="text-center lg:text-left animate-fade-in">
         <div class="fitness-platform">
-          <i class="pi pi-bolt"></i>
-          <span>The #1 Fitness Platform</span>
+          <i class="pi pi-sparkles"></i>
+          <span>Where active communities come together</span>
         </div>
 
         <h1
           class="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-white leading-[1.1] tracking-tight mb-6">
-          Transform Your
-          <span class="text-brand">Fitness Journey</span>
-          Today
+          Make staying <span class="text-brand">active together</span> feel easy.
         </h1>
 
         <p class="text-lg sm:text-xl text-white mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
-          Connect with certified trainers, track your progress, and crush your fitness goals — all in one powerful
-          platform.
+          Whether you lead a group or just love showing up — this is your space to stay active, stay connected, and find <span class="text-brand">your people</span>.
         </p>
-
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-          <p-button label="Get Started Free" icon="pi pi-arrow-right" iconPos="right" routerLink="/auth/signup"
+          <p-button label="Coming soon" icon="pi pi-clock" iconPos="right" [disabled]="true"
             size="large" />
-          <!-- <p-button label="Watch Demo" icon="pi pi-play-circle" [outlined]="true" size="large" /> -->
         </div>
-
-        <div class="flex items-center gap-6 mt-10 justify-center lg:justify-start">
-          <div class="flex items-center gap-2 text-sm text-secondary-500 dark:text-secondary-400">
-            <i class="pi pi-check-circle text-accent-500"></i>
-            <span>No credit card</span>
-          </div>
-          <div class="flex items-center gap-2 text-sm text-secondary-500 dark:text-secondary-400">
-            <i class="pi pi-check-circle text-accent-500"></i>
-            <span>14-day free trial</span>
-          </div>
-          <div class="hidden sm:flex items-center gap-2 text-sm text-secondary-500 dark:text-secondary-400">
-            <i class="pi pi-check-circle text-accent-500"></i>
-            <span>Cancel anytime</span>
-          </div>
-        </div>
+        <p class="mt-3 text-sm text-white/80">
+          <span class="text-brand">Free forever</span> — we're building something good.
+        </p>
       </div>
 
       <!-- Hero Visual -->
@@ -47,25 +30,26 @@
         <div class="hero-visual">
           <div class="hero-hex hero-hex-1">
             <div class="hero-hex-inner">
-              <i class="pi pi-heart-fill text-4xl text-red-600"></i>
-              <span class="text-xs font-semibold mt-2">Health</span>
+              <i class="pi pi-compass text-4xl text-cyan-400"></i>
+              <span class="text-xs font-semibold mt-2">Discover what moves you</span>
             </div>
           </div>
           <div class="hero-hex hero-hex-2">
             <div class="hero-hex-inner">
-              <i class="pi pi-chart-line text-4xl text-green-800"></i>
-              <span class="text-xs font-semibold mt-2">Progress</span>
+              <i class="pi pi-wrench text-4xl text-orange-400"></i>
+              <span class="text-xs font-semibold mt-2">Run it your way</span>
             </div>
           </div>
           <div class="hero-hex hero-hex-3">
             <div class="hero-hex-inner">
-              <i class="pi pi-users text-4xl text-purple-500"></i>
-              <span class="text-xs font-semibold mt-2">Community</span>
+              <i class="pi pi-user-plus text-4xl text-purple-500"></i>
+              <span class="text-xs font-semibold mt-2">Grow your community</span>
             </div>
           </div>
           <div class="hero-hex hero-hex-4">
             <div class="hero-hex-inner">
               <i class="pi pi-bolt text-5xl text-primary-600"></i>
+              <span class="text-xs font-semibold mt-2">Keep the energy going</span>
             </div>
           </div>
         </div>
@@ -77,8 +61,8 @@
               <i class="pi pi-chart-line text-accent-500 text-lg"></i>
             </div>
             <div>
-              <p class="text-lg font-bold">85%</p>
-              <p class="text-xs">Goal Achievement</p>
+              <p class="text-lg font-bold">Grow your <span class="text-brand">brand</span></p>
+              <p class="text-xs">Bring your people together and keep them coming back.</p>
             </div>
           </div>
         </div>
@@ -89,8 +73,8 @@
               <i class="pi pi-users text-primary-500 text-lg"></i>
             </div>
             <div>
-              <p class="text-lg font-bold">10K+</p>
-              <p class="text-xs">Active Members</p>
+              <p class="text-lg font-bold">Find your <span class="text-brand">circle</span></p>
+              <p class="text-xs">Explore activities near you and show up with people who get it.</p>
             </div>
           </div>
         </div>
@@ -99,133 +83,87 @@
   </div>
 </section>
 
-<!-- ===== Stats Section ===== -->
-<section class="py-16 bg-white dark:bg-secondary-900 border-y border-secondary-200/60 dark:border-secondary-700/40">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-      @for (stat of stats; track stat.label) {
-      <div class="text-center">
-        <p class="text-4xl sm:text-5xl font-heading font-extrabold text-brand mb-2">
-          {{ stat.value }}
-        </p>
-        <p class="text-sm sm:text-base text-secondary-500 dark:text-secondary-400 font-medium">{{ stat.label }}</p>
+<!-- ===== Who It's For Section ===== -->
+<section class="who-section py-24 sm:py-28">
+  <div class="who-bg"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <h2 class="section-heading text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold mb-3">
+        How will you <span class="text-brand">BeeActive</span>?
+      </h2>
+      <p class="section-subtext text-lg">
+        One platform. Two ways in.
+      </p>
+    </div>
+
+    <div class="who-grid grid md:grid-cols-2 gap-10 items-stretch">
+      <div class="who-column who-column-left">
+        <div class="who-icon who-icon-instructors">
+          <i class="pi pi-flag"></i>
+        </div>
+        <h3 class="section-heading text-2xl sm:text-3xl font-heading font-extrabold mb-1">
+          You lead.
+        </h3>
+        <p class="section-subtext text-sm font-medium mb-4">Build your hive.</p>
+        <ul class="who-list">
+          <li>Run sessions and classes on your terms.</li>
+          <li>Keep your community in one place.</li>
+          <li>Share updates, not spreadsheets.</li>
+        </ul>
       </div>
-      }
+      <div class="who-column who-column-right">
+        <div class="who-icon who-icon-movers">
+          <i class="pi pi-heart"></i>
+        </div>
+        <h3 class="section-heading text-2xl sm:text-3xl font-heading font-extrabold mb-1">
+          You show up.
+        </h3>
+        <p class="section-subtext text-sm font-medium mb-4">Join the hive.</p>
+        <ul class="who-list">
+          <li>Discover what's happening around you.</li>
+          <li>Stay connected to your favourite groups.</li>
+          <li>Show up, stay close, keep moving.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===== Features Section ===== -->
-<section class="features-section py-20 sm:py-28">
+<!-- ===== What's Coming Section ===== -->
+<section class="coming-section py-20 sm:py-28">
   <div class="honeycomb-bg-subtle"></div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-500/10 dark:bg-accent-400/15 mb-4">
-        <span class="text-sm font-semibold text-accent-700 dark:text-accent-300">Features</span>
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 mb-4">
+        <i class="pi pi-wrench text-sm text-primary-500"></i>
+        <span class="text-sm font-semibold text-primary-500">In the making</span>
       </div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-secondary-900 dark:text-white mb-4">
-        Everything You Need to
-        <span class="text-brand">Succeed</span>
+      <h2 class="section-heading text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold mb-3">
+        The hive is <span class="text-brand">taking shape</span>.
       </h2>
-      <p class="text-lg text-secondary-500 dark:text-secondary-400 max-w-2xl mx-auto">
-        Powerful features designed to help you reach your fitness goals faster and more effectively.
+      <p class="section-subtext text-lg max-w-2xl mx-auto">
+        We're building BeeActive piece by piece. Here's what's landing first.
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-      @for (feature of features; track feature.title) {
-      <div class="feature-card group">
-        <div class="feature-icon-wrap">
-          <i [class]="'pi ' + feature.icon + ' text-xl'"></i>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (item of roadmap; track item.title) {
+      <div class="coming-card">
+        <div class="coming-icon-wrap">
+          <i [class]="'pi ' + item.icon + ' text-lg'"></i>
         </div>
-        <h3 class="text-xl font-heading font-bold text-secondary-900 dark:text-white mb-2">
-          {{ feature.title }}
+        <h3 class="section-heading text-lg font-heading font-bold mb-1">
+          {{ item.title }}
         </h3>
-        <p class="text-secondary-500 dark:text-secondary-400 leading-relaxed">
-          {{ feature.description }}
+        <p class="section-subtext text-sm leading-relaxed">
+          {{ item.description }}
         </p>
-      </div>
-      }
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== How It Works Section ===== -->
-<section class="py-16 bg-white dark:bg-secondary-900 border-y border-secondary-200/60 dark:border-secondary-700/40">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-400/15 mb-4">
-        <span class="text-sm font-semibold text-primary-700 dark:text-primary-300">How It Works</span>
-      </div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-secondary-900 dark:text-white mb-4">
-        Get Started in
-        <span class="text-brand">3 Steps</span>
-      </h2>
-      <p class="text-lg text-secondary-500 dark:text-secondary-400 max-w-2xl mx-auto">
-        From sign-up to your first workout — it takes less than 5 minutes.
-      </p>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
-      @for (step of steps; track step.title; let i = $index) {
-      <div class="relative text-center">
-        <div class="step-number">{{ i + 1 }}</div>
-        <div
-          class="w-16 h-16 mx-auto rounded-2xl bg-primary-500 flex items-center justify-center mb-6 shadow-lg shadow-primary-500/20">
-          <i [class]="'pi ' + step.icon + ' text-white text-2xl'"></i>
-        </div>
-        <h3 class="text-xl font-heading font-bold text-secondary-900 dark:text-white mb-3">
-          {{ step.title }}
-        </h3>
-        <p class="text-secondary-500 dark:text-secondary-400 leading-relaxed">
-          {{ step.description }}
-        </p>
-      </div>
-      }
-    </div>
-  </div>
-</section>
-
-<!-- ===== Testimonials Section ===== -->
-<section class="testimonials-section py-20 sm:py-28">
-  <div class="honeycomb-bg-subtle"></div>
-
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-400/15 mb-4">
-        <span class="text-sm font-semibold text-primary-700 dark:text-primary-300">Testimonials</span>
-      </div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-secondary-900 dark:text-white mb-4">
-        Loved by Thousands
-      </h2>
-      <p class="text-lg text-secondary-500 dark:text-secondary-400 max-w-2xl mx-auto">
-        Join users who have transformed their fitness journey with BeeActive.
-      </p>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-      @for (testimonial of testimonials; track testimonial.name) {
-      <div class="testimonial-card">
-        <div class="flex gap-1 mb-4">
-          @for (star of [1,2,3,4,5]; track star) {
-          <i class="pi pi-star-fill text-primary-500 text-sm"></i>
-          }
-        </div>
-        <p class="text-secondary-600 dark:text-secondary-300 mb-6 leading-relaxed">
-          "{{ testimonial.quote }}"
-        </p>
-        <div class="flex items-center gap-3 mt-auto">
-          <div
-            class="w-11 h-11 rounded-full bg-primary-500 flex items-center justify-center text-white font-bold text-sm">
-            {{ testimonial.initials }}
-          </div>
-          <div>
-            <p class="font-semibold text-secondary-900 dark:text-white text-sm">{{ testimonial.name }}</p>
-            <p class="text-xs text-secondary-500 dark:text-secondary-400">{{ testimonial.role }}</p>
-          </div>
-        </div>
+        @if (item.ready) {
+        <span class="coming-badge coming-badge-live">Live</span>
+        } @else {
+        <span class="coming-badge coming-badge-soon">Coming soon</span>
+        }
       </div>
       }
     </div>
@@ -240,14 +178,13 @@
 
   <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white leading-tight mb-6">
-      Ready to Start Your
-      <span class="text-primary-300">Fitness Journey?</span>
+      Get in <span class="text-primary-300">early</span>.
     </h2>
     <p class="text-lg sm:text-xl text-secondary-300 mb-10 max-w-2xl mx-auto">
-      Join BeeActive today and get matched with the perfect trainer to help you achieve your goals.
+      BeeActive is just getting started. We're building the hive — follow along on our blog and be the first to know when it opens.
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <p-button label="Get Started Free" icon="pi pi-arrow-right" iconPos="right" routerLink="/auth/signup"
+      <p-button label="Read the blog" icon="pi pi-arrow-right" iconPos="right" routerLink="/blog"
         severity="warn" size="large" />
     </div>
   </div>
