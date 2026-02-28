@@ -63,12 +63,12 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 
   // First section: gradient from dark hero into page bg
   &:first-of-type {
-    background: linear-gradient(180deg, #1e293b 0%, #f8fafc 12%);
+    background: linear-gradient(180deg, #0f172a 0%, transparent 12%);
   }
 }
 
 :host-context(.dark) .about-section:first-of-type {
-  background: linear-gradient(180deg, #0f172a 0%, #111827 12%);
+  background: linear-gradient(180deg, #0f172a 0%, transparent 12%);
 }
 
 // ===== Story text =====
@@ -125,16 +125,7 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
   position: relative;
   overflow: hidden;
   z-index: 1;
-  background: #0c1222;
-}
-
-.honeycomb-bg-cta {
-  position: absolute;
-  inset: 0;
-  opacity: 0.05;
-  background-image: $honeycomb-svg;
-  background-size: 56px 100px;
-  pointer-events: none;
+  background: #0f172a;
 }
 
 // ===== Ambient Orbs =====

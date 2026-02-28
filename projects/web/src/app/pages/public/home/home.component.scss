@@ -177,12 +177,11 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
   position: relative;
   overflow: hidden;
   z-index: 1;
-  // Light: gradient from dark hero into light page
-  background: linear-gradient(180deg, #1e293b 0%, #f8fafc 12%);
+  background: linear-gradient(180deg, #0f172a 0%, transparent 12%);
 }
 
 :host-context(.dark) .who-section {
-  background: linear-gradient(180deg, #0f172a 0%, #1a2332 14%);
+  background: linear-gradient(180deg, #0f172a 0%, transparent 14%);
 }
 
 .who-bg {
@@ -352,17 +351,7 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
   position: relative;
   overflow: hidden;
   z-index: 1;
-  // Always dark
-  background: #0c1222;
-}
-
-.honeycomb-bg-cta {
-  position: absolute;
-  inset: 0;
-  opacity: 0.05;
-  background-image: $honeycomb-svg;
-  background-size: 56px 100px;
-  pointer-events: none;
+  background: #0f172a;
 }
 
 .orb-cta-1 {

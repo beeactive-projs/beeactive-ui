@@ -1,3 +1,6 @@
+$honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
+$honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%2394a3b8' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%2394a3b8' stroke-width='1.5'/%3E%3C/svg%3E");
+
 :host {
   display: block;
 }
@@ -6,11 +9,26 @@
   background: #f1f5f9;
   color: #0f172a;
   position: relative;
+  overflow: hidden;
 }
 
 :host-context(.dark) .footer {
-  background: #0c1222;
+  background: #0f172a;
   color: #f8fafc;
+}
+
+.footer-honeycomb {
+  position: absolute;
+  inset: 0;
+  background-image: $honeycomb-svg-light;
+  background-size: 56px 100px;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+:host-context(.dark) .footer-honeycomb {
+  background-image: $honeycomb-svg;
+  opacity: 0.06;
 }
 
 // Thin amber gradient line at the very top
