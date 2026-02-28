@@ -3,19 +3,46 @@
 // - Light theme: frosted white glass, dark text
 // - Dark theme: frosted dark glass, light text
 
+$header-honeycomb-slate: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%2394a3b8' stroke-width='1'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%2394a3b8' stroke-width='1'/%3E%3C/svg%3E");
+$header-honeycomb-amber: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1'/%3E%3C/svg%3E");
+
 .site-header {
+  position: relative;
   transition: background 0.3s ease, box-shadow 0.3s ease;
 
   &.scrolled {
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(12px);
-    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
+    box-shadow:
+      0 1px 12px rgba(0, 0, 0, 0.08),
+      inset 0 -1px 0 rgba(245, 158, 11, 0.08);
+
+    .header-honeycomb { opacity: 0.035; }
   }
+}
+
+// Subtle honeycomb texture — hidden when transparent, fades in on scroll
+.header-honeycomb {
+  position: absolute;
+  inset: 0;
+  background-image: $header-honeycomb-slate;
+  background-size: 42px 75px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+:host-context(.dark) .header-honeycomb {
+  background-image: $header-honeycomb-amber;
 }
 
 :host-context(.dark) .site-header.scrolled {
   background: rgba(15, 23, 42, 0.92);
-  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+  box-shadow:
+    0 1px 12px rgba(0, 0, 0, 0.25),
+    inset 0 -1px 0 rgba(245, 158, 11, 0.12);
+
+  .header-honeycomb { opacity: 0.04; }
 }
 
 // ===== Logo =====

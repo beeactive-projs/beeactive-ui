@@ -31,19 +31,6 @@ $honeycomb-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
   opacity: 0.06;
 }
 
-// Thin amber gradient line at the very top
-.footer-top-border {
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--p-primary-500) 40%,
-    var(--p-primary-500) 60%,
-    transparent
-  );
-  opacity: 0.4;
-}
-
 // Logo mark
 .footer-logo-icon {
   width: 38px;

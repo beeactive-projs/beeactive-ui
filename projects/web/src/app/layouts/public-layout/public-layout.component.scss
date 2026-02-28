@@ -10,7 +10,7 @@
 .hive-glow {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 50;
   pointer-events: none;
   background: radial-gradient(
     600px circle at var(--cursor-x) var(--cursor-y),
@@ -38,41 +38,55 @@
   left: 0;
   z-index: -1;
   background-color: #0f172a;
-  .bottom-border {
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      var(--p-primary-500) 40%,
-      var(--p-primary-500) 60%,
-      transparent
-    );
-    opacity: 0.4;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
 }
 
-// Honeycomb pattern background
-.honeycomb-bg {
-  position: absolute;
-  width: 120%;
-  height: 120%;
+// ===== Global parallax honeycomb layers =====
+// SVG data URIs
+$honeycomb-amber: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
+$honeycomb-slate: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%2394a3b8' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%2394a3b8' stroke-width='1.5'/%3E%3C/svg%3E");
+
+.hive-layer {
+  position: fixed;
   inset: 0;
-  opacity: 0.06;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
-  background-size: 56px 100px;
-  animation: honeycombDrift 30s linear infinite;
+  pointer-events: none;
+  z-index: 0;
 }
 
-@keyframes honeycombDrift {
-  0% {
-    transform: translate(-100px, -100px);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
+// Near layer — smaller cells, faster drift
+.hive-layer--near {
+  background-image: $honeycomb-slate;
+  background-size: 56px 100px;
+  opacity: 0.05;
+  animation: hiveDriftNear 25s linear infinite;
+}
+
+// Far layer — larger cells, slower drift, offset direction
+.hive-layer--far {
+  background-image: $honeycomb-slate;
+  background-size: 112px 200px;
+  opacity: 0.03;
+  animation: hiveDriftFar 45s linear infinite;
+}
+
+// Dark mode — switch to amber SVG, adjust opacities
+:host-context(.dark) .hive-layer--near {
+  background-image: $honeycomb-amber;
+  opacity: 0.05;
+}
+
+:host-context(.dark) .hive-layer--far {
+  background-image: $honeycomb-amber;
+  opacity: 0.025;
+}
+
+@keyframes hiveDriftNear {
+  0%   { transform: translate(-56px, -100px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes hiveDriftFar {
+  0%   { transform: translate(50px, 80px); }
+  100% { transform: translate(-60px, -120px); }
 }
 
 // Gradient orbs
