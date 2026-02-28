@@ -42,7 +42,7 @@ export class LoginComponent {
   private readonly googleAuthService = inject(GoogleAuthService);
   private readonly facebookAuthService = inject(FacebookAuthService);
   private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
+  readonly route = inject(ActivatedRoute);
 
   // Signals for component state
   isLoading = signal(false);

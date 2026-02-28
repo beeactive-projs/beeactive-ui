@@ -59,6 +59,7 @@ export * from './lib/interceptors/auth.interceptor';
 
 // Guards
 export * from './lib/guards/auth.guard';
+export * from './lib/guards/role.guard';
 
 // Environment
 export * from './environments/environment';

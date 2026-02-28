@@ -16,6 +16,7 @@ import {
   Group,
   GroupMember,
   JoinPolicy,
+  AuthStore,
 } from 'core';
 
 type TagSeverity = 'success' | 'warn' | 'danger' | 'secondary' | 'info' | 'contrast' | null | undefined;
@@ -43,6 +44,7 @@ export class GroupDetail implements OnInit {
   private groupService = inject(GroupService);
   private messageService = inject(MessageService);
   private confirmationService = inject(ConfirmationService);
+  private authStore = inject(AuthStore);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
@@ -55,6 +57,11 @@ export class GroupDetail implements OnInit {
   joinLink = signal<string | null>(null);
 
   groupName = computed(() => this.group()?.name ?? 'Group');
+  isGroupOwner = computed(() => {
+    const group = this.group();
+    const user = this.authStore.user();
+    return !!group && !!user && group.instructorId === user.id;
+  });
 
   readonly memberRows = 10;
 
@@ -115,7 +122,7 @@ export class GroupDetail implements OnInit {
     this.groupService.generateJoinLink(group.id).subscribe({
       next: (response) => {
         this.generatingLink.set(false);
-        const link = `${window.location.origin}/app/groups/join/${response.token}`;
+        const link = `${window.location.origin}/app/join/${response.token}`;
         this.joinLink.set(link);
         this.copyToClipboard(link);
         this.messageService.add({
@@ -168,14 +175,19 @@ export class GroupDetail implements OnInit {
   }
 
   copyExistingLink(): void {
-    const group = this.group();
-    const link = this.joinLink() || (group?.joinToken ? `${window.location.origin}/join/${group.joinToken}` : null);
+    const link = this.joinLink();
     if (link) {
       this.copyToClipboard(link);
       this.messageService.add({
         severity: 'info',
         summary: 'Copied',
         detail: 'Join link copied to clipboard',
+      });
+    } else {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Link Unavailable',
+        detail: 'Please generate a new join link to copy it.',
       });
     }
   }

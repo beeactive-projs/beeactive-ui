@@ -34,34 +34,36 @@
           <h1 class="font-heading text-2xl font-semibold text-secondary-900 md:text-3xl">{{ group.name }}</h1>
         </div>
       </div>
-      <div class="flex flex-wrap gap-2">
-        @if (hasActiveJoinToken()) {
-          <p-button
-            label="Copy Join Link"
-            icon="pi pi-copy"
-            severity="secondary"
-            styleClass="!rounded-full"
-            (onClick)="copyExistingLink()"
-          />
-          <p-button
-            label="Revoke Link"
-            icon="pi pi-ban"
-            severity="danger"
-            [text]="true"
-            styleClass="!rounded-full"
-            (onClick)="revokeJoinLink()"
-          />
-        } @else {
-          <p-button
-            label="Generate Join Link"
-            icon="pi pi-link"
-            severity="secondary"
-            styleClass="!rounded-full"
-            [loading]="generatingLink()"
-            (onClick)="generateJoinLink()"
-          />
-        }
-      </div>
+      @if (isGroupOwner()) {
+        <div class="flex flex-wrap gap-2">
+          @if (hasActiveJoinToken()) {
+            <p-button
+              label="Copy Join Link"
+              icon="pi pi-copy"
+              severity="secondary"
+              styleClass="!rounded-full"
+              (onClick)="copyExistingLink()"
+            />
+            <p-button
+              label="Revoke Link"
+              icon="pi pi-ban"
+              severity="danger"
+              [text]="true"
+              styleClass="!rounded-full"
+              (onClick)="revokeJoinLink()"
+            />
+          } @else {
+            <p-button
+              label="Generate Join Link"
+              icon="pi pi-link"
+              severity="secondary"
+              styleClass="!rounded-full"
+              [loading]="generatingLink()"
+              (onClick)="generateJoinLink()"
+            />
+          }
+        </div>
+      }
     </header>
 
     <!-- Group Info -->
@@ -160,10 +162,14 @@
         <ng-template #header>
           <tr>
             <th>Name</th>
-            <th>Email</th>
+            @if (isGroupOwner()) {
+              <th>Email</th>
+            }
             <th>Role</th>
             <th>Joined</th>
-            <th class="w-24 text-center">Actions</th>
+            @if (isGroupOwner()) {
+              <th class="w-24 text-center">Actions</th>
+            }
           </tr>
         </ng-template>
 
@@ -179,7 +185,9 @@
                 <span class="font-medium text-secondary-900">{{ memberName(member) }}</span>
               </div>
             </td>
-            <td>{{ member.user?.email || '—' }}</td>
+            @if (isGroupOwner()) {
+              <td>{{ member.user?.email || '—' }}</td>
+            }
             <td>
               @if (member.isOwner) {
                 <p-tag value="Owner" severity="warn" styleClass="!text-xs" />
@@ -188,20 +196,22 @@
               }
             </td>
             <td>{{ member.joinedAt | date: 'mediumDate' }}</td>
-            <td>
-              <div class="flex items-center justify-center">
-                @if (!member.isOwner) {
-                  <p-button
-                    icon="pi pi-user-minus"
-                    [rounded]="true"
-                    [text]="true"
-                    severity="danger"
-                    pTooltip="Remove Member"
-                    (onClick)="confirmRemoveMember(member)"
-                  />
-                }
-              </div>
-            </td>
+            @if (isGroupOwner()) {
+              <td>
+                <div class="flex items-center justify-center">
+                  @if (!member.isOwner) {
+                    <p-button
+                      icon="pi pi-user-minus"
+                      [rounded]="true"
+                      [text]="true"
+                      severity="danger"
+                      pTooltip="Remove Member"
+                      (onClick)="confirmRemoveMember(member)"
+                    />
+                  }
+                </div>
+              </td>
+            }
           </tr>
         </ng-template>
 
@@ -222,11 +232,11 @@
 
         <ng-template #emptymessage>
           <tr>
-            <td colspan="5">
+            <td [attr.colspan]="isGroupOwner() ? 5 : 3">
               <div class="flex flex-col items-center gap-3 py-8 text-center">
                 <i class="pi pi-users text-3xl text-secondary-300"></i>
                 <p class="text-sm text-secondary-500">No members in this group yet.</p>
-                @if (!hasActiveJoinToken()) {
+                @if (isGroupOwner() && !hasActiveJoinToken()) {
                   <p-button
                     label="Generate Join Link"
                     icon="pi pi-link"

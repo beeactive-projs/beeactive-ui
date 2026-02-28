@@ -89,9 +89,71 @@ $honeycomb-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
   &:hover { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); }
 }
 
+// ===== Belief icon wrap (hex shape, matches home page) =====
+.belief-icon-wrap {
+  width: 2.75rem;
+  height: 2.75rem;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: var(--p-primary-500);
+  color: var(--p-primary-contrast-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 // ===== CTA (always dark) =====
 .about-cta {
   position: relative;
+  overflow: hidden;
   z-index: 1;
   background: #0c1222;
+}
+
+.honeycomb-bg-cta {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: $honeycomb-svg;
+  background-size: 56px 100px;
+  pointer-events: none;
+}
+
+// ===== Ambient Orbs =====
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  animation: orbFloat 8s ease-in-out infinite alternate;
+}
+
+.orb-cta-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -80px;
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.orb-cta-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -60px;
+  left: -80px;
+  background: rgba(20, 184, 166, 0.08);
+  animation-delay: -4s;
+}
+
+@keyframes orbFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -40px) scale(1.1); }
+}
+
+// ===== Animations =====
+.animate-fade-in { animation: fadeIn 0.8s ease-out; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
