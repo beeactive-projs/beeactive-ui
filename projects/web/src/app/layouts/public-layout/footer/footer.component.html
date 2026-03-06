@@ -1,5 +1,10 @@
 <footer class="footer">
-  <div class="footer-honeycomb" aria-hidden="true"></div>
+  <div class="background-main">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="honeycomb-bg"></div>
+  </div>
   <!-- Gradient top border -->
   <div class="footer-top-border" aria-hidden="true"></div>
 
@@ -10,15 +15,19 @@
 
       <!-- Brand column -->
       <div class="sm:col-span-2 lg:col-span-1">
-        <div class="flex items-center gap-2.5 mb-4">
-          <div class="footer-logo-icon" aria-hidden="true">
-            <i class="pi pi-bolt text-white text-xl"></i>
-          </div>
-          <span class="font-heading text-2xl font-extrabold text-white tracking-tight">BeeActive</span>
-        </div>
-        <p class="text-secondary-400 text-sm leading-relaxed mb-6 max-w-xs">
+
+        <!-- Logo -->
+        <a routerLink="/" class="logo-link" aria-label="BeeActive home">
+          <p-button icon="pi pi-bolt" size="small"></p-button>
+          <span class="font-heading text-xl sm:text-2xl font-extrabold">
+            BeeActive
+          </span>
+        </a>
+
+        <p class="text-surface-500 text-sm leading-relaxed my-6 max-w-xs">
           Where active communities come together. One place to lead, join, and stay moving.
         </p>
+
         <!-- Social icons -->
         <div class="flex gap-2">
           @for (s of socialLinks; track s.label) {
@@ -79,7 +88,7 @@
 
     <!-- Bottom bar -->
     <div class="footer-bottom">
-      <p class="text-secondary-500 text-sm">
+      <p class="text-surface-500 text-sm">
         &copy; {{ currentYear }} BeeActive. All rights reserved.
       </p>
       <div class="flex items-center gap-6 text-sm">

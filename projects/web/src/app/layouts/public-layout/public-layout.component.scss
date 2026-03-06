@@ -1,92 +1,31 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  --cursor-x: 50%;
-  --cursor-y: 50%;
-}
-
-// ===== Cursor-reactive honeycomb glow =====
-.hive-glow {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  pointer-events: none;
-  background: radial-gradient(
-    600px circle at var(--cursor-x) var(--cursor-y),
-    rgba(245, 158, 11, 0.06) 0%,
-    transparent 60%
-  );
-  transition: opacity 0.3s ease;
-  mix-blend-mode: screen;
-}
-
-// Subtle in light mode
-:host-context(.dark) .hive-glow {
-  background: radial-gradient(
-    200px circle at var(--cursor-x) var(--cursor-y),
-    rgba(245, 158, 11, 0.07) 0%,
-    transparent 80%
-  );
-}
+@use 'variables' as *;
 
 .background-main {
   overflow: hidden;
+  height: 100vh;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
-  background-color: #0f172a;
+  background-color: var(--p-primary-50);
 }
 
-// ===== Global parallax honeycomb layers =====
-// SVG data URIs
-$honeycomb-amber: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1.5'/%3E%3C/svg%3E");
-$honeycomb-slate: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%2394a3b8' stroke-width='1.5'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%2394a3b8' stroke-width='1.5'/%3E%3C/svg%3E");
+:host-context(.dark) .background-main {
+  background-color: var(--p-secondary-900);
+}
 
-.hive-layer {
-  position: fixed;
+.honeycomb-bg {
+  position: absolute;
   inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-// Near layer — smaller cells, faster drift
-.hive-layer--near {
-  background-image: $honeycomb-slate;
+  opacity: 0.06;
+  background-image: $honeycomb-svg-secondary;
   background-size: 56px 100px;
-  opacity: 0.05;
-  animation: hiveDriftNear 25s linear infinite;
+  pointer-events: none;
 }
 
-// Far layer — larger cells, slower drift, offset direction
-.hive-layer--far {
-  background-image: $honeycomb-slate;
-  background-size: 112px 200px;
-  opacity: 0.03;
-  animation: hiveDriftFar 45s linear infinite;
-}
-
-// Dark mode — switch to amber SVG, adjust opacities
-:host-context(.dark) .hive-layer--near {
-  background-image: $honeycomb-amber;
-  opacity: 0.05;
-}
-
-:host-context(.dark) .hive-layer--far {
-  background-image: $honeycomb-amber;
-  opacity: 0.025;
-}
-
-@keyframes hiveDriftNear {
-  0%   { transform: translate(-56px, -100px); }
-  100% { transform: translate(0, 0); }
-}
-
-@keyframes hiveDriftFar {
-  0%   { transform: translate(50px, 80px); }
-  100% { transform: translate(-60px, -120px); }
+:host-context(.dark) .honeycomb-bg {
+  background-image: $honeycomb-svg-primary;
 }
 
 // Gradient orbs
@@ -102,7 +41,7 @@ $honeycomb-slate: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   height: 500px;
   top: -500px;
   right: -150px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.35) 0%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in oklab, var(--p-primary-500) 35%, transparent) 0%, transparent 70%);
 }
 
 .orb-2 {
@@ -110,7 +49,7 @@ $honeycomb-slate: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   height: 350px;
   bottom: -50px;
   left: -100px;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in oklab, var(--p-orange-500) 30%, transparent) 0%, transparent 70%);
   animation-delay: -3s;
 }
 
@@ -119,7 +58,7 @@ $honeycomb-slate: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   height: 250px;
   top: 40%;
   left: 30%;
-  background: radial-gradient(circle, rgba(251, 191, 36, 0.22) 0%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in oklab, var(--p-primary-400) 22%, transparent) 0%, transparent 70%);
   animation-delay: -6s;
 }
 

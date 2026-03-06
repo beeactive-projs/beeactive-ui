@@ -1,14 +1,12 @@
 <header class="site-header" [class.scrolled]="scrolled()">
 
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16 sm:h-20">
+    <div class="flex items-center justify-between h-16 lg:h-20">
 
       <!-- Logo -->
       <a routerLink="/" class="logo-link" aria-label="BeeActive home">
-        <div class="logo-icon" aria-hidden="true">
-          <i class="pi pi-bolt text-xl"></i>
-        </div>
-        <span class="font-heading text-xl sm:text-2xl font-extrabold tracking-tight">
+        <p-button icon="pi pi-bolt" size="small"></p-button>
+        <span class="font-heading text-xl sm:text-2xl font-extrabold">
           BeeActive
         </span>
       </a>
@@ -27,8 +25,8 @@
         <p-button [icon]="isDark() ? 'pi pi-sun' : 'pi pi-moon'" [rounded]="true" [text]="true"
           (onClick)="toggleTheme()" [ariaLabel]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
           size="small" />
-        <p-button label="Sign In" [text]="true" [disabled]="true" size="small" />
-        <p-button label="Coming Soon" icon="pi pi-clock" iconPos="right" [disabled]="true" size="small" />
+        <!-- <p-button label="Sign In" [text]="true" [disabled]="true" size="small" /> -->
+        <p-button label="Coming Soon" icon="pi pi-clock" iconPos="right" size="small" />
       </div>
 
       <!-- Mobile controls -->
@@ -49,7 +47,7 @@
         link.label }}</a>
       }
 
-      <div class="mobile-menu-divider"></div>
+      <div class="mobile-menu-divider bg-surface-400/90"></div>
 
       <div class="flex gap-2">
         <p-button label="Coming Soon" icon="pi pi-clock" iconPos="right" [disabled]="true" fluid />

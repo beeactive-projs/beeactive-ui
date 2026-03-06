@@ -1,79 +1,30 @@
-// Header sits over the hero which is always dark
-// So default state = light text. When scrolled:
-// - Light theme: frosted white glass, dark text
-// - Dark theme: frosted dark glass, light text
-
-$header-honeycomb-slate: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%2394a3b8' stroke-width='1'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%2394a3b8' stroke-width='1'/%3E%3C/svg%3E");
-$header-honeycomb-amber: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f59e0b' stroke-width='1'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f59e0b' stroke-width='1'/%3E%3C/svg%3E");
+@use 'variables' as *;
 
 .site-header {
   position: relative;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 
   &.scrolled {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(12px);
-    box-shadow:
-      0 1px 12px rgba(0, 0, 0, 0.08),
-      inset 0 -1px 0 rgba(245, 158, 11, 0.08);
-
-    .header-honeycomb { opacity: 0.035; }
+    background: var(--p-primary-50);
+    :host-context(.dark) .site-header.scrolled {
+      background-color: var(--p-secondary-900);
+    }
   }
-}
-
-// Subtle honeycomb texture — hidden when transparent, fades in on scroll
-.header-honeycomb {
-  position: absolute;
-  inset: 0;
-  background-image: $header-honeycomb-slate;
-  background-size: 42px 75px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-:host-context(.dark) .header-honeycomb {
-  background-image: $header-honeycomb-amber;
-}
-
-:host-context(.dark) .site-header.scrolled {
-  background: rgba(15, 23, 42, 0.92);
-  box-shadow:
-    0 1px 12px rgba(0, 0, 0, 0.25),
-    inset 0 -1px 0 rgba(245, 158, 11, 0.12);
-
-  .header-honeycomb { opacity: 0.04; }
 }
 
 // ===== Logo =====
 .logo-link {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
   text-decoration: none;
-  color: #f8fafc; // light on dark hero
 
   &:hover .logo-icon {
     box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);
     transform: scale(1.05);
   }
-}
-
-// Scrolled light mode: dark logo text
-.scrolled .logo-link { color: #0f172a; }
-:host-context(.dark) .scrolled .logo-link { color: #f8fafc; }
-
-.logo-icon {
-  width: 38px;
-  height: 38px;
-  background: var(--p-primary-500);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-  flex-shrink: 0;
 }
 
 // ===== Desktop nav links =====
@@ -84,13 +35,14 @@ $header-honeycomb-amber: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
   border-radius: 0.5rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #f8fafc;
   text-decoration: none;
-  transition: color 0.2s ease, background 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
 
   &:hover {
-    background: var(--p-primary-500);
-    color: #0f172a;
+    background: var(--p-button-primary-hover-background);
+    color: var(--p-button-primary-hover-color);
   }
 
   &::after {
@@ -99,44 +51,22 @@ $header-honeycomb-amber: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
     bottom: -2px;
     left: 50%;
     transform: translateX(-50%) scaleX(0);
-    width: 1rem;
-    height: 2px;
-    border-radius: 1px;
-    background: var(--p-primary-500);
+    width: 1.5rem;
+    height: 0.125rem;
+    border-radius: 0.5rem;
+    background: var(--p-button-link-active-color);
     transition: transform 0.25s ease;
   }
 
   &--active {
-    color: var(--p-primary-500);
+    color: var(--p-button-link-active-color);
     font-weight: 600;
-
-    &:hover {
-      background: var(--p-primary-500);
-      color: #0f172a;
-    }
 
     &::after {
       transform: translateX(-50%) scaleX(1);
     }
   }
 }
-
-// Scrolled light: dark nav text
-.scrolled .nav-link { color: #475569; }
-.scrolled .nav-link--active { color: var(--p-primary-600); }
-:host-context(.dark) .scrolled .nav-link { color: #f8fafc; }
-:host-context(.dark) .scrolled .nav-link--active { color: var(--p-primary-500); }
-
-// ===== Vertical divider =====
-.nav-divider {
-  width: 1px;
-  height: 20px;
-  background: rgba(248, 250, 252, 0.2);
-  margin: 0 4px;
-}
-
-.scrolled .nav-divider { background: rgba(15, 23, 42, 0.12); }
-:host-context(.dark) .scrolled .nav-divider { background: rgba(248, 250, 252, 0.12); }
 
 // ===== Mobile menu =====
 .mobile-menu {
@@ -149,33 +79,45 @@ $header-honeycomb-amber: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 }
 
 @keyframes menuSlideDown {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .mobile-link {
-  padding: 11px 12px;
-  border-radius: 10px;
-  font-size: 0.9375rem;
+  position: relative;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: #94a3b8;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
+    background: var(--p-button-primary-hover-background);
+    color: var(--p-button-primary-hover-color);
   }
 
   &--active {
-    background: rgba(245, 158, 11, 0.1);
-    color: var(--p-primary-300);
+    background: var(--p-button-primary-background);
+    color: var(--p-button-primary-color);
     font-weight: 600;
+
+    &::after {
+      transform: translateX(-50%) scaleX(1);
+    }
   }
 }
 
 .mobile-menu-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.06);
-  margin: 10px 0;
+  margin: 1rem 0;
 }

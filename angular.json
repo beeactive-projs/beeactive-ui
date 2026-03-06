@@ -56,6 +56,9 @@
                 "input": "projects/web/public"
               }
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/web/public"]
+            },
             "styles": [
               "projects/web/src/styles.css"
             ]
