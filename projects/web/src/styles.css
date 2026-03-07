@@ -51,14 +51,16 @@
     sans-serif;
   --font-heading: 'Poppins', ui-sans-serif, system-ui, sans-serif;
 
-  /* Layout */
-  --nav-height: 4rem; /* 64px — matches h-16 (mobile) */
-
   /* Animations */
   --animate-fade-in: fade-in 0.5s ease-in-out;
   --animate-slide-up: slide-up 0.5s ease-out;
   --animate-slide-down: slide-down 0.5s ease-out;
   --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+:root {
+  /* Layout */
+  --nav-height: 4rem; /* 64px — matches h-16 (mobile) */
 }
 
 @media (min-width: 64rem) {
