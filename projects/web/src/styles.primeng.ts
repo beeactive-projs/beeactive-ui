@@ -11,48 +11,6 @@ import {
   secondary,
 } from './theme-colors';
 
-// export const BeeActiveLara = definePreset(Lara, {
-//   semantic: {
-//     primary,
-//     success,
-//     info,
-//     warning,
-//     danger,
-//     colorScheme: {
-//       light: {
-//         primary: {
-//           color: '{primary.600}',
-//           contrastColor: '#ffffff',
-//           hoverColor: '{primary.700}',
-//           activeColor: '{primary.800}',
-//         },
-//         highlight: {
-//           background: '{primary.50}',
-//           focusBackground: '{primary.100}',
-//           color: '{primary.700}',
-//           focusColor: '{primary.800}',
-//         },
-//         surface: surfaceLight,
-//       },
-//       dark: {
-//         primary: {
-//           color: '{primary.500}',
-//           contrastColor: '{primary.950}',
-//           hoverColor: '{primary.300}',
-//           activeColor: '{primary.200}',
-//         },
-//         highlight: {
-//           background: 'rgba(251, 191, 36, .16)',
-//           focusBackground: 'rgba(251, 191, 36, .24)',
-//           color: '{primary.300}',
-//           focusColor: '{primary.200}',
-//         },
-//         surface: surfaceDark,
-//       },
-//     },
-//   },
-// });
-
 export const BeeActiveLara = definePreset(Lara, {
   semantic: {
     primary,
@@ -93,6 +51,32 @@ export const BeeActiveLara = definePreset(Lara, {
           // focusColor: '{primary.300}',
         },
         surface: surfaceDark,
+      },
+    },
+  },
+  components: {
+    button: {
+      colorScheme: {
+        light: {
+          outlined: {
+            primary: {
+              borderColor: '{primary.500}',
+              color: '{primary.500}',
+              hoverBackground: 'color-mix(in srgb, {primary.500} 10%, transparent)',
+              activeBackground: 'color-mix(in srgb, {primary.500} 20%, transparent)',
+            },
+          },
+        },
+        dark: {
+          outlined: {
+            primary: {
+              borderColor: '{primary.500}',
+              color: '{primary.500}',
+              hoverBackground: 'color-mix(in srgb, {primary.500} 10%, transparent)',
+              activeBackground: 'color-mix(in srgb, {primary.500} 20%, transparent)',
+            },
+          },
+        },
       },
     },
   },

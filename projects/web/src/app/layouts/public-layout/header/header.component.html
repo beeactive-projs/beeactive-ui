@@ -14,7 +14,7 @@
       <!-- Desktop nav links -->
       <div class="hidden lg:flex items-center" role="navigation" aria-label="Main navigation">
         @for (link of navLinks; track link.label) {
-        <a [routerLink]="link.path" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: true}"
+        <a [routerLink]="link.path" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: link.exact}"
           class="nav-link">{{ link.label }}</a>
         }
       </div>
@@ -26,7 +26,7 @@
           (onClick)="toggleTheme()" [ariaLabel]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
           size="small" />
         <!-- <p-button label="Sign In" [text]="true" [disabled]="true" size="small" /> -->
-        <p-button label="Coming Soon" icon="pi pi-clock" iconPos="right" size="small" />
+        <p-button label="Coming soon" icon="pi pi-clock" iconPos="right" size="small" />
       </div>
 
       <!-- Mobile controls -->
@@ -42,15 +42,15 @@
     @if (mobileMenuOpen()) {
     <div class="mobile-menu" role="navigation" aria-label="Mobile navigation">
       @for (link of navLinks; track link.label) {
-      <a [routerLink]="link.path" routerLinkActive="mobile-link--active" [routerLinkActiveOptions]="{exact: true}"
+      <a [routerLink]="link.path" routerLinkActive="mobile-link--active" [routerLinkActiveOptions]="{exact: link.exact}"
         (click)="closeMobileMenu()" class="mobile-link">{{
         link.label }}</a>
       }
 
-      <div class="mobile-menu-divider bg-surface-400/90"></div>
+      <div class="mobile-menu-divider bg-surface-200"></div>
 
-      <div class="flex gap-2">
-        <p-button label="Coming Soon" icon="pi pi-clock" iconPos="right" [disabled]="true" fluid />
+      <div class="flex gap-2 justify-end">
+        <p-button label="Coming soon" icon="pi pi-clock" iconPos="right" fluid />
       </div>
     </div>
     }

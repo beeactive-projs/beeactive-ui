@@ -22,4 +22,8 @@ export const publicRoutes: Routes = [
       import('./blog/blog-article/blog-article.component').then((m) => m.BlogArticleComponent),
     title: 'BeeActive Blog',
   },
+  {
+    path: 'legal',
+    loadChildren: () => import('../legal/legal.routes').then((m) => m.legalRoutes),
+  },
 ];

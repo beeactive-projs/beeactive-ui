@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Article — Improved Areas Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & tokens ───────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-heading: 'Poppins', system-ui, sans-serif;
+
+      /* Primary — Amber */
+      --primary-50:  #fffbeb;
+      --primary-100: #fef3c7;
+      --primary-200: #fde68a;
+      --primary-300: #fcd34d;
+      --primary-400: #fbbf24;
+      --primary-500: #f59e0b;
+      --primary-600: #d97706;
+      --primary-700: #b45309;
+
+      /* Secondary — Slate Navy */
+      --secondary-50:  #f8fafc;
+      --secondary-100: #f1f5f9;
+      --secondary-200: #e2e8f0;
+      --secondary-300: #cbd5e1;
+      --secondary-400: #94a3b8;
+      --secondary-500: #64748b;
+      --secondary-700: #334155;
+      --secondary-800: #1e293b;
+      --secondary-900: #0f172a;
+
+      /* Teal accent */
+      --accent-400: #2dd4bf;
+      --accent-500: #14b8a6;
+
+      --surface-0:   #ffffff;
+      --surface-50:  #f8fafc;
+      --surface-100: #f1f5f9;
+      --surface-200: #e2e8f0;
+      --surface-900: #0f172a;
+    }
+
+    html, body { height: 100%; font-family: var(--font-sans); background: var(--surface-50); color: var(--secondary-800); }
+    h1,h2,h3,h4,h5,h6 { font-family: var(--font-heading); }
+
+    .max-w-3xl { max-width: 48rem; margin-inline: auto; }
+    .max-w-4xl { max-width: 56rem; margin-inline: auto; }
+    .max-w-5xl { max-width: 64rem; margin-inline: auto; }
+    .max-w-7xl { max-width: 80rem; margin-inline: auto; }
+    .px { padding-inline: 1.5rem; }
+
+    .text-brand { color: var(--primary-500); }
+    .label-pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.375rem 1rem; border-radius: 999px;
+      font-size: 0.8125rem; font-weight: 600;
+      background: color-mix(in srgb, var(--primary-500) 12%, transparent);
+      color: var(--primary-700);
+      margin-bottom: 1rem;
+    }
+    .label-pill i { font-size: 0.75rem; }
+
+    /* ─── Toggle bar ────────────────────────────────────── */
+    .demo-bar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1.5rem;
+      background: var(--secondary-900); color: white;
+      font-size: 0.875rem; font-weight: 500;
+    }
+    .demo-bar span { margin-right: auto; opacity: .7; font-size: 0.75rem; }
+    .toggle-btn {
+      display: flex; gap: 0.25rem; background: var(--secondary-800);
+      border-radius: 0.5rem; padding: 0.25rem; border: none; cursor: pointer;
+    }
+    .toggle-btn button {
+      padding: 0.35rem 0.85rem; border-radius: 0.375rem; border: none;
+      font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all .2s;
+      background: transparent; color: var(--secondary-300);
+    }
+    .toggle-btn button.active { background: var(--primary-500); color: var(--secondary-900); }
+
+    /* ─── BEFORE: original article body area ──────────── */
+    .before-article-body {
+      background: var(--surface-50);
+      padding-top: 1rem;
+    }
+    .before-cover { width: 100%; height: 400px; object-fit: cover; border-radius: 1.25rem; display: block; margin-bottom: 2.5rem; }
+    .before-prose { font-size: 1.0625rem; line-height: 1.85; color: var(--secondary-500); }
+    .before-prose h2 { font-size: 1.5rem; font-weight: 800; color: var(--secondary-900); margin: 2.5rem 0 0.875rem; }
+    .before-prose p { margin-bottom: 1.5rem; }
+
+    .before-related { padding: 4rem 0; }
+    .before-related h2 { font-size: 1.75rem; font-weight: 800; margin-bottom: 2rem; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: 1.5rem; }
+    .card {
+      background: var(--surface-0); border: 1px solid var(--surface-200);
+      border-radius: 1rem; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .card img { width: 100%; height: 160px; object-fit: cover; display: block; }
+    .card-body { padding: 1.25rem; }
+    .card-badge {
+      display: inline-block; padding: 0.2rem 0.625rem; border-radius: 999px;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: .03em;
+      background: var(--primary-100); color: var(--primary-700); margin-bottom: 0.5rem;
+    }
+    .card-body h3 { font-size: 1rem; font-weight: 700; line-height: 1.4; color: var(--secondary-900); margin-bottom: 0.5rem; }
+    .card-body p  { font-size: 0.875rem; color: var(--secondary-500); line-height: 1.6; }
+
+    .before-cta {
+      position: relative; overflow: hidden;
+      background: var(--surface-100);
+      text-align: center; padding: 5rem 1.5rem;
+    }
+    .before-cta h2 { font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem; }
+    .before-cta p  { font-size: 1.125rem; color: var(--secondary-500); margin-bottom: 2rem; max-width: 32rem; margin-inline: auto; margin-bottom: 2rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none;
+      font-family: var(--font-sans); font-size: 1rem; font-weight: 600; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--primary-500); color: var(--secondary-900); }
+    .btn-primary:hover { background: var(--primary-600); }
+    .btn-outlined { background: transparent; border: 1.5px solid var(--primary-500); color: var(--primary-600); }
+    .btn-outlined:hover { background: var(--primary-50); }
+    .btn-lg { padding: 0.875rem 2rem; font-size: 1.0625rem; border-radius: 0.625rem; }
+
+    /* ─── AFTER: improved article body area ─────────────── */
+    /*  1. Article body — warm reading zone  */
+    .after-article-body {
+      background: linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--primary-500) 4%, var(--surface-50)) 0%,
+        var(--surface-50) 12rem
+      );
+      padding-top: 1rem;
+    }
+
+    .after-cover {
+      width: 100%; height: 400px; object-fit: cover;
+      border-radius: 1.25rem; display: block; margin-bottom: 2.5rem;
+      box-shadow: 0 8px 40px color-mix(in srgb, black 12%, transparent);
+    }
+
+    /* Reading container gets a card feel */
+    .reading-container {
+      background: var(--surface-0);
+      border: 1px solid color-mix(in srgb, black 6%, transparent);
+      border-radius: 1.5rem;
+      padding: 2.5rem 3rem;
+      box-shadow: 0 2px 24px color-mix(in srgb, black 4%, transparent);
+    }
+    @media (max-width: 640px) { .reading-container { padding: 1.5rem; } }
+
+    .after-prose { font-size: 1.0625rem; line-height: 1.85; color: var(--secondary-500); }
+    .after-prose h2 { font-size: 1.5rem; font-weight: 800; color: var(--secondary-900); margin: 2.5rem 0 0.875rem; }
+    .after-prose p { margin-bottom: 1.5rem; }
+
+    /* Reading progress accent bar */
+    .prose-accent-bar {
+      width: 3rem; height: 3px; background: var(--primary-500);
+      border-radius: 2px; margin-bottom: 1.5rem;
+    }
+
+    /* 2. Related articles — warm tinted section */
+    .after-related {
+      position: relative;
+      background: var(--primary-50);
+      padding: 4rem 0;
+      overflow: hidden;
+    }
+    /* Subtle honeycomb watermark */
+    .after-related::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zM28 100L0 84V50l28-16 28 16v34L28 100z' fill='none' stroke='%23f59e0b' stroke-opacity='0.06' stroke-width='1'/%3E%3C/svg%3E");
+      background-size: 56px 100px;
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    .after-related-inner { position: relative; z-index: 1; }
+
+    .related-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 2rem; gap: 1rem; flex-wrap: wrap;
+    }
+    .related-header h2 { font-size: 1.75rem; font-weight: 800; color: var(--secondary-900); }
+    .related-header a { font-size: 0.875rem; font-weight: 600; color: var(--primary-600); text-decoration: none; white-space: nowrap; }
+    .related-header a:hover { text-decoration: underline; }
+
+    .after-card {
+      background: var(--surface-0); border: 1px solid color-mix(in srgb, black 5%, transparent);
+      border-radius: 1rem; overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: all 0.3s ease;
+      text-decoration: none; color: inherit;
+    }
+    .after-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px color-mix(in srgb, black 8%, transparent); }
+    .after-card:hover .after-card__img { transform: scale(1.04); }
+    .after-card__img-wrap { overflow: hidden; height: 160px; flex-shrink: 0; }
+    .after-card__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .after-card__body { padding: 1.25rem; flex: 1; }
+    .after-card__body h3 { font-size: 1rem; font-weight: 700; line-height: 1.4; color: var(--secondary-900); margin-bottom: 0.5rem; }
+    .after-card__body p  { font-size: 0.875rem; color: var(--secondary-500); line-height: 1.6; }
+
+    /* 3. CTA — richer, warmer */
+    .after-cta {
+      position: relative; overflow: hidden;
+      background: var(--surface-50);
+      text-align: center;
+    }
+
+    /* Honeycomb bg */
+    .after-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zM28 100L0 84V50l28-16 28 16v34L28 100z' fill='none' stroke='%23f59e0b' stroke-opacity='0.07' stroke-width='1'/%3E%3C/svg%3E");
+      background-size: 56px 100px;
+      pointer-events: none;
+    }
+
+    /* Orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(72px); opacity: 0.55;
+      pointer-events: none;
+      animation: orbFloat 12s ease-in-out infinite;
+    }
+    .orb-1 { width: 28rem; height: 28rem; top: -8rem; left: -10rem; background: radial-gradient(circle, color-mix(in srgb, #ef4444 60%, transparent), transparent 70%); animation-duration: 14s; }
+    .orb-2 { width: 32rem; height: 32rem; bottom: -10rem; right: -12rem; background: radial-gradient(circle, color-mix(in srgb, var(--primary-500) 60%, transparent), transparent 70%); animation-duration: 18s; animation-delay: -4s; }
+    .orb-3 { width: 20rem; height: 20rem; top: 30%; left: 55%; background: radial-gradient(circle, color-mix(in srgb, var(--accent-400) 50%, transparent), transparent 70%); animation-duration: 10s; animation-delay: -8s; }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(2rem, -1.5rem) scale(1.04); }
+      66%       { transform: translate(-1.5rem, 1rem) scale(0.97); }
+    }
+
+    .after-cta-inner {
+      position: relative; z-index: 1;
+      padding: 5rem 1.5rem;
+    }
+
+    /* Frosted content box */
+    .cta-glass {
+      display: inline-block;
+      max-width: 38rem;
+      background: color-mix(in srgb, var(--surface-0) 70%, transparent);
+      backdrop-filter: blur(12px);
+      border: 1px solid color-mix(in srgb, white 80%, transparent);
+      border-radius: 2rem;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 8px 48px color-mix(in srgb, black 6%, transparent);
+    }
+
+    .after-cta h2 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; line-height: 1.15; }
+    .after-cta p  { font-size: 1.125rem; color: var(--secondary-500); margin-bottom: 2rem; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── Shared demo structure ─────────────────────────── */
+    .demo-section { display: none; }
+    .demo-section.visible { display: block; }
+
+    /* Author bio card */
+    .author-bio-card {
+      display: flex; align-items: flex-start; gap: 1.25rem;
+      padding: 1.75rem; border-radius: 1rem;
+      background: var(--surface-0); border: 1px solid color-mix(in srgb, black 6%, transparent);
+      margin-bottom: 4rem;
+    }
+    .author-avatar {
+      width: 4rem; height: 4rem; border-radius: 50%; flex-shrink: 0;
+      background: var(--primary-500); display: flex; align-items: center;
+      justify-content: center; font-family: var(--font-heading);
+      font-weight: 800; font-size: 1.25rem; color: var(--secondary-900);
+    }
+    .author-bio-card p:first-child { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--secondary-400); margin-bottom: 0.25rem; }
+    .author-bio-card p:last-child { font-size: 1.0625rem; font-weight: 700; color: var(--secondary-900); }
+
+    .tag-pill {
+      display: inline-block; padding: 0.3rem 0.875rem; border-radius: 2rem;
+      font-size: 0.8125rem; font-weight: 500;
+      background: var(--surface-100); color: var(--secondary-500);
+    }
+    .tags-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--surface-200); }
+  </style>
+</head>
+<body>
+
+<!-- Demo toggle bar -->
+<div class="demo-bar">
+  <span>Article page — improvements demo</span>
+  <div class="toggle-btn">
+    <button id="btn-before" onclick="show('before')" class="active">Before</button>
+    <button id="btn-after"  onclick="show('after')">After</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  BEFORE                                            -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="before" class="demo-section visible">
+
+  <!-- Article body -->
+  <section class="before-article-body">
+    <div class="max-w-5xl px">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80" alt="Running shoes" class="before-cover" />
+    </div>
+    <div class="max-w-3xl px" style="margin-bottom:3rem">
+      <div class="before-prose">
+        <p>We've been sold this idea that getting fit requires dramatic change. Wake up at 5am. Run 10k. Eat clean. Grind. Repeat. And sure, that works for some people. But for most of us? That kind of all-or-nothing approach leads to burnout in about three weeks.</p>
+        <p>What if the real game-changer isn't the intense workout you force yourself through twice a week, but the small movements you weave into every single day?</p>
+        <h2>The science of micro-habits</h2>
+        <p>Research consistently shows that consistency beats intensity. A 10-minute walk every day does more for your long-term health than a gruelling 90-minute session you dread and skip.</p>
+        <p>The compound effect is real: small, repeatable actions stack up into remarkable change over months and years.</p>
+      </div>
+      <div class="tags-row">
+        <span class="tag-pill">#fitness</span>
+        <span class="tag-pill">#habits</span>
+        <span class="tag-pill">#wellness</span>
+      </div>
+    </div>
+    <div class="max-w-3xl px">
+      <div class="author-bio-card">
+        <div class="author-avatar">JD</div>
+        <div>
+          <p>Written by</p>
+          <p>Jane Doe</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related articles -->
+  <section class="before-related">
+    <div class="max-w-7xl px">
+      <h2>Related Articles</h2>
+      <div class="cards-grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=70" alt="Accountability" />
+          <div class="card-body">
+            <span class="card-badge">Wellness</span><span style="font-size:.75rem;color:var(--secondary-400);margin-left:.5rem">5 min read</span>
+            <h3>Why Accountability Is the Real Secret to Fitness Results</h3>
+            <p>Motivation gets you started. Accountability keeps you going. Here's why having someone in your...</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=70" alt="Trainer" />
+          <div class="card-body">
+            <span class="card-badge">Guide</span><span style="font-size:.75rem;color:var(--secondary-400);margin-left:.5rem">7 min read</span>
+            <h3>How to Choose the Right Personal Trainer (And Why It Matters)</h3>
+            <p>Picking a personal trainer can feel overwhelming. Here's a no-nonsense guide to finding someone...</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=70" alt="Nutrition" />
+          <div class="card-body">
+            <span class="card-badge">Nutrition</span><span style="font-size:.75rem;color:var(--secondary-400);margin-left:.5rem">6 min read</span>
+            <h3>5 Nutrition Habits That Actually Stick (No Crazy Diets Required)</h3>
+            <p>Forget the fads. These five simple eating habits are the ones that actually last — and they don't requir...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="before-cta">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div style="position:relative;z-index:1">
+      <h2>Follow the <span class="text-brand">journey</span>.</h2>
+      <p>We're building BeeActive in the open. Check out more stories from the hive.</p>
+      <button class="btn btn-primary btn-lg">← Back to Blog</button>
+    </div>
+  </section>
+
+</div><!-- /before -->
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  AFTER                                             -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="after" class="demo-section">
+
+  <!-- Article body — warm reading zone -->
+  <section class="after-article-body">
+    <div class="max-w-5xl px">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80" alt="Running shoes" class="after-cover" />
+    </div>
+
+    <!-- Reading container card -->
+    <div class="max-w-3xl px" style="margin-bottom:3rem">
+      <div class="reading-container">
+        <div class="prose-accent-bar"></div>
+        <div class="after-prose">
+          <p>We've been sold this idea that getting fit requires dramatic change. Wake up at 5am. Run 10k. Eat clean. Grind. Repeat. And sure, that works for some people. But for most of us? That kind of all-or-nothing approach leads to burnout in about three weeks.</p>
+          <p>What if the real game-changer isn't the intense workout you force yourself through twice a week, but the small movements you weave into every single day?</p>
+          <h2>The science of micro-habits</h2>
+          <p>Research consistently shows that consistency beats intensity. A 10-minute walk every day does more for your long-term health than a gruelling 90-minute session you dread and skip.</p>
+          <p>The compound effect is real: small, repeatable actions stack up into remarkable change over months and years.</p>
+        </div>
+        <div class="tags-row">
+          <span class="tag-pill">#fitness</span>
+          <span class="tag-pill">#habits</span>
+          <span class="tag-pill">#wellness</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Author bio -->
+    <div class="max-w-3xl px">
+      <div class="author-bio-card">
+        <div class="author-avatar">JD</div>
+        <div>
+          <p>Written by</p>
+          <p>Jane Doe</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related articles — warm honeycomb bg -->
+  <section class="after-related">
+    <div class="after-related-inner max-w-7xl px">
+      <!-- Label pill -->
+      <div class="label-pill" style="margin-bottom:0.5rem">
+        <i>✦</i> Keep reading
+      </div>
+      <div class="related-header">
+        <h2>Related Articles</h2>
+        <a href="#">View all articles →</a>
+      </div>
+      <div class="cards-grid">
+        <a href="#" class="after-card">
+          <div class="after-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=70" alt="Accountability" class="after-card__img" />
+          </div>
+          <div class="after-card__body">
+            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+              <span class="card-badge">Wellness</span>
+              <span style="font-size:.75rem;color:var(--secondary-400)">5 min read</span>
+            </div>
+            <h3>Why Accountability Is the Real Secret to Fitness Results</h3>
+            <p>Motivation gets you started. Accountability keeps you going. Here's why having someone in your corner changes everything.</p>
+          </div>
+        </a>
+        <a href="#" class="after-card">
+          <div class="after-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=70" alt="Trainer" class="after-card__img" />
+          </div>
+          <div class="after-card__body">
+            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+              <span class="card-badge">Guide</span>
+              <span style="font-size:.75rem;color:var(--secondary-400)">7 min read</span>
+            </div>
+            <h3>How to Choose the Right Personal Trainer (And Why It Matters)</h3>
+            <p>Picking a personal trainer can feel overwhelming. Here's a no-nonsense guide to finding someone who actually fits you.</p>
+          </div>
+        </a>
+        <a href="#" class="after-card">
+          <div class="after-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=70" alt="Nutrition" class="after-card__img" />
+          </div>
+          <div class="after-card__body">
+            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+              <span class="card-badge">Nutrition</span>
+              <span style="font-size:.75rem;color:var(--secondary-400)">6 min read</span>
+            </div>
+            <h3>5 Nutrition Habits That Actually Stick (No Crazy Diets Required)</h3>
+            <p>Forget the fads. These five simple eating habits are the ones that actually last — no willpower required.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA — frosted glass + honeycomb + richer orbs -->
+  <section class="after-cta">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="after-cta-inner">
+      <div class="cta-glass">
+        <div class="label-pill" style="margin-inline:auto;width:fit-content">
+          <i>✦</i> More from the hive
+        </div>
+        <h2>Follow the <span class="text-brand">journey</span>.</h2>
+        <p>We're building BeeActive in the open. Check out more stories from the hive.</p>
+        <div class="cta-buttons">
+          <button class="btn btn-primary btn-lg">← Back to Blog</button>
+          <button class="btn btn-outlined btn-lg">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /after -->
+
+<script>
+  function show(which) {
+    document.getElementById('before').classList.toggle('visible', which === 'before');
+    document.getElementById('after').classList.toggle('visible', which === 'after');
+    document.getElementById('btn-before').classList.toggle('active', which === 'before');
+    document.getElementById('btn-after').classList.toggle('active', which === 'after');
+  }
+</script>
+</body>
+</html>

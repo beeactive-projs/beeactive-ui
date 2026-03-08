@@ -51,11 +51,7 @@
 
 // Brand name
 .footer .font-heading {
-  color: var(--p-slate-900);
-}
-
-:host-context(.dark) .footer .font-heading {
-  color: var(--p-slate-50);
+  color: var(--p-surface-900);
 }
 
 // Column headings
@@ -65,18 +61,14 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: var(--p-slate-900);
+  color: var(--p-surface-900);
   margin-bottom: 18px;
-}
-
-:host-context(.dark) .footer-heading {
-  color: var(--p-slate-50);
 }
 
 // Text links
 .footer-link {
   font-size: 0.875rem;
-  color: var(--p-surface-500);
+  color: var(--p-surface-700);
   text-decoration: none;
   transition: color 0.2s ease;
 
@@ -95,7 +87,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--p-slate-500);
+  color: var(--p-surface-700);
   text-decoration: none;
   transition:
     background 0.2s ease,

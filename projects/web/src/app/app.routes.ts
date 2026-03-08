@@ -16,10 +16,7 @@ export const routes: Routes = [
     path: 'error',
     loadChildren: () => import('./pages/error/error.routes').then((m) => m.errorRoutes),
   },
-  {
-    path: 'legal',
-    loadChildren: () => import('./pages/legal/legal.routes').then((m) => m.legalRoutes),
-  },
+
   {
     path: 'app',
     canActivate: [authGuard],

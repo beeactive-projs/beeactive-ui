@@ -12,6 +12,7 @@ import { ThemeService } from '../../../_core/services/theme.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(window:scroll)': 'onScroll()',
+    '(window:resize)': 'onResize()',
   },
 })
 export class PublicHeaderComponent {
@@ -25,9 +26,15 @@ export class PublicHeaderComponent {
     this.scrolled.set(window.scrollY > 5);
   }
 
+  onResize(): void {
+    if (window.innerWidth >= 1024) {
+      this.mobileMenuOpen.set(false);
+    }
+  }
+
   readonly navLinks = [
     { label: 'Home', path: '/', exact: true },
-    { label: 'About', path: '/about', exact: false },
+    { label: 'About', path: '/about', exact: true },
     { label: 'Blog', path: '/blog', exact: false },
   ];
 

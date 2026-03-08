@@ -63,6 +63,12 @@
   --nav-height: 4rem; /* 64px — matches h-16 (mobile) */
 }
 
+@media (min-width: 32rem) {
+  :root {
+    --nav-height: 4rem;
+  } /* 80px — matches lg:h-20 (desktop) */
+}
+
 @media (min-width: 64rem) {
   :root {
     --nav-height: 5rem;
@@ -135,6 +141,7 @@
   --color-accent-900: #134e4a;
   --color-accent-950: #042f2e; */
 }
+
 /* -------------------------------------------------- */
 /*  Base styles                                       */
 /* -------------------------------------------------- */
