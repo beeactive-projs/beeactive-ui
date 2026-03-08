@@ -17,7 +17,13 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: calc(100dvh - var(--nav-height) - (var(--featured-article-image) / 2));
+  height: 30rem;
+}
+
+@media screen and (min-height: 668px) {
+  .hero-section {
+    height: calc(100dvh - var(--nav-height) - (var(--featured-article-image) / 2));
+  }
 }
 
 // ===== Cover Image =====
@@ -188,4 +194,3 @@
   padding: 1.25rem;
   flex: 1;
 }
-

@@ -2,13 +2,16 @@
 
 .background-main {
   overflow: hidden;
-  height: 100vh;
+  height: 670px;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
   background-color: var(--p-primary-50);
+  @media screen and (min-height: 440px) {
+    height: 100vh;
+  }
 }
 
 :host-context(.dark) .background-main {
@@ -41,7 +44,11 @@
   height: 500px;
   top: -500px;
   right: -150px;
-  background: radial-gradient(circle, color-mix(in oklab, var(--p-primary-500) 35%, transparent) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--p-primary-500) 35%, transparent) 0%,
+    transparent 70%
+  );
 }
 
 .orb-2 {
@@ -49,7 +56,11 @@
   height: 350px;
   bottom: -50px;
   left: -100px;
-  background: radial-gradient(circle, color-mix(in oklab, var(--p-orange-500) 30%, transparent) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--p-orange-500) 30%, transparent) 0%,
+    transparent 70%
+  );
   animation-delay: -3s;
 }
 
@@ -58,7 +69,11 @@
   height: 250px;
   top: 40%;
   left: 30%;
-  background: radial-gradient(circle, color-mix(in oklab, var(--p-primary-400) 22%, transparent) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--p-primary-400) 22%, transparent) 0%,
+    transparent 70%
+  );
   animation-delay: -6s;
 }
 
