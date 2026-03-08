@@ -9,8 +9,8 @@ import { ThemeService } from '../../../_core/services/theme.service';
     <p-button
       [icon]="isDark() ? 'pi pi-sun' : 'pi pi-moon'"
       rounded
-      text
-      severity="secondary"
+      outlined
+      size="small"
       (onClick)="themeService.toggle()"
       [ariaLabel]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
     />

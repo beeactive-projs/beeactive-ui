@@ -66,6 +66,13 @@ export const BeeActiveLara = definePreset(Lara, {
               activeBackground: 'color-mix(in srgb, {primary.500} 20%, transparent)',
             },
           },
+          text: {
+            secondary: {
+              color: '{secondary.500}',
+              hoverBackground: 'color-mix(in srgb, {secondary.600} 30%, transparent)',
+              activeBackground: 'color-mix(in srgb, {secondary.700} 40%, transparent)',
+            },
+          },
         },
         dark: {
           outlined: {
@@ -74,6 +81,13 @@ export const BeeActiveLara = definePreset(Lara, {
               color: '{primary.500}',
               hoverBackground: 'color-mix(in srgb, {primary.500} 10%, transparent)',
               activeBackground: 'color-mix(in srgb, {primary.500} 20%, transparent)',
+            },
+          },
+          text: {
+            secondary: {
+              color: '{secondary.500}',
+              hoverBackground: 'color-mix(in srgb, {secondary.600} 30%, transparent)',
+              activeBackground: 'color-mix(in srgb, {secondary.700} 40%, transparent)',
             },
           },
         },
