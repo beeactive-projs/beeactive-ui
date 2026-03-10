@@ -75,11 +75,22 @@ export const BeeActiveLara = definePreset(Lara, {
             primary: {
               borderColor: '{primary.500}',
               color: '{primary.500}',
-              hoverBackground: 'color-mix(in srgb, {primary.500} 10%, transparent)',
-              activeBackground: 'color-mix(in srgb, {primary.500} 20%, transparent)',
+              hoverBackground: 'color-mix(in srgb, {primary.600} 30%, transparent)',
+              activeBackground: 'color-mix(in srgb, {primary.700} 40%, transparent)',
+            },
+            secondary: {
+              borderColor: '{secondary.500}',
+              color: '{secondary.500}',
+              hoverBackground: 'color-mix(in srgb, {secondary.600} 30%, transparent)',
+              activeBackground: 'color-mix(in srgb, {secondary.700} 40%, transparent)',
             },
           },
           text: {
+            primary: {
+              color: '{primary.500}',
+              hoverBackground: 'color-mix(in srgb, {primary.600} 30%, transparent)',
+              activeBackground: 'color-mix(in srgb, {primary.700} 40%, transparent)',
+            },
             secondary: {
               color: '{secondary.500}',
               hoverBackground: 'color-mix(in srgb, {secondary.600} 30%, transparent)',
@@ -92,15 +103,26 @@ export const BeeActiveLara = definePreset(Lara, {
             primary: {
               borderColor: '{primary.500}',
               color: '{primary.500}',
-              hoverBackground: 'color-mix(in srgb, {primary.500} 10%, transparent)',
-              activeBackground: 'color-mix(in srgb, {primary.500} 20%, transparent)',
+              hoverBackground: 'color-mix(in srgb, {primary.600} 30%, transparent)',
+              activeBackground: 'color-mix(in srgb, {primary.700} 40%, transparent)',
+            },
+            secondary: {
+              borderColor: '{secondary.300}',
+              color: '{secondary.300}',
+              hoverBackground: 'color-mix(in srgb, {secondary.400} 30%, transparent)',
+              activeBackground: 'color-mix(in srgb, {secondary.500} 40%, transparent)',
             },
           },
           text: {
+             primary: {
+              color: '{primary.500}',
+              hoverBackground: 'color-mix(in srgb, {primary.600} 30%, transparent)',
+              activeBackground: 'color-mix(in srgb, {primary.700} 40%, transparent)',
+            },
             secondary: {
-              color: '{secondary.500}',
-              hoverBackground: 'color-mix(in srgb, {secondary.600} 30%, transparent)',
-              activeBackground: 'color-mix(in srgb, {secondary.700} 40%, transparent)',
+              color: '{secondary.300}',
+              hoverBackground: 'color-mix(in srgb, {secondary.400} 30%, transparent)',
+              activeBackground: 'color-mix(in srgb, {secondary.500} 40%, transparent)',
             },
           },
         },
