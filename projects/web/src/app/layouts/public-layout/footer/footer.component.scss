@@ -74,7 +74,6 @@
   // color: var(--p-surface-700);
   text-decoration: none;
   transition: color 0.2s ease;
-  padding: 0 !important;
 
   &:hover {
     color: var(--p-primary-500);
@@ -131,4 +130,24 @@
 
 :host-context(.dark) .footer-bottom {
   border-top: 1px solid color-mix(in oklab, var(--p-primary-500) 30%, transparent);
+}
+
+:host::ng-deep {
+  .footer-link .p-button-label {
+    font-size: 0.875rem;
+    font-weight: normal;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    color: var(--p-surface-700);
+
+    &:hover {
+      color: var(--p-primary-500);
+    }
+  }
+}
+
+:host-context(.dark) :host::ng-deep {
+  .footer-link .p-button-label {
+    color: var(--p-surface-300);
+  }
 }
