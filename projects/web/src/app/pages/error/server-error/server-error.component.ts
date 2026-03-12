@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ButtonModule } from 'primeng/button';
+import { ThemeToggleComponent } from '../../../_shared/components/theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'bee-server-error',
-  imports: [ButtonModule],
+  imports: [ButtonModule, ThemeToggleComponent],
   templateUrl: './server-error.component.html',
   styleUrl: './server-error.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

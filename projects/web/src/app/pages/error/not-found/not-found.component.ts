@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { ThemeToggleComponent } from '../../../_shared/components/theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'bee-not-found',
-  imports: [RouterLink, ButtonModule],
+  imports: [RouterLink, ButtonModule, ThemeToggleComponent],
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

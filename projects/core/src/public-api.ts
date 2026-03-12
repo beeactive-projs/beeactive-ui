@@ -29,6 +29,9 @@ export * from './lib/models/common/pagination.model';
 // Models - Blog
 export * from './lib/models/blog/blog.model';
 
+// Models - Feedback
+export * from './lib/models/feedback/feedback.model';
+
 // Models - Social Auth
 export * from './lib/models/auth/social-login.model';
 
@@ -50,6 +53,7 @@ export * from './lib/services/profile/profile.service';
 export * from './lib/services/client/client.service';
 export * from './lib/services/group/group.service';
 export * from './lib/services/blog/blog.service';
+export * from './lib/services/feedback/feedback.service';
 
 // Stores
 export * from './lib/stores/auth.store';
