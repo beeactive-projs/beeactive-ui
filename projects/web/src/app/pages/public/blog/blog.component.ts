@@ -20,12 +20,14 @@ import { InputText } from 'primeng/inputtext';
 import { Paginator, PaginatorState } from 'primeng/paginator';
 import { Skeleton } from 'primeng/skeleton';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { IconField } from "primeng/iconfield";
+import { InputIcon } from "primeng/inputicon";
 
 const PAGE_SIZE = 9;
 
 @Component({
   selector: 'bee-blog',
-  imports: [RouterLink, ButtonModule, FormsModule, DatePipe, Skeleton, InputText, Paginator],
+  imports: [RouterLink, ButtonModule, FormsModule, DatePipe, Skeleton, InputText, Paginator, IconField, InputIcon],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,9 +48,12 @@ export class BlogComponent {
   readonly categories = signal<string[]>([]);
 
   readonly isFirstPage = computed(() => this.currentPage() === 1);
-  readonly hasActiveFilters = computed(() => this.searchQuery() !== '' || this.selectedCategory() !== 'All');
-  readonly featuredPost = computed(() => (!this.hasActiveFilters() && this.isFirstPage()) ? (this.posts()[0] ?? null) : null);
-  readonly gridPosts = computed(() => this.featuredPost() ? this.posts().slice(1) : this.posts());
+  readonly hasActiveFilters = computed(
+    () => this.searchQuery() !== '' || this.selectedCategory() !== 'All',
+  );
+  readonly featuredPost = computed(() => this.posts()[0] ?? null);
+  // !this.hasActiveFilters() && this.isFirstPage() ?
+  readonly gridPosts = computed(() => (this.featuredPost() ? this.posts().slice(1) : this.posts()));
   readonly categoryOptions = computed(() => ['All', ...this.categories()]);
 
   private readonly _search$ = new Subject<string>();
@@ -65,20 +70,20 @@ export class BlogComponent {
     this._loadPosts();
     this._loadCategories();
 
-    afterRenderEffect(() => {
-      const el = this.featuredSection()?.nativeElement;
-      if (!el) return;
+    // afterRenderEffect(() => {
+    //   const el = this.featuredSection()?.nativeElement;
+    //   if (!el) return;
 
-      const observer = new ResizeObserver((entries) => {
-        const height = entries[0]?.contentRect.height;
-        if (height != null) {
-          this._elementRef.nativeElement.style.setProperty('--featured-article-height', `${height}px`);
-        }
-      });
-      observer.observe(el);
+    //   const observer = new ResizeObserver((entries) => {
+    //     const height = entries[0]?.contentRect.height;
+    //     if (height != null) {
+    //       this._elementRef.nativeElement.style.setProperty('--featured-article-height', `${height}px`);
+    //     }
+    //   });
+    //   observer.observe(el);
 
-      return () => observer.disconnect();
-    });
+    //   return () => observer.disconnect();
+    // });
   }
 
   onSearchInput(value: string): void {
