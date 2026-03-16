@@ -23,13 +23,13 @@ export class App {
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: environment.appUrl },
       { property: 'og:title', content: 'BeeActive' },
-      { property: 'og:description', content: 'Your fitness platform description here.' },
+      { property: 'og:description', content: 'Where active communities come together' },
       { property: 'og:image', content: imageUrl },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '630' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'BeeActive' },
-      { name: 'twitter:description', content: 'Your fitness platform description here.' },
+      { name: 'twitter:description', content: 'Where active communities come together' },
       { name: 'twitter:image', content: imageUrl },
     ]);
   }
