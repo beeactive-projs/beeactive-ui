@@ -13,7 +13,7 @@ import { WaitlistService } from 'core';
 export class HomeComponent {
   private readonly _waitlistService = inject(WaitlistService);
 
-  openSubscribe(): void {
+  openJoinWaitlist(): void {
     this._waitlistService.open('home');
   }
   roadmap = [

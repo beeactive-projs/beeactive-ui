@@ -20,7 +20,7 @@ export class Dashboard {
   protected readonly _authStore = inject(AuthStore);
   private readonly _waitlistService = inject(WaitlistService);
 
-  openSubscribe(): void {
+  openJoinWaitlist(): void {
     this._waitlistService.open('dashboard');
   }
 }
