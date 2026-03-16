@@ -8,12 +8,10 @@
 
   <div class="error-content text-center">
 
-    <div class="brand-logo mb-12">
-      <div class="brand-logo-icon bg-primary-500">
-        <i class="pi pi-bolt text-primary-contrast text-xl"></i>
-      </div>
+    <a routerLink="/" class="brand-logo mb-12" aria-label="BeeActive home">
+      <img src="svg/logo-navy.svg" alt="BeeActive logo" class="max-w-10">
       <span class="font-heading text-2xl font-extrabold tracking-tight">Bee Active</span>
-    </div>
+    </a>
 
     <p class="text-4xl sm:text-6xl 3xl:text-8xl font-heading font-extrabold leading-[1.1] mb-6 text-brand">
       {{ errorCode() }}
