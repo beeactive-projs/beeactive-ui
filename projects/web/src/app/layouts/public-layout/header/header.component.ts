@@ -52,7 +52,7 @@ export class PublicHeaderComponent {
     this.mobileMenuOpen.set(false);
   }
 
-  openSubscribe(): void {
+  openJoinWaitlist(): void {
     this._waitlistService.open('header');
     this.mobileMenuOpen.set(false);
   }
