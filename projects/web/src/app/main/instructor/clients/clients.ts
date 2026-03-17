@@ -94,7 +94,7 @@ export class Clients implements OnInit {
   pendingCount = computed(() => this.pendingRequests().length);
 
   ngOnInit(): void {
-    this.loadClients();
+    // this.loadClients();
     this.loadPendingRequests();
   }
 

@@ -1,4 +1,11 @@
-import { Component, ChangeDetectionStrategy, inject, OnInit, signal, computed } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  inject,
+  OnInit,
+  signal,
+  computed,
+} from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -46,7 +53,7 @@ export class Instructors implements OnInit {
   readonly pendingCount = computed(() => this.pendingRequests().length);
 
   ngOnInit(): void {
-    this.loadInstructors();
+    // this.loadInstructors();
     this.loadPendingRequests();
   }
 
@@ -60,14 +67,19 @@ export class Instructors implements OnInit {
       },
       error: () => {
         this.loading.set(false);
-        this._messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load instructors' });
+        this._messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to load instructors',
+        });
       },
     });
   }
 
   loadPendingRequests(): void {
     this._clientService.getPendingRequests().subscribe({
-      next: (requests) => this.pendingRequests.set(requests.filter((r) => r.type === 'CLIENT_TO_INSTRUCTOR')),
+      next: (requests) =>
+        this.pendingRequests.set(requests.filter((r) => r.type === 'CLIENT_TO_INSTRUCTOR')),
       error: () => {},
     });
   }
@@ -80,7 +92,9 @@ export class Instructors implements OnInit {
   }
 
   confirmCancel(request: ClientRequest): void {
-    const name = request.toUser ? `${request.toUser.firstName} ${request.toUser.lastName}` : 'this instructor';
+    const name = request.toUser
+      ? `${request.toUser.firstName} ${request.toUser.lastName}`
+      : 'this instructor';
     this._confirmationService.confirm({
       message: `Are you sure you want to cancel your request to ${name}?`,
       header: 'Cancel Request',
@@ -93,11 +107,19 @@ export class Instructors implements OnInit {
   private cancelRequest(request: ClientRequest): void {
     this._clientService.cancelRequest(request.id).subscribe({
       next: () => {
-        this._messageService.add({ severity: 'info', summary: 'Request Cancelled', detail: 'Your request has been cancelled' });
+        this._messageService.add({
+          severity: 'info',
+          summary: 'Request Cancelled',
+          detail: 'Your request has been cancelled',
+        });
         this.loadPendingRequests();
       },
       error: (err) => {
-        this._messageService.add({ severity: 'error', summary: 'Error', detail: err.error?.message || 'Failed to cancel request' });
+        this._messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error?.message || 'Failed to cancel request',
+        });
       },
     });
   }
