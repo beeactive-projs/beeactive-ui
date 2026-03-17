@@ -1,4 +1,11 @@
-import { Component, ChangeDetectionStrategy, inject, OnInit, signal, computed } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  inject,
+  OnInit,
+  signal,
+  computed,
+} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card';
@@ -14,14 +21,17 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { TooltipModule } from 'primeng/tooltip';
-import {
-  InstructorClient,
-  InstructorClientStatus,
-  ClientRequest,
-  ClientService,
-} from 'core';
+import { InstructorClient, InstructorClientStatus, ClientRequest, ClientService } from 'core';
 
-type TagSeverity = 'success' | 'warn' | 'danger' | 'secondary' | 'info' | 'contrast' | null | undefined;
+type TagSeverity =
+  | 'success'
+  | 'warn'
+  | 'danger'
+  | 'secondary'
+  | 'info'
+  | 'contrast'
+  | null
+  | undefined;
 
 @Component({
   selector: 'bee-clients',
@@ -209,7 +219,9 @@ export class Clients implements OnInit {
 
   // Archive
   confirmArchive(client: InstructorClient): void {
-    const name = client.client ? `${client.client.firstName} ${client.client.lastName}` : 'this client';
+    const name = client.client
+      ? `${client.client.firstName} ${client.client.lastName}`
+      : 'this client';
     this._confirmationService.confirm({
       message: `Are you sure you want to archive ${name}?`,
       header: 'Archive Client',
