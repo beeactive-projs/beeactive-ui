@@ -26,6 +26,7 @@ export * from './lib/models/group/group.model';
 // Models - Common
 export * from './lib/models/common/api-response.model';
 export * from './lib/models/common/pagination.model';
+export * from './lib/models/common/ui.model';
 
 // Models - Blog
 export * from './lib/models/blog/blog.model';

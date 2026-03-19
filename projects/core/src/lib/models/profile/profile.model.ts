@@ -71,6 +71,7 @@ export interface FullProfileResponse {
     createdAt: string;
   };
   roles: string[];
+  hasInstructorProfile: boolean;
   userProfile: UserProfile | null;
   instructorProfile: InstructorProfile | null;
 }
@@ -108,6 +109,9 @@ export interface UpdateFullProfilePayload {
     firstName?: string;
     lastName?: string;
     phone?: string;
+    avatarId?: string;
+    language?: string;
+    timezone?: string;
   };
   userProfile?: UpdateUserProfilePayload;
   instructor?: UpdateInstructorProfilePayload;
