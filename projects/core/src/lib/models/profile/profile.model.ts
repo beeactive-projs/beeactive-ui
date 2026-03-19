@@ -68,6 +68,8 @@ export interface FullProfileResponse {
     avatarId: string | null;
     isActive: boolean;
     isEmailVerified: boolean;
+    language: string | null;
+    timezone: string | null;
     createdAt: string;
   };
   roles: string[];

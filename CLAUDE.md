@@ -195,6 +195,32 @@ Classes use **PascalCase**. Components have **no type suffix**; all other artifa
 - Forms: `isFieldInvalid()` / `getFieldError()` pattern, `p-message` for errors
 - Style via `styleClass` prop, not wrapping divs
 
+#### Full-width inputs — use `fluid` instead of `class="w-full"`
+
+The following components support a `fluid` boolean input. Use it instead of adding `class="w-full"`:
+
+```html
+<p-button fluid />
+<input pInputText fluid />
+<p-password fluid />
+<p-textarea fluid />           <!-- [pTextarea] directive -->
+<p-multiselect fluid />
+<p-listbox fluid />
+<p-treeselect fluid />
+<p-cascadeselect fluid />
+<p-selectbutton fluid />
+<p-togglebutton fluid />
+```
+
+These components do **not** have a `fluid` input — use `class="w-full"` on them:
+
+```html
+<p-select class="w-full" />
+<p-datepicker class="w-full" />
+<p-autocomplete class="w-full" />
+<p-inputnumber class="w-full" />
+```
+
 #### PrimeNG 21 component names (v18+ renames — never use the old names)
 
 | Old (deprecated) | Current (v21+) |

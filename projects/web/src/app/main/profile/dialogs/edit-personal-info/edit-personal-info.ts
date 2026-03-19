@@ -22,6 +22,7 @@ import {
   FullProfileResponse,
   UpdateFullProfilePayload,
   Gender,
+  TIMEZONE_OPTIONS,
 } from 'core';
 
 interface PersonalInfoForm {
@@ -30,6 +31,7 @@ interface PersonalInfoForm {
   phone: string;
   dateOfBirth: Date | null;
   gender: Gender | null;
+  timezone: string | null;
   medicalConditions: string;
   notes: string;
 }
@@ -61,12 +63,15 @@ export class EditPersonalInfo {
   readonly saving = signal(false);
   readonly today = new Date();
 
+  readonly timezoneOptions = TIMEZONE_OPTIONS;
+
   readonly form = signal<PersonalInfoForm>({
     firstName: '',
     lastName: '',
     phone: '',
     dateOfBirth: null,
     gender: null,
+    timezone: null,
     medicalConditions: '',
     notes: '',
   });
@@ -88,6 +93,7 @@ export class EditPersonalInfo {
         phone: p.user.phone ?? '',
         dateOfBirth: up?.dateOfBirth ? this._parseDate(up.dateOfBirth) : null,
         gender: up?.gender ?? null,
+        timezone: p.user.timezone ?? null,
         medicalConditions: up?.medicalConditions?.join(', ') ?? '',
         notes: up?.notes ?? '',
       });
@@ -108,6 +114,7 @@ export class EditPersonalInfo {
     if (f.firstName !== p.user.firstName) userChanges.firstName = f.firstName;
     if (f.lastName !== p.user.lastName) userChanges.lastName = f.lastName;
     if (f.phone !== (p.user.phone ?? '')) userChanges.phone = f.phone;
+    if (f.timezone !== (p.user.timezone ?? null)) userChanges.timezone = f.timezone ?? undefined;
     if (Object.keys(userChanges).length) payload.user = userChanges;
 
     const profileChanges: NonNullable<UpdateFullProfilePayload['userProfile']> = {};

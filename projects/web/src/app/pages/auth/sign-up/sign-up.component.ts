@@ -29,6 +29,7 @@ import {
   GoogleAuthService,
   RegisterRequest,
   UserRoles,
+  UserService,
 } from 'core';
 import { ThemeToggleComponent } from '../../../_shared/components/theme-toggle/theme-toggle.component';
 
@@ -55,6 +56,7 @@ export class SignUpComponent {
   private readonly _authStore = inject(AuthStore);
   private readonly _googleAuthService = inject(GoogleAuthService);
   private readonly _facebookAuthService = inject(FacebookAuthService);
+  private readonly _userService = inject(UserService);
   private readonly _router = inject(Router);
   protected readonly _route = inject(ActivatedRoute);
 
@@ -113,6 +115,8 @@ export class SignUpComponent {
     this._authService.register(data).subscribe({
       next: () => {
         this.isLoading.set(false);
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        this._userService.updateMe({ timezone }).subscribe({ error: () => {} });
         this.navigateToApp();
       },
       error: (error) => {

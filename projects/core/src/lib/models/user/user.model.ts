@@ -14,6 +14,8 @@ export interface User {
   isEmailVerified: boolean;
   roles: UserRole[];
   permissions: string[];
+  language?: string | null;
+  timezone?: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -38,4 +40,6 @@ export interface UpdateUserDto {
   lastName?: string;
   phone?: string;
   avatarUrl?: string;
+  language?: string;
+  timezone?: string;
 }

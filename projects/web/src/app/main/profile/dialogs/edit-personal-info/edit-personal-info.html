@@ -36,8 +36,16 @@
         <label for="piGender" class="text-sm font-medium">Gender</label>
         <p-select inputId="piGender" [options]="genderOptions" [ngModel]="form().gender"
           (ngModelChange)="updateField('gender', $event)" optionLabel="label" optionValue="value"
-          placeholder="Select gender" [showClear]="true" class="w-full" />
+          placeholder="Select gender" [showClear]="true" fluid />
       </div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="piTimezone" class="text-sm font-medium">Timezone</label>
+      <p-select inputId="piTimezone" [options]="timezoneOptions" [ngModel]="form().timezone"
+        (ngModelChange)="updateField('timezone', $event)" optionLabel="label" optionValue="value"
+        placeholder="Select timezone" [filter]="true" filterPlaceholder="Search timezone..."
+        [showClear]="true" fluid [appendTo]="'body'" />
     </div>
 
     <div class="flex flex-col gap-2">

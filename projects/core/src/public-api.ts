@@ -43,6 +43,7 @@ export * from './lib/models/auth/social-login.model';
 // Constants
 export * from './lib/constants/api-endpoints.const';
 export * from './lib/constants/storage-keys.const';
+export * from './lib/constants/timezones.const';
 
 // Services
 export * from './lib/services/auth/auth.service';

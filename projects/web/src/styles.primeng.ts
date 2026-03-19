@@ -25,6 +25,11 @@ export const BeeActiveLara = definePreset(Lara, {
       smPaddingX: '0.5rem',
       smPaddingY: '0.375rem',
     },
+    list: {
+      header: {
+        padding: '0.625rem 1rem',
+      },
+    },
 
     primary,
     success,
@@ -73,6 +78,13 @@ export const BeeActiveLara = definePreset(Lara, {
         padding: '{overlay.modal.padding}',
       },
     },
+    // select: {
+    //   list: {
+    //     header: {
+    //       padding: '',
+    //     },
+    //   },
+    // },
     button: {
       colorScheme: {
         light: {
